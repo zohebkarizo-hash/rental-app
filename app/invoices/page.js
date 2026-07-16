@@ -120,8 +120,8 @@ export default function InvoicesPage() {
                     </td>
                     <td style={{display: 'flex', gap: '0.5rem', whiteSpace: 'nowrap'}}>
                       <button 
-                        className="btn" 
-                        style={{padding: '0.4rem 0.8rem', fontSize: '0.875rem', backgroundColor: 'transparent', border: '1px solid var(--border-color)'}}
+                        className="btn btn-outline" 
+                        style={{padding: '0.4rem 0.8rem', fontSize: '0.875rem'}}
                         onClick={() => setPreviewInvoice(inv)}
                       >
                         Preview
@@ -134,8 +134,8 @@ export default function InvoicesPage() {
                         Open WA
                       </button>
                       <button 
-                        className="btn" 
-                        style={{padding: '0.4rem 0.8rem', fontSize: '0.875rem', backgroundColor: '#333'}}
+                        className="btn btn-outline" 
+                        style={{padding: '0.4rem 0.8rem', fontSize: '0.875rem'}}
                         onClick={() => handleSendWhatsApp(inv.id)}
                         disabled={sendingId === inv.id}
                         title="Send via Twilio Background API"

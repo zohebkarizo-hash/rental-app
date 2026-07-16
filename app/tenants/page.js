@@ -298,15 +298,13 @@ export default function TenantsPage() {
         <div className="glass-panel">
           <div style={{display: 'flex', gap: '1rem', marginBottom: '1rem', borderBottom: '1px solid var(--border-color)', paddingBottom: '1rem'}}>
             <button 
-              className={`btn ${showActive ? 'btn-success' : ''}`} 
-              style={{background: showActive ? '' : 'transparent', border: '1px solid var(--border-color)'}}
+              className={`btn ${showActive ? 'btn-success' : 'btn-outline'}`} 
               onClick={() => setShowActive(true)}
             >
               Active Tenants
             </button>
             <button 
-              className={`btn ${!showActive ? 'btn-success' : ''}`} 
-              style={{background: !showActive ? '' : 'transparent', border: '1px solid var(--border-color)'}}
+              className={`btn ${!showActive ? 'btn-success' : 'btn-outline'}`} 
               onClick={() => setShowActive(false)}
             >
               Vacated (Past Tenants)
@@ -360,15 +358,15 @@ export default function TenantsPage() {
                             </button>
                           )}
                           <button 
-                            className="btn" 
-                            style={{padding: '0.4rem 0.8rem', fontSize: '0.75rem', backgroundColor: 'rgba(245, 158, 11, 0.2)', color: 'var(--warning-color)'}}
+                            className="btn btn-warning" 
+                            style={{padding: '0.4rem 0.8rem', fontSize: '0.75rem'}}
                             onClick={() => handleEditClick(t)}
                           >
                             Edit
                           </button>
                           <button 
-                            className="btn" 
-                            style={{padding: '0.4rem 0.8rem', fontSize: '0.75rem', backgroundColor: t.isActive ? 'rgba(239, 68, 68, 0.2)' : 'rgba(16, 185, 129, 0.2)', color: t.isActive ? '#ef4444' : 'var(--success-color)'}}
+                            className={`btn ${t.isActive ? 'btn-danger' : 'btn-success'}`} 
+                            style={{padding: '0.4rem 0.8rem', fontSize: '0.75rem'}}
                             onClick={() => handleToggleActive(t.id, t.isActive)}
                           >
                             {t.isActive ? 'Mark Vacated' : 'Restore Active'}
