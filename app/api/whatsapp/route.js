@@ -50,7 +50,7 @@ export async function POST(request) {
       })
       messageSid = msg.sid
     } else {
-      console.warn("Twilio credentials missing. Simulating WhatsApp send.")
+      return NextResponse.json({ error: "Twilio credentials missing. Please add them to Vercel Environment Variables." }, { status: 500 })
     }
 
     // Mark invoice as sent

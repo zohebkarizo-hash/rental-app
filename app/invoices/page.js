@@ -42,6 +42,7 @@ export default function InvoicesPage() {
     
     const data = await res.json()
     if (res.ok) {
+      alert('WhatsApp message sent successfully via Twilio!')
       fetchInvoices()
     } else {
       alert(`Twilio Error: ${data.error}`)
