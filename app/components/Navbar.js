@@ -11,7 +11,8 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <Link href="/" className="logo">
-        🏠 KirayaPay
+        <img src="/logo.jpg" alt="KirayaPay Logo" style={{width: '32px', height: '32px', borderRadius: '8px', objectFit: 'cover'}} />
+        KirayaPay
       </Link>
       <div className="nav-links">
         <Link href="/">Dashboard</Link>
