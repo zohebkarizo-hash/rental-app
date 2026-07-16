@@ -9,6 +9,8 @@ export default function TenantsPage() {
   
   // Edit State
   const [editingId, setEditingId] = useState(null)
+  const [currentDocs, setCurrentDocs] = useState({ aadharUrl: null, passportUrl: null, photoUrl: null, agreementUrl: null })
+  const [removedDocs, setRemovedDocs] = useState({ aadhar: false, passport: false, photo: false, agreement: false })
 
   const [files, setFiles] = useState({ aadhar: null, passport: null, photo: null, agreement: null })
   const [formData, setFormData] = useState({ name: '', phone: '91', houseNo: '', unitNo: '', deposit: '', rentAmount: '' })
@@ -28,6 +30,8 @@ export default function TenantsPage() {
   const handleFileChange = (type, e) => {
     if (e.target.files && e.target.files[0]) {
       setFiles({ ...files, [type]: e.target.files[0] })
+      // If they upload a new one, we no longer consider the old one "removed" explicitly (it will just be overwritten)
+      setRemovedDocs({ ...removedDocs, [type]: false })
     }
   }
 
@@ -50,8 +54,14 @@ export default function TenantsPage() {
       deposit: tenant.deposit,
       rentAmount: tenant.rentAmount
     })
+    setCurrentDocs({
+      aadharUrl: tenant.aadharUrl,
+      passportUrl: tenant.passportUrl,
+      photoUrl: tenant.photoUrl,
+      agreementUrl: tenant.agreementUrl
+    })
+    setRemovedDocs({ aadhar: false, passport: false, photo: false, agreement: false })
     setFiles({ aadhar: null, passport: null, photo: null, agreement: null })
-    // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
@@ -59,6 +69,8 @@ export default function TenantsPage() {
     setEditingId(null)
     setFormData({ name: '', phone: '91', houseNo: '', unitNo: '', deposit: '', rentAmount: '' })
     setFiles({ aadhar: null, passport: null, photo: null, agreement: null })
+    setCurrentDocs({ aadharUrl: null, passportUrl: null, photoUrl: null, agreementUrl: null })
+    setRemovedDocs({ aadhar: false, passport: false, photo: false, agreement: false })
   }
 
   const handleSubmit = async (e) => {
@@ -66,9 +78,15 @@ export default function TenantsPage() {
     setUploading(true)
     
     let uploadedUrls = {};
-    // Only set null in POST mode, in PATCH mode we don't send null so we don't overwrite existing documents
     if (!editingId) {
       uploadedUrls = { aadharUrl: null, passportUrl: null, photoUrl: null, agreementUrl: null };
+    } else {
+      // In Edit Mode, set any explicitly removed docs to null so the backend clears them
+      ['aadhar', 'passport', 'photo', 'agreement'].forEach(type => {
+        if (removedDocs[type]) {
+          uploadedUrls[`${type}Url`] = null;
+        }
+      });
     }
     
     // Upload files sequentially
@@ -106,7 +124,7 @@ export default function TenantsPage() {
     })
     
     if (res.ok) {
-      cancelEdit(); // Reset form and state
+      cancelEdit(); 
       document.querySelectorAll('input[type="file"]').forEach(input => input.value = '');
       fetchTenants();
     }
@@ -187,6 +205,44 @@ export default function TenantsPage() {
             <h3 style={{fontSize: '1rem', marginTop: '1rem', marginBottom: '0.5rem', color: 'var(--primary-color)'}}>
               {editingId ? 'Update Documents (Optional)' : 'Upload Documents'}
             </h3>
+
+            {/* Display existing documents in Edit Mode with option to remove */}
+            {editingId && (
+              <div style={{marginBottom: '1rem', padding: '0.75rem', background: 'rgba(0,0,0,0.2)', borderRadius: '8px'}}>
+                <label style={{fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '0.5rem', display: 'block'}}>Current Saved Documents:</label>
+                <div style={{display: 'flex', gap: '0.5rem', flexWrap: 'wrap'}}>
+                  {['aadhar', 'passport', 'photo', 'agreement'].map(type => {
+                    const hasDoc = currentDocs[`${type}Url`];
+                    const isRemoved = removedDocs[type];
+                    if (hasDoc && !isRemoved) {
+                      return (
+                        <span key={type} className="badge" style={{background: 'rgba(255,255,255,0.1)', display: 'flex', gap: '6px', alignItems: 'center'}}>
+                          {type.charAt(0).toUpperCase() + type.slice(1)}
+                          <button 
+                            type="button" 
+                            onClick={() => setRemovedDocs({...removedDocs, [type]: true})} 
+                            style={{background: 'transparent', border: 'none', color: '#ef4444', cursor: 'pointer', padding: '0 2px'}}
+                            title="Delete this document"
+                          >
+                            🗑️
+                          </button>
+                        </span>
+                      )
+                    } else if (hasDoc && isRemoved) {
+                      return (
+                        <span key={type} className="badge" style={{background: 'rgba(239, 68, 68, 0.2)', color: '#ef4444', textDecoration: 'line-through'}}>
+                          {type.charAt(0).toUpperCase() + type.slice(1)} (Will be deleted)
+                        </span>
+                      )
+                    }
+                    return null;
+                  })}
+                  {!currentDocs.aadharUrl && !currentDocs.passportUrl && !currentDocs.photoUrl && !currentDocs.agreementUrl && (
+                    <span style={{fontSize: '0.8rem', color: 'var(--text-secondary)'}}>No documents saved currently.</span>
+                  )}
+                </div>
+              </div>
+            )}
             <div className="form-group" style={{marginBottom: '0.5rem'}}>
               <div style={{display: 'flex', gap: '0.5rem', flexWrap: 'wrap'}}>
                 <select 
