@@ -40,13 +40,51 @@ export default function InvoicesPage() {
       body: JSON.stringify({ invoiceId })
     })
     
+    const data = await res.json()
     if (res.ok) {
-      alert('WhatsApp message sent successfully (or simulated)!')
       fetchInvoices()
     } else {
-      alert('Failed to send WhatsApp message.')
+      alert(`Twilio Error: ${data.error}`)
     }
     setSendingId(null)
+  }
+
+  const handleBulkSendWhatsApp = async () => {
+    const pendingInvoices = invoices.filter(inv => !inv.whatsappSent && inv.status === 'PENDING')
+    if (pendingInvoices.length === 0) {
+      alert("No pending unsent invoices found!")
+      return
+    }
+    
+    if (!confirm(`Are you sure you want to send WhatsApp messages to ${pendingInvoices.length} tenants?`)) return;
+
+    setGenerating(true)
+    let successCount = 0;
+    let failCount = 0;
+    let lastError = "";
+
+    for (const inv of pendingInvoices) {
+      const res = await fetch('/api/whatsapp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ invoiceId: inv.id })
+      })
+      if (res.ok) {
+        successCount++;
+      } else {
+        const data = await res.json();
+        lastError = data.error;
+        failCount++;
+      }
+    }
+    
+    fetchInvoices()
+    setGenerating(false)
+    if (failCount > 0) {
+      alert(`Bulk Send Complete:\nSuccess: ${successCount}\nFailed: ${failCount}\nLast Error: ${lastError}`);
+    } else {
+      alert(`Successfully sent ${successCount} WhatsApp messages!`);
+    }
   }
 
   const handleSendManual = async (inv) => {
@@ -76,13 +114,23 @@ export default function InvoicesPage() {
     <main className="container animate-fade-in">
       <div className="flex-between">
         <h1>Invoices & Billing</h1>
-        <button 
-          className="btn btn-success" 
-          onClick={handleGenerateAll}
-          disabled={generating}
-        >
-          {generating ? 'Generating...' : 'Generate Rent for All Tenants'}
-        </button>
+        <div style={{display: 'flex', gap: '1rem', flexWrap: 'wrap'}}>
+          <button 
+            className="btn btn-outline" 
+            onClick={handleBulkSendWhatsApp}
+            disabled={generating}
+            style={{borderColor: '#25D366', color: '#25D366'}}
+          >
+            {generating ? 'Sending...' : 'Bulk Send via Twilio'}
+          </button>
+          <button 
+            className="btn btn-success" 
+            onClick={handleGenerateAll}
+            disabled={generating}
+          >
+            {generating ? 'Generating...' : 'Generate Rent for All Tenants'}
+          </button>
+        </div>
       </div>
 
       <div className="glass-panel">

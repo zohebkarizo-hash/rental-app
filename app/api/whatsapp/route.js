@@ -61,7 +61,7 @@ export async function POST(request) {
     
     return NextResponse.json({ success: true, messageSid, qrUrl: qrApiUrl })
   } catch (error) {
-    console.error(error)
-    return NextResponse.json({ error: 'Failed to send WhatsApp message' }, { status: 500 })
+    console.error("Twilio Error:", error)
+    return NextResponse.json({ error: error.message || 'Failed to send WhatsApp message' }, { status: 500 })
   }
 }
