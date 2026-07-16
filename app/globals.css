@@ -10,7 +10,7 @@
   --border-color: #262626;
   --success-color: #2c5a45;
   --text-success: #67a685;
-  --warning-color: #e68a49;
+  --warning-color: #ef4444;
 }
 
 * {
@@ -229,7 +229,7 @@ h3 {
   font-size: 0.7rem;
 }
 .badge-pending {
-  background: rgba(230, 138, 73, 0.2); /* soft translucent orange */
+  background: rgba(217, 119, 119, 0.15); /* pastel red translucent */
   color: var(--warning-color);
 }
 .badge-paid {
