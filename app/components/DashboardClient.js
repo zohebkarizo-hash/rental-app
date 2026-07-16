@@ -134,7 +134,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
           <Link href="/tenants" className="btn">
             Manage Tenants
           </Link>
-          <Link href="/invoices" className="btn btn-success">
+          <Link href="/invoices" className="btn">
             Generate Invoices
           </Link>
         </div>
