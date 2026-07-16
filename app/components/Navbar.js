@@ -10,13 +10,14 @@ export default function Navbar() {
 
   return (
     <nav className="navbar">
-      <Link href="/" className="logo">
+      <a href="/" className="logo">
         <img src="/logo.jpg" alt="KirayaPay Logo" style={{width: '32px', height: '32px', borderRadius: '8px', objectFit: 'cover'}} />
         KirayaPay
-      </Link>
+      </a>
+      
       <div className="nav-links">
-        <Link href="/">Dashboard</Link>
-        <Link href="/tenants">Tenants</Link>
+        <a href="/" className={pathname === '/' ? 'active' : ''}>Dashboard</a>
+        <Link href="/tenants" className={pathname === '/tenants' ? 'active' : ''}>Tenants</Link>
         <Link href="/invoices">Invoices</Link>
       </div>
     </nav>
