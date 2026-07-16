@@ -103,7 +103,7 @@ export default function InvoicesPage() {
               <tbody>
                 {invoices.map(inv => (
                   <tr key={inv.id}>
-                    <td>{new Date(inv.createdAt).toLocaleDateString()}</td>
+                    <td>{new Date(inv.createdAt).toLocaleDateString('en-IN')}</td>
                     <td>{inv.tenant?.name || 'Unknown'}</td>
                     <td>₹{inv.amountDue}</td>
                     <td>
