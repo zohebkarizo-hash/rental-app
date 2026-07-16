@@ -3,12 +3,12 @@
 :root {
   --bg-color: #0a0a0a;
   --surface-color: #141414;
-  --primary-color: #ffffff;
-  --primary-hover: #e5e5e5;
+  --primary-color: #2c5a45;
+  --primary-hover: #366e54;
   --text-primary: #fafafa;
   --text-secondary: #a3a3a3;
   --border-color: #262626;
-  --success-color: #10b981;
+  --success-color: #2c5a45;
   --warning-color: #ef4444;
 }
 
@@ -105,7 +105,7 @@ h3 {
 /* Buttons */
 .btn {
   background: var(--primary-color);
-  color: #000000;
+  color: #ffffff;
   border: none;
   padding: 0.6rem 1.2rem;
   border-radius: 6px;
@@ -134,7 +134,7 @@ h3 {
   color: #ffffff;
 }
 .btn-success:hover:not(:disabled) {
-  background: #059669;
+  background: var(--primary-hover);
 }
 
 .btn-outline {
