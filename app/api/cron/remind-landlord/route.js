@@ -23,9 +23,13 @@ export async function GET(request) {
     const baseUrl = request.headers.get('origin') || process.env.NEXT_PUBLIC_BASE_URL || 'https://your-app.vercel.app';
     
     // Format landlord phone safely
-    let phone = landlordPhone;
+    let phone = landlordPhone.trim();
     if (!phone.startsWith('+')) {
-      phone = '+91' + phone; 
+      if (phone.startsWith('91')) {
+        phone = '+' + phone;
+      } else {
+        phone = '+91' + phone; 
+      }
     }
 
     const msg = await client.messages.create({

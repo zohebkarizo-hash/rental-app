@@ -26,10 +26,14 @@ export async function POST(request) {
       })
       return NextResponse.json({ success: true, manual: true })
     }
-    // Format the phone number
-    let phone = invoice.tenant.phone
+    // Ensure phone has correct country code formatting for Twilio
+    let phone = invoice.tenant.phone.trim();
     if (!phone.startsWith('+')) {
-      phone = '+91' + phone // Default to India country code for UPI
+      if (phone.startsWith('91')) {
+        phone = '+' + phone;
+      } else {
+        phone = '+91' + phone; 
+      }
     }
     
     // Generate UPI URL
