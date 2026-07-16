@@ -208,6 +208,9 @@ h3 {
   text-align: left;
   border-bottom: 1px solid var(--border-color);
 }
+.data-table td {
+  color: var(--text-secondary);
+}
 .data-table th {
   color: var(--text-secondary);
   font-weight: 400;
