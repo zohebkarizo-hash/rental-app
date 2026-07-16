@@ -39,7 +39,7 @@ body {
 /* Typography */
 h1 {
   font-size: 1.75rem;
-  font-weight: 600;
+  font-weight: 400;
   margin-bottom: 1.5rem;
   color: var(--text-primary);
 }
@@ -71,7 +71,7 @@ h3 {
 
 .logo {
   font-size: 1.15rem;
-  font-weight: 600;
+  font-weight: 400;
   color: #ef4444;
   text-decoration: none;
   display: flex;
@@ -255,7 +255,7 @@ h3 {
 }
 .stat-value {
   font-size: 2rem;
-  font-weight: 600;
+  font-weight: 400;
   margin: 0.5rem 0;
   color: var(--text-success);
 }

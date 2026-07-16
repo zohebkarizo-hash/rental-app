@@ -58,7 +58,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
                     <td>House {t.houseNo || '-'}, Unit {t.unitNo || '-'}</td>
                     <td>{t.name}</td>
                     <td>+{t.phone}</td>
-                    <td>₹{t.rentAmount}</td>
+                    <td style={{fontWeight: 'bold'}}>₹{t.rentAmount}</td>
                   </tr>
                 ))}
                 {activeTenants.length === 0 && <tr><td colSpan="4" style={{textAlign: 'center'}}>No active tenants found.</td></tr>}
