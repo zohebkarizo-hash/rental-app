@@ -1,15 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --bg-color: #edddd4;
+  --bg-color: #f7f7f5;
   --surface-color: #ffffff;
-  --primary-color: #197278;
-  --primary-hover: #145a5f;
-  --text-primary: #283d3b;
-  --text-secondary: #772e25;
-  --border-color: rgba(40, 61, 59, 0.15);
-  --success-color: #197278;
-  --warning-color: #c44536;
+  --primary-color: #8b9dc3;
+  --primary-hover: #7285ab;
+  --text-primary: #37352f;
+  --text-secondary: #787774;
+  --border-color: #e9e9e7;
+  --success-color: #76a889;
+  --warning-color: #d97777;
 }
 
 * {
@@ -190,13 +190,13 @@ h3 {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  background: rgba(237, 221, 212, 0.3); /* Subtle background for headers */
+  background: rgba(0, 0, 0, 0.02); /* Subtle neutral background for headers */
 }
 .data-table tr {
   transition: background-color 0.2s ease;
 }
 .data-table tr:hover {
-  background-color: rgba(25, 114, 120, 0.04);
+  background-color: rgba(0, 0, 0, 0.02);
 }
 
 .badge {
@@ -206,11 +206,11 @@ h3 {
   font-weight: 600;
 }
 .badge-pending {
-  background: rgba(196, 69, 54, 0.1);
+  background: rgba(217, 119, 119, 0.15); /* pastel red translucent */
   color: var(--warning-color);
 }
 .badge-paid {
-  background: rgba(25, 114, 120, 0.1);
+  background: rgba(139, 157, 195, 0.15); /* pastel blue translucent */
   color: var(--primary-color);
 }
 
