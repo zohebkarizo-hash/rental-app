@@ -293,4 +293,5 @@ h3 {
   td .btn { margin-bottom: 0.5rem; width: 100%; }
   .glass-panel { padding: 16px; }
   h1 { font-size: 1.5rem; }
+  .hide-on-mobile { display: none !important; }
 }

@@ -124,7 +124,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
         </div>
       )}
 
-      <div className="glass-panel">
+      <div className={`glass-panel ${activeView ? 'hide-on-mobile' : ''}`}>
         <h2>Quick Actions</h2>
         <p style={{color: 'var(--text-secondary)', marginBottom: '1.5rem'}}>Manage your properties and generate rent invoices automatically.</p>
         <div style={{display: 'flex', gap: '1rem'}}>
