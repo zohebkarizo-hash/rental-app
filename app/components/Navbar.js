@@ -11,7 +11,7 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <Link href="/" className="logo">
-        🏠 RentalManager
+        🏠 KirayaPay
       </Link>
       <div className="nav-links">
         <Link href="/">Dashboard</Link>
