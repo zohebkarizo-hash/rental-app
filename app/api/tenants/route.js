@@ -19,10 +19,14 @@ export async function POST(request) {
       data: {
         name: data.name,
         phone: data.phone,
-        room: data.room,
+        houseNo: data.houseNo || null,
+        unitNo: data.unitNo || null,
         deposit: parseFloat(data.deposit),
         rentAmount: parseFloat(data.rentAmount),
-        idDocumentUrl: data.idDocumentUrl || null
+        aadharUrl: data.aadharUrl || null,
+        passportUrl: data.passportUrl || null,
+        photoUrl: data.photoUrl || null,
+        agreementUrl: data.agreementUrl || null
       },
     })
     return NextResponse.json(tenant)
