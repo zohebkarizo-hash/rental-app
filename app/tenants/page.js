@@ -166,7 +166,7 @@ export default function TenantsPage() {
       <div className="dashboard-grid" style={{gridTemplateColumns: '1fr 2fr'}}>
         {/* Add/Edit Tenant Form */}
         <div className="glass-panel">
-          <h2 style={{color: editingId ? 'var(--warning-color)' : 'white'}}>
+          <h2 style={{color: editingId ? 'var(--warning-color)' : 'var(--text-primary)'}}>
             {editingId ? 'Edit Tenant Details' : 'Add New Tenant'}
           </h2>
           <form onSubmit={handleSubmit}>
@@ -216,7 +216,7 @@ export default function TenantsPage() {
                     const isRemoved = removedDocs[type];
                     if (hasDoc && !isRemoved) {
                       return (
-                        <span key={type} className="badge" style={{background: 'rgba(255,255,255,0.1)', display: 'flex', gap: '6px', alignItems: 'center'}}>
+                        <span key={type} className="badge" style={{background: 'rgba(0,0,0,0.05)', color: 'var(--text-primary)', display: 'flex', gap: '6px', alignItems: 'center'}}>
                           {type.charAt(0).toUpperCase() + type.slice(1)}
                           <button 
                             type="button" 
