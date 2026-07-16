@@ -108,7 +108,7 @@ export default function InvoicesPage() {
                     <td>₹{inv.amountDue}</td>
                     <td>
                       <span className={`badge ${inv.status === 'PAID' ? 'badge-paid' : 'badge-pending'}`}>
-                        {inv.status}
+                        {inv.status === 'PENDING' ? 'Pending' : inv.status === 'PAID' ? 'Paid' : inv.status}
                       </span>
                     </td>
                     <td>
