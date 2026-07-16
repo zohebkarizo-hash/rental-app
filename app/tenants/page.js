@@ -7,6 +7,9 @@ export default function TenantsPage() {
   const [showActive, setShowActive] = useState(true)
   const [uploading, setUploading] = useState(false)
   
+  // Edit State
+  const [editingId, setEditingId] = useState(null)
+
   const [files, setFiles] = useState({ aadhar: null, passport: null, photo: null, agreement: null })
   const [formData, setFormData] = useState({ name: '', phone: '91', houseNo: '', unitNo: '', deposit: '', rentAmount: '' })
 
@@ -30,20 +33,43 @@ export default function TenantsPage() {
 
   const handlePhoneChange = (e) => {
     let val = e.target.value.replace(/\D/g, ''); // keep only digits
-    // ensure it starts with 91
     if (val.length > 0 && !val.startsWith('91') && !val.startsWith('9') && !val.startsWith('1')) {
        val = '91' + val;
     }
-    // If they delete everything, just keep 91 or empty
     if (val === '9' || val === '') val = '91';
     setFormData({...formData, phone: val});
+  }
+
+  const handleEditClick = (tenant) => {
+    setEditingId(tenant.id)
+    setFormData({
+      name: tenant.name,
+      phone: tenant.phone,
+      houseNo: tenant.houseNo || '',
+      unitNo: tenant.unitNo || '',
+      deposit: tenant.deposit,
+      rentAmount: tenant.rentAmount
+    })
+    setFiles({ aadhar: null, passport: null, photo: null, agreement: null })
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const cancelEdit = () => {
+    setEditingId(null)
+    setFormData({ name: '', phone: '91', houseNo: '', unitNo: '', deposit: '', rentAmount: '' })
+    setFiles({ aadhar: null, passport: null, photo: null, agreement: null })
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setUploading(true)
     
-    let uploadedUrls = { aadharUrl: null, passportUrl: null, photoUrl: null, agreementUrl: null };
+    let uploadedUrls = {};
+    // Only set null in POST mode, in PATCH mode we don't send null so we don't overwrite existing documents
+    if (!editingId) {
+      uploadedUrls = { aadharUrl: null, passportUrl: null, photoUrl: null, agreementUrl: null };
+    }
     
     // Upload files sequentially
     for (const [key, file] of Object.entries(files)) {
@@ -67,18 +93,22 @@ export default function TenantsPage() {
       }
     }
 
-    const res = await fetch('/api/tenants', {
-      method: 'POST',
+    const endpoint = '/api/tenants';
+    const method = editingId ? 'PATCH' : 'POST';
+    const bodyPayload = editingId 
+      ? { id: editingId, ...formData, ...uploadedUrls } 
+      : { ...formData, ...uploadedUrls };
+
+    const res = await fetch(endpoint, {
+      method: method,
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...formData, ...uploadedUrls })
+      body: JSON.stringify(bodyPayload)
     })
     
     if (res.ok) {
-      setFormData({ name: '', phone: '91', houseNo: '', unitNo: '', deposit: '', rentAmount: '' })
-      setFiles({ aadhar: null, passport: null, photo: null, agreement: null })
-      // Clear file inputs
+      cancelEdit(); // Reset form and state
       document.querySelectorAll('input[type="file"]').forEach(input => input.value = '');
-      if (showActive) fetchTenants()
+      fetchTenants();
     }
     setUploading(false)
   }
@@ -116,9 +146,11 @@ export default function TenantsPage() {
       </div>
 
       <div className="dashboard-grid" style={{gridTemplateColumns: '1fr 2fr'}}>
-        {/* Add Tenant Form */}
+        {/* Add/Edit Tenant Form */}
         <div className="glass-panel">
-          <h2>Add New Tenant</h2>
+          <h2 style={{color: editingId ? 'var(--warning-color)' : 'white'}}>
+            {editingId ? 'Edit Tenant Details' : 'Add New Tenant'}
+          </h2>
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label>Name</label>
@@ -152,7 +184,9 @@ export default function TenantsPage() {
               </div>
             </div>
 
-            <h3 style={{fontSize: '1rem', marginTop: '1rem', marginBottom: '0.5rem', color: 'var(--primary-color)'}}>Upload Document</h3>
+            <h3 style={{fontSize: '1rem', marginTop: '1rem', marginBottom: '0.5rem', color: 'var(--primary-color)'}}>
+              {editingId ? 'Update Documents (Optional)' : 'Upload Documents'}
+            </h3>
             <div className="form-group" style={{marginBottom: '0.5rem'}}>
               <div style={{display: 'flex', gap: '0.5rem', flexWrap: 'wrap'}}>
                 <select 
@@ -191,9 +225,16 @@ export default function TenantsPage() {
               ))}
             </div>
 
-            <button type="submit" className="btn btn-success" style={{width: '100%'}} disabled={uploading}>
-              {uploading ? 'Uploading & Adding...' : 'Add Tenant'}
-            </button>
+            <div style={{display: 'flex', gap: '0.5rem'}}>
+              <button type="submit" className={`btn ${editingId ? 'btn-success' : 'btn-success'}`} style={{flex: '1', backgroundColor: editingId ? 'var(--warning-color)' : ''}} disabled={uploading}>
+                {uploading ? 'Processing...' : (editingId ? 'Update Tenant' : 'Add Tenant')}
+              </button>
+              {editingId && (
+                <button type="button" className="btn" style={{backgroundColor: 'rgba(255,255,255,0.1)'}} onClick={cancelEdit} disabled={uploading}>
+                  Cancel
+                </button>
+              )}
+            </div>
           </form>
         </div>
 
@@ -264,7 +305,14 @@ export default function TenantsPage() {
                           )}
                           <button 
                             className="btn" 
-                            style={{padding: '0.4rem 0.8rem', fontSize: '0.75rem', backgroundColor: t.isActive ? 'rgba(245, 158, 11, 0.2)' : 'rgba(16, 185, 129, 0.2)', color: t.isActive ? 'var(--warning-color)' : 'var(--success-color)'}}
+                            style={{padding: '0.4rem 0.8rem', fontSize: '0.75rem', backgroundColor: 'rgba(245, 158, 11, 0.2)', color: 'var(--warning-color)'}}
+                            onClick={() => handleEditClick(t)}
+                          >
+                            Edit
+                          </button>
+                          <button 
+                            className="btn" 
+                            style={{padding: '0.4rem 0.8rem', fontSize: '0.75rem', backgroundColor: t.isActive ? 'rgba(239, 68, 68, 0.2)' : 'rgba(16, 185, 129, 0.2)', color: t.isActive ? '#ef4444' : 'var(--success-color)'}}
                             onClick={() => handleToggleActive(t.id, t.isActive)}
                           >
                             {t.isActive ? 'Mark Vacated' : 'Restore Active'}

@@ -37,14 +37,19 @@ export async function POST(request) {
 
 export async function PATCH(request) {
   try {
-    const data = await request.json()
-    const { id, isActive } = data
+    const data = await request.json();
+    const { id, ...updateData } = data;
+    
+    if (updateData.deposit !== undefined) updateData.deposit = parseFloat(updateData.deposit);
+    if (updateData.rentAmount !== undefined) updateData.rentAmount = parseFloat(updateData.rentAmount);
+
     const tenant = await prisma.tenant.update({
       where: { id },
-      data: { isActive }
-    })
-    return NextResponse.json(tenant)
+      data: updateData
+    });
+    return NextResponse.json(tenant);
   } catch (error) {
-    return NextResponse.json({ error: 'Failed to update tenant' }, { status: 500 })
+    console.error('Failed to update tenant:', error);
+    return NextResponse.json({ error: 'Failed to update tenant' }, { status: 500 });
   }
 }
