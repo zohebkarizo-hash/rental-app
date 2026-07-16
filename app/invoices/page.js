@@ -111,6 +111,22 @@ export default function InvoicesPage() {
     fetchInvoices();
   }
 
+  const handleMarkPaid = async (id) => {
+    if (!confirm('Are you sure you want to mark this invoice as Paid in Cash?')) return;
+    
+    const res = await fetch(`/api/invoices/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: 'PAID' })
+    })
+    
+    if (res.ok) {
+      fetchInvoices()
+    } else {
+      alert('Failed to mark as paid')
+    }
+  }
+
   return (
     <main className="container animate-fade-in">
       <div className="flex-between">
@@ -135,18 +151,18 @@ export default function InvoicesPage() {
       </div>
 
       <div className="glass-panel">
-        <h2>Recent Invoices</h2>
+        <h2 style={{marginTop: 0, marginBottom: '1.5rem'}}>Recent Invoices</h2>
         {loading ? <p>Loading...</p> : (
           <div style={{overflowX: 'auto'}}>
             <table className="data-table">
               <thead>
                 <tr>
-                  <th>Date</th>
-                  <th>Tenant</th>
-                  <th>Amount</th>
-                  <th>Status</th>
-                  <th>WhatsApp</th>
-                  <th>Actions</th>
+                  <th>DATE</th>
+                  <th>TENANT</th>
+                  <th>AMOUNT</th>
+                  <th>STATUS</th>
+                  <th>WHATSAPP</th>
+                  <th>ACTIONS</th>
                 </tr>
               </thead>
               <tbody>
@@ -168,6 +184,16 @@ export default function InvoicesPage() {
                       )}
                     </td>
                     <td style={{display: 'flex', gap: '0.5rem', whiteSpace: 'nowrap'}}>
+                      {inv.status === 'PENDING' && (
+                        <button 
+                          className="btn btn-outline" 
+                          style={{padding: '0.4rem 0.6rem', fontSize: '0.75rem', borderColor: 'var(--text-success)', color: 'var(--text-success)'}}
+                          onClick={() => handleMarkPaid(inv.id)}
+                          title="Mark as paid in cash"
+                        >
+                          Cash Received
+                        </button>
+                      )}
                       <button 
                         className="btn btn-outline" 
                         style={{padding: '0.4rem 0.6rem', fontSize: '0.75rem'}}
@@ -196,7 +222,7 @@ export default function InvoicesPage() {
                   </tr>
                 ))}
                 {invoices.length === 0 && (
-                  <tr><td colSpan="6" style={{textAlign: 'center', color: 'var(--text-secondary)'}}>No invoices generated yet.</td></tr>
+                  <tr><td colSpan="6" style={{textAlign: 'center', opacity: 0.5}}>No invoices generated yet.</td></tr>
                 )}
               </tbody>
             </table>

@@ -1,9 +1,11 @@
 "use client"
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
 export default function DashboardClient({ activeTenants, pendingInvoices, totalDeposit }) {
   const [activeView, setActiveView] = useState(null) // 'tenants', 'deposits', 'pending'
+  const router = useRouter()
 
   const pendingRentTotal = pendingInvoices.reduce((sum, inv) => sum + inv.amountDue, 0)
 
@@ -18,9 +20,25 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
     }
     phone = phone.replace('+', '');
     
-    const text = `Hello ${inv.tenant?.name},\n\nYour rent for this month (Rs. ${inv.amountDue}) is currently PENDING.\n\nPlease pay at the earliest without any ifs and buts.\n\nPay here: ${window.location.origin}/pay/${inv.id}`;
+    const text = `Hello ${inv.tenant?.name},\n\nYour rent for this month (Rs. ${inv.amountDue.toLocaleString('en-IN', {minimumFractionDigits: 2})}) is currently PENDING.\n\nPlease pay at the earliest without any ifs and buts.\n\nPay here: ${window.location.origin}/pay/${inv.id}`;
     window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, '_blank');
   };
+
+  const handleMarkPaid = async (id) => {
+    if (!confirm('Are you sure you want to mark this invoice as Paid in Cash?')) return;
+    
+    const res = await fetch(`/api/invoices/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: 'PAID' })
+    })
+    
+    if (res.ok) {
+      router.refresh();
+    } else {
+      alert('Failed to mark as paid')
+    }
+  }
 
   return (
     <>
@@ -131,7 +149,14 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
                     <td>{inv.tenant.name}</td>
                     <td>{new Date(inv.dueDate).toLocaleDateString('en-IN')}</td>
                     <td style={{color: 'var(--warning-color)', fontWeight: '600'}}>₹{inv.amountDue.toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
-                    <td style={{textAlign: 'right'}}>
+                    <td style={{display: 'flex', gap: '0.5rem', justifyContent: 'flex-end', flexWrap: 'nowrap'}}>
+                      <button 
+                        className="btn btn-outline" 
+                        style={{padding: '0.3rem 0.6rem', fontSize: '0.75rem', fontWeight: 'bold', borderColor: 'var(--text-success)', color: 'var(--text-success)'}}
+                        onClick={() => handleMarkPaid(inv.id)}
+                      >
+                        Cash Received
+                      </button>
                       <button 
                         className="btn btn-danger" 
                         style={{padding: '0.3rem 0.6rem', fontSize: '0.75rem', fontWeight: 'bold'}}
