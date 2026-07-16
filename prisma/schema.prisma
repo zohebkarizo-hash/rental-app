@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Tenant {
+  id          Int       @id @default(autoincrement())
+  name        String
+  phone       String
+  room        String?
+  deposit     Float
+  rentAmount  Float
+  moveInDate  DateTime  @default(now())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  invoices    Invoice[]
+}
+
+model Invoice {
+  id          Int      @id @default(autoincrement())
+  tenantId    Int
+  amountDue   Float
+  dueDate     DateTime
+  status      String   @default("PENDING") // PENDING, PAID
+  whatsappSent Boolean @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  tenant      Tenant   @relation(fields: [tenantId], references: [id])
+}

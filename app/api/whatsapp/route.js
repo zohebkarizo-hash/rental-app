@@ -1,0 +1,67 @@
+import { NextResponse } from 'next/server'
+import twilio from 'twilio'
+import { prisma } from '@/lib/prisma'
+
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const twilioPhoneNumber = process.env.TWILIO_PHONE_NUMBER; 
+const UPI_ID = '919854469256@waaxis';
+
+export async function POST(request) {
+  try {
+    const data = await request.json()
+    const { invoiceId } = data
+    
+    const invoice = await prisma.invoice.findUnique({
+      where: { id: parseInt(invoiceId) },
+      include: { tenant: true }
+    })
+    
+    if (!invoice) return NextResponse.json({ error: 'Invoice not found' }, { status: 404 })
+      
+    if (data.manual) {
+      await prisma.invoice.update({
+        where: { id: invoice.id },
+        data: { whatsappSent: true }
+      })
+      return NextResponse.json({ success: true, manual: true })
+    }
+    // Format the phone number
+    let phone = invoice.tenant.phone
+    if (!phone.startsWith('+')) {
+      phone = '+91' + phone // Default to India country code for UPI
+    }
+    
+    // Generate UPI URL
+    const upiUrl = `upi://pay?pa=${UPI_ID}&pn=Landlord&am=${invoice.amountDue}&cu=INR`
+    const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(upiUrl)}`
+
+    const payUrl = `http://bore.pub:44998/pay/${invoice.id}`;
+
+    let messageSid;
+    // Send message via Twilio
+    if (accountSid && authToken && twilioPhoneNumber) {
+      const client = twilio(accountSid, authToken)
+      const msg = await client.messages.create({
+        body: `Hello ${invoice.tenant.name},\n\nYour rent for this month is Rs. ${invoice.amountDue}.\nTo pay instantly via GPay/PhonePe or to view your QR code, click your secure invoice link below:\n${payUrl}\n\nThank you!`,
+        from: twilioPhoneNumber,
+        to: `whatsapp:${phone}`,
+        mediaUrl: [qrApiUrl]
+      })
+      messageSid = msg.sid
+    } else {
+      console.warn("Twilio credentials missing. Simulating WhatsApp send.")
+    }
+
+    // Mark invoice as sent
+    await prisma.invoice.update({
+      where: { id: invoice.id },
+      data: { whatsappSent: true }
+    })
+    
+    return NextResponse.json({ success: true, messageSid, qrUrl: qrApiUrl })
+  } catch (error) {
+    console.error(error)
+    return NextResponse.json({ error: 'Failed to send WhatsApp message' }, { status: 500 })
+  }
+}
