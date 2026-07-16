@@ -15,7 +15,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
           style={{cursor: 'pointer', border: activeView === 'tenants' ? '2px solid var(--text-success)' : ''}}
           onClick={() => setActiveView(activeView === 'tenants' ? null : 'tenants')}
         >
-          <div className="stat-label">Active Tenants <span style={{opacity: 0.5}}>→</span></div>
+          <div className="stat-label">Active Tenants <span style={{opacity: 0.5}}>&rarr;</span></div>
           <div className="stat-value">{activeTenants.length}</div>
         </div>
         
@@ -24,7 +24,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
           style={{cursor: 'pointer', border: activeView === 'deposits' ? '2px solid var(--text-success)' : ''}}
           onClick={() => setActiveView(activeView === 'deposits' ? null : 'deposits')}
         >
-          <div className="stat-label">Total Deposits <span style={{opacity: 0.5}}>→</span></div>
+          <div className="stat-label">Total Deposits <span style={{opacity: 0.5}}>&rarr;</span></div>
           <div className="stat-value">₹{totalDeposit.toLocaleString()}</div>
         </div>
         
@@ -33,7 +33,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
           style={{cursor: 'pointer', border: activeView === 'pending' ? '2px solid var(--text-success)' : ''}}
           onClick={() => setActiveView(activeView === 'pending' ? null : 'pending')}
         >
-          <div className="stat-label">Pending Rent <span style={{opacity: 0.5}}>→</span></div>
+          <div className="stat-label">Pending Rent <span style={{opacity: 0.5}}>&rarr;</span></div>
           <div className="stat-value" style={{color: 'var(--warning-color)'}}>₹{pendingRentTotal.toLocaleString()}</div>
         </div>
       </div>
