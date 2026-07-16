@@ -80,6 +80,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
                 <tr>
                   <th>Name</th>
                   <th>House/Unit</th>
+                  <th>Date of Deposit</th>
                   <th>Deposit Amount</th>
                 </tr>
               </thead>
@@ -88,10 +89,11 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
                   <tr key={t.id}>
                     <td><strong>{t.name}</strong></td>
                     <td>House {t.houseNo || '-'}, Unit {t.unitNo || '-'}</td>
+                    <td>{new Date(t.createdAt).toLocaleDateString()}</td>
                     <td style={{fontWeight: '600'}}>₹{t.deposit.toLocaleString()}</td>
                   </tr>
                 ))}
-                {activeTenants.length === 0 && <tr><td colSpan="3" style={{textAlign: 'center'}}>No active deposits found.</td></tr>}
+                {activeTenants.length === 0 && <tr><td colSpan="4" style={{textAlign: 'center'}}>No active deposits found.</td></tr>}
               </tbody>
             </table>
           </div>
