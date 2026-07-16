@@ -9,6 +9,7 @@
   --text-secondary: #a3a3a3;
   --border-color: #262626;
   --success-color: #2c5a45;
+  --text-success: #67a685;
   --warning-color: #ef4444;
 }
 
@@ -92,7 +93,7 @@ h3 {
 }
 
 .nav-links a:hover, .nav-links a.active {
-  color: var(--primary-color);
+  color: var(--text-primary);
 }
 
 /* Main Layout */
@@ -194,7 +195,7 @@ h3 {
 }
 .form-control:focus {
   outline: none;
-  border-color: var(--primary-color);
+  border-color: var(--primary-hover);
   background: rgba(0, 0, 0, 0.4);
 }
 
@@ -236,8 +237,8 @@ h3 {
   color: var(--warning-color);
 }
 .badge-paid {
-  background: rgba(139, 157, 195, 0.15); /* pastel blue translucent */
-  color: var(--primary-color);
+  background: rgba(44, 90, 69, 0.3);
+  color: var(--text-success);
 }
 
 /* Dashboard Grid */

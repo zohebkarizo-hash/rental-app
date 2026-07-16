@@ -337,10 +337,10 @@ export default function TenantsPage() {
                       </td>
                       <td>
                         <div style={{display: 'flex', flexDirection: 'column', gap: '4px'}}>
-                          {t.aadharUrl && <a href={t.aadharUrl} target="_blank" rel="noreferrer" style={{fontSize: '0.75rem', color: 'var(--primary-color)', textDecoration: 'none'}}>📄 Aadhar</a>}
-                          {t.passportUrl && <a href={t.passportUrl} target="_blank" rel="noreferrer" style={{fontSize: '0.75rem', color: 'var(--primary-color)', textDecoration: 'none'}}>📄 Passport</a>}
-                          {t.photoUrl && <a href={t.photoUrl} target="_blank" rel="noreferrer" style={{fontSize: '0.75rem', color: 'var(--primary-color)', textDecoration: 'none'}}>🖼️ Photo</a>}
-                          {t.agreementUrl && <a href={t.agreementUrl} target="_blank" rel="noreferrer" style={{fontSize: '0.75rem', color: 'var(--primary-color)', textDecoration: 'none'}}>📄 Agreement</a>}
+                          {t.aadharUrl && <a href={t.aadharUrl} target="_blank" rel="noreferrer" style={{fontSize: '0.75rem', color: 'var(--text-success)', textDecoration: 'none'}}>📄 Aadhar</a>}
+                          {t.passportUrl && <a href={t.passportUrl} target="_blank" rel="noreferrer" style={{fontSize: '0.75rem', color: 'var(--text-success)', textDecoration: 'none'}}>📄 Passport</a>}
+                          {t.photoUrl && <a href={t.photoUrl} target="_blank" rel="noreferrer" style={{fontSize: '0.75rem', color: 'var(--text-success)', textDecoration: 'none'}}>🖼️ Photo</a>}
+                          {t.agreementUrl && <a href={t.agreementUrl} target="_blank" rel="noreferrer" style={{fontSize: '0.75rem', color: 'var(--text-success)', textDecoration: 'none'}}>📄 Agreement</a>}
                           {!t.aadharUrl && !t.passportUrl && !t.photoUrl && !t.agreementUrl && <span style={{fontSize: '0.75rem', color: 'var(--text-secondary)'}}>None</span>}
                         </div>
                       </td>

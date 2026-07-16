@@ -113,7 +113,7 @@ export default function InvoicesPage() {
                     </td>
                     <td>
                       {inv.whatsappSent ? (
-                        <span style={{color: 'var(--success-color)'}}>✓ Sent</span>
+                        <span style={{color: 'var(--text-success)'}}>✓ Sent</span>
                       ) : (
                         <span style={{color: 'var(--text-secondary)'}}>Not Sent</span>
                       )}
