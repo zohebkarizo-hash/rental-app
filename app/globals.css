@@ -47,12 +47,13 @@ h2 {
   font-size: 1.25rem;
   font-weight: 400;
   margin-bottom: 1rem;
-  color: var(--text-primary);
+  color: var(--text-secondary);
 }
 h3 {
   font-size: 1rem;
   font-weight: 400;
   margin-bottom: 0.75rem;
+  color: var(--text-secondary);
 }
 
 /* Navigation */
