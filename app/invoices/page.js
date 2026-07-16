@@ -169,18 +169,27 @@ export default function InvoicesPage() {
                     <td style={{display: 'flex', gap: '0.5rem', whiteSpace: 'nowrap'}}>
                       <button 
                         className="btn btn-outline" 
-                        style={{padding: '0.4rem 0.8rem', fontSize: '0.875rem'}}
+                        style={{padding: '0.4rem 0.6rem', fontSize: '0.75rem'}}
                         onClick={() => setPreviewInvoice(inv)}
                       >
                         Preview
                       </button>
                       <button 
                         className="btn btn-success" 
-                        style={{padding: '0.4rem 0.8rem', fontSize: '0.875rem'}}
+                        style={{padding: '0.4rem 0.6rem', fontSize: '0.75rem'}}
                         onClick={() => handleSendManual(inv)}
                         title="Open WhatsApp on your device to send manually"
                       >
-                        Send Manual
+                        Manual WA
+                      </button>
+                      <button 
+                        className="btn btn-outline" 
+                        style={{padding: '0.4rem 0.6rem', fontSize: '0.75rem', borderColor: '#25D366', color: '#25D366'}}
+                        onClick={() => handleSendWhatsApp(inv.id)}
+                        disabled={sendingId === inv.id}
+                        title="Send silently in background via Twilio API"
+                      >
+                        {sendingId === inv.id ? '...' : 'Auto WA'}
                       </button>
                     </td>
                   </tr>
