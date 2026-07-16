@@ -17,6 +17,8 @@ model Tenant {
   moveInDate  DateTime  @default(now())
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
+  idDocumentUrl String?
+  isActive    Boolean   @default(true)
   invoices    Invoice[]
 }
 
