@@ -228,16 +228,14 @@ h3 {
 }
 
 .badge {
-  padding: 0.2rem 0.6rem;
-  border-radius: 9999px;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
 }
 .badge-pending {
-  background: rgba(217, 119, 119, 0.15); /* pastel red translucent */
+  background: transparent;
   color: var(--warning-color);
 }
 .badge-paid {
-  background: rgba(44, 90, 69, 0.3);
+  background: transparent;
   color: var(--text-success);
 }
 
