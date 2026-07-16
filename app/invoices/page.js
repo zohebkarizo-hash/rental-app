@@ -178,17 +178,9 @@ export default function InvoicesPage() {
                         className="btn btn-success" 
                         style={{padding: '0.4rem 0.8rem', fontSize: '0.875rem'}}
                         onClick={() => handleSendManual(inv)}
+                        title="Open WhatsApp on your device to send manually"
                       >
-                        Open WA
-                      </button>
-                      <button 
-                        className="btn btn-outline" 
-                        style={{padding: '0.4rem 0.8rem', fontSize: '0.875rem'}}
-                        onClick={() => handleSendWhatsApp(inv.id)}
-                        disabled={sendingId === inv.id}
-                        title="Send via Twilio Background API"
-                      >
-                        {sendingId === inv.id ? '...' : 'Auto'}
+                        Send Manual
                       </button>
                     </td>
                   </tr>
