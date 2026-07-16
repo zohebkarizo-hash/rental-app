@@ -7,6 +7,21 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
 
   const pendingRentTotal = pendingInvoices.reduce((sum, inv) => sum + inv.amountDue, 0)
 
+  const handleSendStrictReminder = (inv) => {
+    let phone = inv.tenant?.phone || '';
+    if (!phone) {
+      alert("No phone number for this tenant.");
+      return;
+    }
+    if (!phone.startsWith('91') && !phone.startsWith('+')) {
+      phone = '91' + phone;
+    }
+    phone = phone.replace('+', '');
+    
+    const text = `Hello ${inv.tenant?.name},\n\nYour rent for this month (Rs. ${inv.amountDue}) is currently PENDING.\n\nPlease pay at the earliest without any ifs and buts.\n\nPay here: ${window.location.origin}/pay/${inv.id}`;
+    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, '_blank');
+  };
+
   return (
     <>
       <div className="dashboard-grid">
@@ -107,6 +122,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
                   <th>Tenant Name</th>
                   <th>Due Date</th>
                   <th>Amount Owed</th>
+                  <th style={{textAlign: 'right'}}>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -115,9 +131,18 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
                     <td>{inv.tenant.name}</td>
                     <td>{new Date(inv.dueDate).toLocaleDateString('en-IN')}</td>
                     <td style={{color: 'var(--warning-color)', fontWeight: '600'}}>₹{inv.amountDue.toLocaleString()}</td>
+                    <td style={{textAlign: 'right'}}>
+                      <button 
+                        className="btn btn-danger" 
+                        style={{padding: '0.3rem 0.6rem', fontSize: '0.75rem', fontWeight: 'bold'}}
+                        onClick={() => handleSendStrictReminder(inv)}
+                      >
+                        Strict Reminder
+                      </button>
+                    </td>
                   </tr>
                 ))}
-                {pendingInvoices.length === 0 && <tr><td colSpan="3" style={{textAlign: 'center'}}>No pending invoices right now!</td></tr>}
+                {pendingInvoices.length === 0 && <tr><td colSpan="4" style={{textAlign: 'center'}}>No pending invoices right now!</td></tr>}
               </tbody>
             </table>
           </div>
