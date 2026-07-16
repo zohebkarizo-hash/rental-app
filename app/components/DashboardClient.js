@@ -59,7 +59,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
                 {activeTenants.map(t => (
                   <tr key={t.id}>
                     <td>House {t.houseNo || '-'}, Unit {t.unitNo || '-'}</td>
-                    <td><strong>{t.name}</strong></td>
+                    <td>{t.name}</td>
                     <td>+{t.phone}</td>
                     <td>₹{t.rentAmount}</td>
                   </tr>
@@ -87,7 +87,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
               <tbody>
                 {activeTenants.map(t => (
                   <tr key={t.id}>
-                    <td><strong>{t.name}</strong></td>
+                    <td>{t.name}</td>
                     <td>House {t.houseNo || '-'}, Unit {t.unitNo || '-'}</td>
                     <td>{new Date(t.createdAt).toLocaleDateString()}</td>
                     <td style={{fontWeight: '600'}}>₹{t.deposit.toLocaleString()}</td>
@@ -115,7 +115,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
               <tbody>
                 {pendingInvoices.map(inv => (
                   <tr key={inv.id}>
-                    <td><strong>{inv.tenant.name}</strong></td>
+                    <td>{inv.tenant.name}</td>
                     <td>{new Date(inv.dueDate).toLocaleDateString()}</td>
                     <td style={{color: 'var(--warning-color)', fontWeight: '600'}}>₹{inv.amountDue.toLocaleString()}</td>
                   </tr>

@@ -332,7 +332,7 @@ export default function TenantsPage() {
                         <div style={{fontSize: '0.8rem', color: 'var(--text-secondary)'}}>Unit {t.unitNo || '-'}</div>
                       </td>
                       <td>
-                        <div><strong>{t.name}</strong></div>
+                        <div>{t.name}</div>
                         <div style={{fontSize: '0.8rem', color: 'var(--text-secondary)'}}>📱 +{t.phone}</div>
                       </td>
                       <td>
