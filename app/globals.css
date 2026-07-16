@@ -39,19 +39,19 @@ body {
 /* Typography */
 h1 {
   font-size: 1.75rem;
-  font-weight: bold;
+  font-weight: 600;
   margin-bottom: 1.5rem;
   color: var(--text-primary);
 }
 h2 {
   font-size: 1.25rem;
-  font-weight: bold;
+  font-weight: 600;
   margin-bottom: 1rem;
   color: var(--text-primary);
 }
 h3 {
   font-size: 1rem;
-  font-weight: bold;
+  font-weight: 600;
   margin-bottom: 0.75rem;
 }
 
@@ -71,7 +71,7 @@ h3 {
 
 .logo {
   font-size: 1.15rem;
-  font-weight: bold;
+  font-weight: 600;
   color: var(--text-primary);
   text-decoration: none;
   display: flex;
@@ -210,7 +210,7 @@ h3 {
 }
 .data-table th {
   color: var(--text-secondary);
-  font-weight: bold;
+  font-weight: 600;
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -255,7 +255,7 @@ h3 {
 }
 .stat-value {
   font-size: 2rem;
-  font-weight: bold;
+  font-weight: 600;
   margin: 0.5rem 0;
   color: var(--text-success);
 }
