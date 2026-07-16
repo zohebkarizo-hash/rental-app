@@ -87,14 +87,14 @@ h3 {
 
 .nav-links a {
   color: #ef4444;
-  opacity: 0.65;
+  opacity: 1;
   text-decoration: none;
   font-size: 0.9rem;
   transition: opacity 0.2s ease;
 }
 
-.nav-links a:hover, .nav-links a.active {
-  opacity: 1;
+.nav-links a:hover {
+  opacity: 0.8;
 }
 
 /* Main Layout */
