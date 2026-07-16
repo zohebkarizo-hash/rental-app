@@ -1,15 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --bg-color: #1e1e2e;
-  --surface-color: #27273a;
-  --primary-color: #89b4fa;
-  --primary-hover: #b4befe;
-  --text-primary: #cdd6f4;
-  --text-secondary: #a6adc8;
-  --border-color: #45475a;
-  --success-color: #a6e3a1;
-  --warning-color: #f38ba8;
+  --bg-color: #0a0a0a;
+  --surface-color: #141414;
+  --primary-color: #ffffff;
+  --primary-hover: #e5e5e5;
+  --text-primary: #fafafa;
+  --text-secondary: #a3a3a3;
+  --border-color: #262626;
+  --success-color: #10b981;
+  --warning-color: #ef4444;
 }
 
 * {
@@ -104,12 +104,12 @@ h3 {
 
 /* Buttons */
 .btn {
-  background: var(--text-primary);
-  color: white;
+  background: var(--primary-color);
+  color: #000000;
   border: none;
   padding: 0.6rem 1.2rem;
   border-radius: 6px;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 0.9rem;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -121,7 +121,7 @@ h3 {
 }
 
 .btn:hover:not(:disabled) {
-  background: #1d2c2a;
+  background: var(--primary-hover);
 }
 
 .btn:disabled {
@@ -130,10 +130,11 @@ h3 {
 }
 
 .btn-success {
-  background: var(--primary-color);
+  background: var(--success-color);
+  color: #ffffff;
 }
 .btn-success:hover:not(:disabled) {
-  background: var(--primary-hover);
+  background: #059669;
 }
 
 /* Forms */
