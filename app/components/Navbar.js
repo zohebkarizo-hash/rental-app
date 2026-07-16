@@ -12,7 +12,7 @@ export default function Navbar() {
     <nav className="navbar">
       <a href="/" className="logo">
         <img src="/house_logo.jpg" alt="KirayaPay Logo" style={{width: '32px', height: '32px', objectFit: 'cover', mixBlendMode: 'lighten'}} />
-        <span>Kiraya<span style={{color: 'var(--primary-color)'}}>Pay</span></span>
+        <span>Kiraya<span style={{color: 'var(--text-success)'}}>Pay</span></span>
       </a>
       
       <div className="nav-links">
