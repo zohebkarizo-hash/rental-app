@@ -12,7 +12,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
       <div className="dashboard-grid">
         <div 
           className="glass-panel stat-card" 
-          style={{cursor: 'pointer', border: activeView === 'tenants' ? '2px solid var(--primary-color)' : ''}}
+          style={{cursor: 'pointer', border: activeView === 'tenants' ? '2px solid var(--text-success)' : ''}}
           onClick={() => setActiveView(activeView === 'tenants' ? null : 'tenants')}
         >
           <div className="stat-label">Active Tenants</div>
@@ -22,7 +22,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
         
         <div 
           className="glass-panel stat-card"
-          style={{cursor: 'pointer', border: activeView === 'deposits' ? '2px solid var(--primary-color)' : ''}}
+          style={{cursor: 'pointer', border: activeView === 'deposits' ? '2px solid var(--text-success)' : ''}}
           onClick={() => setActiveView(activeView === 'deposits' ? null : 'deposits')}
         >
           <div className="stat-label">Total Deposits Held</div>
@@ -32,7 +32,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
         
         <div 
           className="glass-panel stat-card"
-          style={{cursor: 'pointer', border: activeView === 'pending' ? '2px solid var(--primary-color)' : ''}}
+          style={{cursor: 'pointer', border: activeView === 'pending' ? '2px solid var(--text-success)' : ''}}
           onClick={() => setActiveView(activeView === 'pending' ? null : 'pending')}
         >
           <div className="stat-label">Pending Rent</div>
