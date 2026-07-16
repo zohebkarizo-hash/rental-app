@@ -72,7 +72,7 @@ h3 {
 .logo {
   font-size: 1.15rem;
   font-weight: 600;
-  color: var(--text-primary);
+  color: #ef4444;
   text-decoration: none;
   display: flex;
   align-items: center;
