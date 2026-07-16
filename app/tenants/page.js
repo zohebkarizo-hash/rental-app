@@ -152,23 +152,43 @@ export default function TenantsPage() {
               </div>
             </div>
 
-            <h3 style={{fontSize: '1rem', marginTop: '1rem', marginBottom: '0.5rem', color: 'var(--primary-color)'}}>Documents</h3>
+            <h3 style={{fontSize: '1rem', marginTop: '1rem', marginBottom: '0.5rem', color: 'var(--primary-color)'}}>Upload Document</h3>
+            <div className="form-group" style={{marginBottom: '0.5rem'}}>
+              <div style={{display: 'flex', gap: '0.5rem', flexWrap: 'wrap'}}>
+                <select 
+                  className="form-control" 
+                  style={{flex: '1', minWidth: '150px'}}
+                  onChange={(e) => document.getElementById('unified-file-upload').setAttribute('data-doctype', e.target.value)}
+                >
+                  <option value="aadhar">Aadhar Card</option>
+                  <option value="passport">Passport</option>
+                  <option value="photo">Tenant Photo</option>
+                  <option value="agreement">Rental Agreement</option>
+                </select>
+                <input 
+                  type="file" 
+                  id="unified-file-upload"
+                  data-doctype="aadhar"
+                  className="form-control" 
+                  accept="image/*,application/pdf" 
+                  onChange={(e) => {
+                    const type = e.target.getAttribute('data-doctype');
+                    handleFileChange(type, e);
+                    e.target.value = ''; // Reset so they can upload another type easily
+                  }} 
+                  style={{flex: '2', padding: '0.5rem', minWidth: '200px'}} 
+                />
+              </div>
+            </div>
             
-            <div className="form-group">
-              <label>Aadhar Card</label>
-              <input type="file" className="form-control" accept="image/*,application/pdf" onChange={(e) => handleFileChange('aadhar', e)} style={{padding: '0.5rem'}} />
-            </div>
-            <div className="form-group">
-              <label>Passport</label>
-              <input type="file" className="form-control" accept="image/*,application/pdf" onChange={(e) => handleFileChange('passport', e)} style={{padding: '0.5rem'}} />
-            </div>
-            <div className="form-group">
-              <label>Tenant Photo</label>
-              <input type="file" className="form-control" accept="image/*" onChange={(e) => handleFileChange('photo', e)} style={{padding: '0.5rem'}} />
-            </div>
-            <div className="form-group" style={{marginBottom: '1.5rem'}}>
-              <label>Rental Agreement</label>
-              <input type="file" className="form-control" accept="image/*,application/pdf" onChange={(e) => handleFileChange('agreement', e)} style={{padding: '0.5rem'}} />
+            {/* Show attached files */}
+            <div style={{display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1.5rem'}}>
+              {Object.entries(files).map(([type, file]) => file && (
+                <span key={type} className="badge badge-paid" style={{display: 'flex', alignItems: 'center', gap: '4px'}}>
+                  {type.charAt(0).toUpperCase() + type.slice(1)} Attached
+                  <button type="button" onClick={() => setFiles({...files, [type]: null})} style={{background: 'transparent', border: 'none', color: 'white', cursor: 'pointer', padding: '0 2px'}}>✖</button>
+                </span>
+              ))}
             </div>
 
             <button type="submit" className="btn btn-success" style={{width: '100%'}} disabled={uploading}>
