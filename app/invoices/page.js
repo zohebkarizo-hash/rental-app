@@ -57,7 +57,7 @@ export default function InvoicesPage() {
     phone = phone.replace('+', '');
     
     const baseUrl = window.location.origin;
-    let payUrl = `http://bore.pub:44998/pay/${inv.id}`;
+    let payUrl = `${baseUrl}/pay/${inv.id}`;
     
     const text = `Hello ${inv.tenant?.name},\n\nYour rent for this month is Rs. ${inv.amountDue}.\nTo pay instantly via GPay/PhonePe or to view your QR code, click your secure invoice link below:\n${payUrl}\n\nThank you!`;
     

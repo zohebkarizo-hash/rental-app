@@ -36,8 +36,8 @@ export async function POST(request) {
     const upiUrl = `upi://pay?pa=${UPI_ID}&pn=Landlord&am=${invoice.amountDue}&cu=INR`
     const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(upiUrl)}`
 
-    const payUrl = `http://bore.pub:44998/pay/${invoice.id}`;
-
+    const baseUrl = request.headers.get('origin') || new URL(request.url).origin;
+    const payUrl = `${baseUrl}/pay/${invoice.id}`;
     let messageSid;
     // Send message via Twilio
     if (accountSid && authToken && twilioPhoneNumber) {
