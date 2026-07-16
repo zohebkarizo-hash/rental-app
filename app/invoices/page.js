@@ -154,7 +154,7 @@ export default function InvoicesPage() {
                   <tr key={inv.id}>
                     <td>{new Date(inv.createdAt).toLocaleDateString('en-IN')}</td>
                     <td>{inv.tenant?.name || 'Unknown'}</td>
-                    <td>₹{inv.amountDue}</td>
+                    <td>₹{inv.amountDue.toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
                     <td>
                       <span className={`badge ${inv.status === 'PAID' ? 'badge-paid' : 'badge-pending'}`}>
                         {inv.status === 'PENDING' ? 'Pending' : inv.status === 'PAID' ? 'Paid' : inv.status}

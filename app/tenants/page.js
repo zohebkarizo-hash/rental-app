@@ -344,8 +344,8 @@ export default function TenantsPage() {
                           {!t.aadharUrl && !t.passportUrl && !t.photoUrl && !t.agreementUrl && <span style={{fontSize: '0.75rem', color: 'var(--text-secondary)'}}>None</span>}
                         </div>
                       </td>
-                      <td>₹{t.deposit}</td>
-                      <td>₹{t.rentAmount}</td>
+                      <td>₹{t.deposit.toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
+                      <td>₹{t.rentAmount.toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
                       <td>
                         <div style={{display: 'flex', gap: '0.5rem', flexWrap: 'wrap'}}>
                           {t.isActive && (

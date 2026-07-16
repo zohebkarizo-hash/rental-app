@@ -40,7 +40,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
           onClick={() => setActiveView(activeView === 'deposits' ? null : 'deposits')}
         >
           <div className="stat-label">Total Deposits <span style={{opacity: 0.5}}>&rarr;</span></div>
-          <div className="stat-value">₹{totalDeposit.toLocaleString()}</div>
+          <div className="stat-value">₹{totalDeposit.toLocaleString('en-IN', {minimumFractionDigits: 2})}</div>
         </div>
         
         <div 
@@ -49,7 +49,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
           onClick={() => setActiveView(activeView === 'pending' ? null : 'pending')}
         >
           <div className="stat-label">Pending Rent <span style={{opacity: 0.5}}>&rarr;</span></div>
-          <div className="stat-value" style={{color: 'var(--warning-color)'}}>₹{pendingRentTotal.toLocaleString()}</div>
+          <div className="stat-value" style={{color: 'var(--warning-color)'}}>₹{pendingRentTotal.toLocaleString('en-IN', {minimumFractionDigits: 2})}</div>
         </div>
       </div>
 
@@ -73,7 +73,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
                     <td>House {t.houseNo || '-'}, Unit {t.unitNo || '-'}</td>
                     <td>{t.name}</td>
                     <td>+{t.phone}</td>
-                    <td>₹{t.rentAmount}</td>
+                    <td>₹{t.rentAmount.toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
                   </tr>
                 ))}
                 {activeTenants.length === 0 && <tr><td colSpan="4" style={{textAlign: 'center'}}>No active tenants found.</td></tr>}
@@ -102,7 +102,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
                     <td>{t.name}</td>
                     <td>House {t.houseNo || '-'}, Unit {t.unitNo || '-'}</td>
                     <td>{new Date(t.createdAt).toLocaleDateString('en-IN')}</td>
-                    <td style={{fontWeight: '600'}}>₹{t.deposit.toLocaleString()}</td>
+                    <td style={{fontWeight: '600'}}>₹{t.deposit.toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
                   </tr>
                 ))}
                 {activeTenants.length === 0 && <tr><td colSpan="4" style={{textAlign: 'center'}}>No active deposits found.</td></tr>}
@@ -130,7 +130,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
                   <tr key={inv.id}>
                     <td>{inv.tenant.name}</td>
                     <td>{new Date(inv.dueDate).toLocaleDateString('en-IN')}</td>
-                    <td style={{color: 'var(--warning-color)', fontWeight: '600'}}>₹{inv.amountDue.toLocaleString()}</td>
+                    <td style={{color: 'var(--warning-color)', fontWeight: '600'}}>₹{inv.amountDue.toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
                     <td style={{textAlign: 'right'}}>
                       <button 
                         className="btn btn-danger" 

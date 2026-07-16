@@ -29,7 +29,7 @@ export default async function PaymentPage({ params }) {
         <p style={{ color: 'var(--text-secondary)', margin: '0 0 1.5rem 0' }}>For {invoice.tenant?.name || 'Tenant'}</p>
         
         <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: 'var(--primary-color)', marginBottom: '1rem' }}>
-          ₹{invoice.amountDue}
+          ₹{invoice.amountDue.toLocaleString('en-IN', {minimumFractionDigits: 2})}
         </div>
         
         <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>
