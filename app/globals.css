@@ -1,15 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --bg-color: #f7f7f5;
-  --surface-color: #ffffff;
-  --primary-color: #8b9dc3;
-  --primary-hover: #7285ab;
-  --text-primary: #37352f;
-  --text-secondary: #787774;
-  --border-color: #e9e9e7;
-  --success-color: #76a889;
-  --warning-color: #d97777;
+  --bg-color: #1e1e2e;
+  --surface-color: #27273a;
+  --primary-color: #89b4fa;
+  --primary-hover: #b4befe;
+  --text-primary: #cdd6f4;
+  --text-secondary: #a6adc8;
+  --border-color: #45475a;
+  --success-color: #a6e3a1;
+  --warning-color: #f38ba8;
 }
 
 * {
@@ -158,7 +158,7 @@ h3 {
 .form-control {
   width: 100%;
   padding: 0.6rem 0.75rem;
-  background: #f9f9f9;
+  background: rgba(0, 0, 0, 0.2);
   border: 1px solid var(--border-color);
   border-radius: 6px;
   color: var(--text-primary);
@@ -169,7 +169,7 @@ h3 {
 .form-control:focus {
   outline: none;
   border-color: var(--primary-color);
-  background: #ffffff;
+  background: rgba(0, 0, 0, 0.4);
 }
 
 /* Tables */
@@ -190,13 +190,13 @@ h3 {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  background: rgba(0, 0, 0, 0.02); /* Subtle neutral background for headers */
+  background: rgba(255, 255, 255, 0.03); /* Subtle light background for headers */
 }
 .data-table tr {
   transition: background-color 0.2s ease;
 }
 .data-table tr:hover {
-  background-color: rgba(0, 0, 0, 0.02);
+  background-color: rgba(255, 255, 255, 0.03);
 }
 
 .badge {
