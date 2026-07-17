@@ -313,7 +313,7 @@ export default function TenantsPage() {
 
           {loading ? <p>Loading...</p> : (
             <div style={{overflowX: 'auto'}}>
-              <table className="data-table">
+              <table className="data-table tenants-table">
                 <thead>
                   <tr>
                     <th>Unit/House</th>
