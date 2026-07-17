@@ -19,7 +19,7 @@ export async function POST(request) {
   } catch (error) {
     console.error('Error uploading file:', error);
     return NextResponse.json(
-      { error: 'Failed to upload file to Blob storage' },
+      { error: error.message || 'Failed to upload file to Blob storage' },
       { status: 500 }
     );
   }
