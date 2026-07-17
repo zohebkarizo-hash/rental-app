@@ -199,33 +199,50 @@ export default function TenantsPage() {
             </div>
 
             {roommateCount >= 1 && (
-              <div className="form-grid animate-fade-in" style={{marginTop: '1rem', padding: '1rem', background: 'rgba(255,255,255,0.02)', borderRadius: '8px', border: '1px solid var(--border-color)'}}>
-                <div className="form-group">
-                  <label>Roommate 1 Name</label>
-                  <input type="text" className="form-control" value={formData.roommate1Name} onChange={e => setFormData({...formData, roommate1Name: e.target.value})} />
-                </div>
-                <div className="form-group">
-                  <label>Roommate 1 Phone</label>
-                  <input type="tel" className="form-control" value={formData.roommate1Phone} onChange={e => {
-                    const val = e.target.value.replace(/\D/g, '');
-                    if (val === '' || val.startsWith('91')) setFormData({...formData, roommate1Phone: val});
-                  }} />
+              <div className="animate-fade-in" style={{position: 'relative', marginTop: '1rem', padding: '1rem', background: 'rgba(255,255,255,0.02)', borderRadius: '8px', border: '1px solid var(--border-color)'}}>
+                <button type="button" style={{position: 'absolute', top: '8px', right: '8px', background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', fontSize: '1.2rem', padding: '0 4px'}} onClick={() => {
+                  if (roommateCount === 2) {
+                    setFormData({...formData, roommate1Name: formData.roommate2Name, roommate1Phone: formData.roommate2Phone, roommate2Name: '', roommate2Phone: '91'});
+                    setRoommateCount(1);
+                  } else {
+                    setFormData({...formData, roommate1Name: '', roommate1Phone: '91'});
+                    setRoommateCount(0);
+                  }
+                }}>×</button>
+                <div className="form-grid">
+                  <div className="form-group">
+                    <label>Roommate 1 Name</label>
+                    <input type="text" className="form-control" value={formData.roommate1Name} onChange={e => setFormData({...formData, roommate1Name: e.target.value})} />
+                  </div>
+                  <div className="form-group">
+                    <label>Roommate 1 Phone</label>
+                    <input type="tel" className="form-control" value={formData.roommate1Phone} onChange={e => {
+                      const val = e.target.value.replace(/\D/g, '');
+                      if (val === '' || val.startsWith('91')) setFormData({...formData, roommate1Phone: val});
+                    }} />
+                  </div>
                 </div>
               </div>
             )}
 
             {roommateCount >= 2 && (
-              <div className="form-grid animate-fade-in" style={{marginTop: '1rem', padding: '1rem', background: 'rgba(255,255,255,0.02)', borderRadius: '8px', border: '1px solid var(--border-color)'}}>
-                <div className="form-group">
-                  <label>Roommate 2 Name</label>
-                  <input type="text" className="form-control" value={formData.roommate2Name} onChange={e => setFormData({...formData, roommate2Name: e.target.value})} />
-                </div>
-                <div className="form-group">
-                  <label>Roommate 2 Phone</label>
-                  <input type="tel" className="form-control" value={formData.roommate2Phone} onChange={e => {
-                    const val = e.target.value.replace(/\D/g, '');
-                    if (val === '' || val.startsWith('91')) setFormData({...formData, roommate2Phone: val});
-                  }} />
+              <div className="animate-fade-in" style={{position: 'relative', marginTop: '1rem', padding: '1rem', background: 'rgba(255,255,255,0.02)', borderRadius: '8px', border: '1px solid var(--border-color)'}}>
+                <button type="button" style={{position: 'absolute', top: '8px', right: '8px', background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', fontSize: '1.2rem', padding: '0 4px'}} onClick={() => {
+                  setFormData({...formData, roommate2Name: '', roommate2Phone: '91'});
+                  setRoommateCount(1);
+                }}>×</button>
+                <div className="form-grid">
+                  <div className="form-group">
+                    <label>Roommate 2 Name</label>
+                    <input type="text" className="form-control" value={formData.roommate2Name} onChange={e => setFormData({...formData, roommate2Name: e.target.value})} />
+                  </div>
+                  <div className="form-group">
+                    <label>Roommate 2 Phone</label>
+                    <input type="tel" className="form-control" value={formData.roommate2Phone} onChange={e => {
+                      const val = e.target.value.replace(/\D/g, '');
+                      if (val === '' || val.startsWith('91')) setFormData({...formData, roommate2Phone: val});
+                    }} />
+                  </div>
                 </div>
               </div>
             )}
