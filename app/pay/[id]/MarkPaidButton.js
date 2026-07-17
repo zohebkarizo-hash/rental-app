@@ -32,22 +32,19 @@ export default function MarkPaidButton({ invoiceId }) {
 
   if (done) {
     return (
-      <div style={{ marginTop: '2rem', padding: '1rem', backgroundColor: 'var(--bg-card)', border: '1px solid var(--text-success)', borderRadius: '8px', color: 'var(--text-success)' }}>
+      <div style={{ padding: '0.75rem', backgroundColor: 'var(--bg-card)', border: '1px solid var(--text-success)', borderRadius: '8px', color: 'var(--text-success)', fontSize: '0.9rem' }}>
         Thank you! The landlord has been notified.
       </div>
     )
   }
 
   return (
-    <div style={{ marginTop: '2rem', paddingTop: '2rem', borderTop: '1px solid var(--border-color)' }}>
-      <p style={{ color: 'var(--text-secondary)', marginBottom: '1rem', fontSize: '0.9rem' }}>
-        After you finish paying on your app, click the button below to update your invoice status.
-      </p>
+    <div>
       <button 
         onClick={handleMarkPaid} 
         disabled={loading}
         className="btn btn-outline"
-        style={{ width: '100%', borderColor: 'var(--text-success)', color: 'var(--text-success)' }}
+        style={{ width: '100%', borderColor: 'var(--text-success)', color: 'var(--text-success)', padding: '0.75rem', fontSize: '0.95rem' }}
       >
         {loading ? 'Updating...' : 'I have completed the payment'}
       </button>

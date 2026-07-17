@@ -25,22 +25,22 @@ export default async function PaymentPage({ params }) {
 
   return (
     <main className="container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', padding: '1rem' }}>
-      <div className="glass-panel animate-fade-in" style={{ maxWidth: '400px', width: '100%', textAlign: 'center', padding: '2rem' }}>
-        <h1 style={{ fontSize: '1.5rem', margin: '0 0 0.5rem 0' }}>Rent Payment</h1>
-        <p style={{ color: 'var(--text-secondary)', margin: '0 0 1.5rem 0' }}>For {invoice.tenant?.name || 'Tenant'}</p>
+      <div className="glass-panel animate-fade-in" style={{ maxWidth: '400px', width: '100%', textAlign: 'center', padding: '1.5rem 1rem' }}>
+        <h1 style={{ fontSize: '1.25rem', margin: '0 0 0.25rem 0' }}>Rent Payment</h1>
+        <p style={{ color: 'var(--text-secondary)', margin: '0 0 0.5rem 0', fontSize: '0.9rem' }}>For {invoice.tenant?.name || 'Tenant'}</p>
         
-        <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: 'var(--primary-color)', marginBottom: '1rem' }}>
+        <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--primary-color)', marginBottom: '0.25rem' }}>
           ₹{invoice.amountDue.toLocaleString('en-IN', {minimumFractionDigits: 2})}
         </div>
         
-        <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>
+        <p style={{ color: 'var(--text-secondary)', marginBottom: '1rem', fontSize: '0.85rem' }}>
           {new Date(invoice.createdAt).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })} Rent
         </p>
 
         {invoice.status === 'PAID' ? (
-          <div style={{ padding: '2rem', backgroundColor: 'var(--bg-card)', border: '1px solid var(--text-success)', borderRadius: '12px', color: 'var(--text-success)' }}>
-            <h2 style={{ margin: '0 0 1rem 0' }}>✓ Payment Cleared</h2>
-            <p style={{ margin: 0, color: 'var(--text-secondary)' }}>This invoice has been marked as paid.</p>
+          <div style={{ padding: '1.5rem', backgroundColor: 'var(--bg-card)', border: '1px solid var(--text-success)', borderRadius: '12px', color: 'var(--text-success)' }}>
+            <h2 style={{ margin: '0 0 0.5rem 0', fontSize: '1.25rem' }}>✓ Payment Cleared</h2>
+            <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>This invoice has been marked as paid.</p>
           </div>
         ) : (
           <>
@@ -50,32 +50,32 @@ export default async function PaymentPage({ params }) {
               style={{ 
                 display: 'block', 
                 width: '100%', 
-                padding: '1rem', 
-                fontSize: '1.1rem', 
+                padding: '0.75rem', 
+                fontSize: '1rem', 
                 fontWeight: '600', 
-                marginBottom: '2rem',
+                marginBottom: '0.75rem',
                 textDecoration: 'none'
               }}
             >
               Pay via UPI App
             </a>
+            
+            <MarkPaidButton invoiceId={invoice.id} />
 
-            <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '2rem' }}>
-              <p style={{ color: 'var(--text-secondary)', marginBottom: '1rem', fontSize: '0.9rem' }}>Or scan this QR Code from another phone:</p>
+            <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '1rem', marginTop: '1rem' }}>
+              <p style={{ color: 'var(--text-secondary)', marginBottom: '0.5rem', fontSize: '0.85rem' }}>Or scan QR from another phone:</p>
               <img 
                 src={qrUrl} 
                 alt="UPI QR Code" 
                 style={{ 
-                  borderRadius: '12px', 
-                  border: '4px solid white', 
-                  width: '200px', 
-                  height: '200px', 
+                  borderRadius: '8px', 
+                  border: '3px solid white', 
+                  width: '150px', 
+                  height: '150px', 
                   margin: '0 auto' 
                 }} 
               />
             </div>
-            
-            <MarkPaidButton invoiceId={invoice.id} />
           </>
         )}
       </div>
