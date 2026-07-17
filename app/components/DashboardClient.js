@@ -167,9 +167,9 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
                   <tr key={inv.id}>
                     <td>{inv.tenant.name}</td>
                     <td>{new Date(inv.dueDate).toLocaleDateString('en-IN')}</td>
-                    <td style={{color: inv.status === 'VERIFYING' ? 'var(--warning-color)' : 'var(--warning-color)', fontWeight: '600'}}>
+                    <td style={{color: inv.status === 'VERIFYING' ? '#fbbf24' : 'var(--warning-color)', fontWeight: '600'}}>
                       ₹{inv.amountDue.toLocaleString('en-IN', {minimumFractionDigits: 2})}
-                      {inv.status === 'VERIFYING' && <div style={{fontSize: '0.75rem', marginTop: '0.2rem'}}>⏳ Tenant claims paid</div>}
+                      {inv.status === 'VERIFYING' && <div style={{fontSize: '0.75rem', marginTop: '0.2rem', color: '#fbbf24'}}>⏳ Tenant claims paid</div>}
                     </td>
                     <td style={{display: 'flex', gap: '0.5rem', justifyContent: 'flex-end', flexWrap: 'nowrap'}}>
                       {inv.status === 'VERIFYING' ? (
