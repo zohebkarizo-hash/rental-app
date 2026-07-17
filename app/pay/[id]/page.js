@@ -49,21 +49,20 @@ export default async function PaymentPage({ params }) {
           </div>
         ) : (
           <>
-            <a 
-              href={upiUrl} 
-              className="btn btn-success" 
-              style={{ 
-                display: 'block', 
-                width: '100%', 
-                padding: '0.75rem', 
-                fontSize: '1rem', 
-                fontWeight: '600', 
-                marginBottom: '0.75rem',
-                textDecoration: 'none'
-              }}
-            >
-              Pay via UPI App
-            </a>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', marginBottom: '1rem' }}>
+              <a href={`phonepe://pay?pa=${UPI_ID}&pn=Landlord&am=${invoice.amountDue}&cu=INR`} className="btn" style={{ backgroundColor: '#5f259f', color: 'white', padding: '0.6rem', fontSize: '0.9rem', textAlign: 'center', textDecoration: 'none', borderRadius: '8px', fontWeight: 'bold' }}>
+                PhonePe
+              </a>
+              <a href={`gpay://upi/pay?pa=${UPI_ID}&pn=Landlord&am=${invoice.amountDue}&cu=INR`} className="btn" style={{ backgroundColor: '#ffffff', color: '#3c4043', border: '1px solid #dadce0', padding: '0.6rem', fontSize: '0.9rem', textAlign: 'center', textDecoration: 'none', borderRadius: '8px', fontWeight: 'bold' }}>
+                GPay
+              </a>
+              <a href={`paytmmp://pay?pa=${UPI_ID}&pn=Landlord&am=${invoice.amountDue}&cu=INR`} className="btn" style={{ backgroundColor: '#00baf2', color: 'white', padding: '0.6rem', fontSize: '0.9rem', textAlign: 'center', textDecoration: 'none', borderRadius: '8px', fontWeight: 'bold' }}>
+                Paytm
+              </a>
+              <a href={upiUrl} className="btn btn-success" style={{ padding: '0.6rem', fontSize: '0.9rem', textAlign: 'center', textDecoration: 'none', borderRadius: '8px', fontWeight: 'bold' }}>
+                Other UPI
+              </a>
+            </div>
             
             <MarkPaidButton invoiceId={invoice.id} />
 
