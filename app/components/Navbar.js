@@ -16,9 +16,9 @@ export default function Navbar() {
       </a>
       
       <div className="nav-links">
-        <a href="/" className={pathname === '/' ? 'active' : ''}>Dashboard</a>
+        {pathname !== '/' && <Link href="/">Dashboard</Link>}
         <Link href="/tenants" className={pathname === '/tenants' ? 'active' : ''}>Tenants</Link>
-        <Link href="/invoices">Invoices</Link>
+        <Link href="/invoices" className={pathname === '/invoices' ? 'active' : ''}>Invoices</Link>
       </div>
     </nav>
   )
