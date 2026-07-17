@@ -16,6 +16,7 @@ export default function TenantsPage() {
   const [files, setFiles] = useState({ aadhar: null, passport: null, photo: null, agreement: null })
   const [formData, setFormData] = useState({ name: '', phone: '91', houseNo: '', unitNo: '', deposit: '', rentAmount: '', roommate1Name: '', roommate1Phone: '91', roommate2Name: '', roommate2Phone: '91' })
   const [selectedClient, setSelectedClient] = useState(null)
+  const [roommateCount, setRoommateCount] = useState(0)
 
   useEffect(() => {
     fetchTenants()
@@ -60,6 +61,16 @@ export default function TenantsPage() {
       roommate2Name: tenant.roommate2Name || '',
       roommate2Phone: tenant.roommate2Phone || '91'
     })
+    
+    // Set roommate count based on existing data
+    if (tenant.roommate2Name || (tenant.roommate2Phone && tenant.roommate2Phone !== '91')) {
+      setRoommateCount(2)
+    } else if (tenant.roommate1Name || (tenant.roommate1Phone && tenant.roommate1Phone !== '91')) {
+      setRoommateCount(1)
+    } else {
+      setRoommateCount(0)
+    }
+
     setCurrentDocs({
       aadharUrl: tenant.aadharUrl,
       passportUrl: tenant.passportUrl,
@@ -74,6 +85,7 @@ export default function TenantsPage() {
   const cancelEdit = () => {
     setEditingId(null)
     setFormData({ name: '', phone: '91', houseNo: '', unitNo: '', deposit: '', rentAmount: '', roommate1Name: '', roommate1Phone: '91', roommate2Name: '', roommate2Phone: '91' })
+    setRoommateCount(0)
     setFiles({ aadhar: null, passport: null, photo: null, agreement: null })
     setCurrentDocs({ aadharUrl: null, passportUrl: null, photoUrl: null, agreementUrl: null })
     setRemovedDocs({ aadhar: false, passport: false, photo: false, agreement: false })
@@ -186,35 +198,47 @@ export default function TenantsPage() {
               <input type="tel" className="form-control" required value={formData.phone} onChange={handlePhoneChange} />
             </div>
 
-            <div className="form-grid">
-              <div className="form-group">
-                <label>Roommate 1 Name</label>
-                <input type="text" className="form-control" value={formData.roommate1Name} onChange={e => setFormData({...formData, roommate1Name: e.target.value})} />
+            {roommateCount >= 1 && (
+              <div className="form-grid animate-fade-in" style={{marginTop: '1rem', padding: '1rem', background: 'rgba(255,255,255,0.02)', borderRadius: '8px', border: '1px solid var(--border-color)'}}>
+                <div className="form-group">
+                  <label>Roommate 1 Name</label>
+                  <input type="text" className="form-control" value={formData.roommate1Name} onChange={e => setFormData({...formData, roommate1Name: e.target.value})} />
+                </div>
+                <div className="form-group">
+                  <label>Roommate 1 Phone</label>
+                  <input type="tel" className="form-control" value={formData.roommate1Phone} onChange={e => {
+                    const val = e.target.value.replace(/\D/g, '');
+                    if (val === '' || val.startsWith('91')) setFormData({...formData, roommate1Phone: val});
+                  }} />
+                </div>
               </div>
-              <div className="form-group">
-                <label>Roommate 1 Phone</label>
-                <input type="tel" className="form-control" value={formData.roommate1Phone} onChange={e => {
-                  const val = e.target.value.replace(/\D/g, '');
-                  if (val === '' || val.startsWith('91')) setFormData({...formData, roommate1Phone: val});
-                }} />
-              </div>
-            </div>
+            )}
 
-            <div className="form-grid">
-              <div className="form-group">
-                <label>Roommate 2 Name</label>
-                <input type="text" className="form-control" value={formData.roommate2Name} onChange={e => setFormData({...formData, roommate2Name: e.target.value})} />
+            {roommateCount >= 2 && (
+              <div className="form-grid animate-fade-in" style={{marginTop: '1rem', padding: '1rem', background: 'rgba(255,255,255,0.02)', borderRadius: '8px', border: '1px solid var(--border-color)'}}>
+                <div className="form-group">
+                  <label>Roommate 2 Name</label>
+                  <input type="text" className="form-control" value={formData.roommate2Name} onChange={e => setFormData({...formData, roommate2Name: e.target.value})} />
+                </div>
+                <div className="form-group">
+                  <label>Roommate 2 Phone</label>
+                  <input type="tel" className="form-control" value={formData.roommate2Phone} onChange={e => {
+                    const val = e.target.value.replace(/\D/g, '');
+                    if (val === '' || val.startsWith('91')) setFormData({...formData, roommate2Phone: val});
+                  }} />
+                </div>
               </div>
-              <div className="form-group">
-                <label>Roommate 2 Phone</label>
-                <input type="tel" className="form-control" value={formData.roommate2Phone} onChange={e => {
-                  const val = e.target.value.replace(/\D/g, '');
-                  if (val === '' || val.startsWith('91')) setFormData({...formData, roommate2Phone: val});
-                }} />
+            )}
+
+            {roommateCount < 2 && (
+              <div style={{marginTop: '1rem', textAlign: 'center'}}>
+                <button type="button" className="btn btn-outline" style={{padding: '0.4rem 0.8rem', fontSize: '0.85rem', width: 'fit-content', color: 'var(--primary-color)', borderColor: 'var(--primary-color)'}} onClick={() => setRoommateCount(prev => prev + 1)}>
+                  + {roommateCount === 0 ? 'Add Roommate' : 'Add Another Roommate'}
+                </button>
               </div>
-            </div>
+            )}
             
-            <div className="form-grid">
+            <div className="form-grid" style={{marginTop: '1.5rem'}}>
               <div className="form-group">
                 <label>House No. (e.g. 42)</label>
                 <input type="text" className="form-control" value={formData.houseNo} onChange={e => setFormData({...formData, houseNo: e.target.value})} />
