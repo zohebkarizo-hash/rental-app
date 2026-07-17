@@ -228,6 +228,16 @@ h3 {
   background-color: rgba(255, 255, 255, 0.03);
 }
 
+.bullet-3d {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffffff, #67a685);
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+  flex-shrink: 0;
+}
+
 .badge {
   font-weight: 500;
   font-size: 0.9rem;
