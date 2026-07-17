@@ -240,14 +240,7 @@ export default function InvoicesPage() {
                       >
                         Preview
                       </button>
-                      <button 
-                        className="btn btn-success" 
-                        style={{padding: '0.4rem 0.6rem', fontSize: '0.75rem'}}
-                        onClick={() => handleSendManual(inv)}
-                        title="Open WhatsApp on your device to send manually"
-                      >
-                        Manual WA
-                      </button>
+
                       <button 
                         className="btn btn-outline" 
                         style={{padding: '0.4rem 0.6rem', fontSize: '0.75rem', borderColor: '#25D366', color: '#25D366'}}
