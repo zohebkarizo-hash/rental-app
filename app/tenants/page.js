@@ -206,7 +206,7 @@ export default function TenantsPage() {
       <div className="dashboard-grid" style={{gridTemplateColumns: '1fr 2fr'}}>
         {/* Add/Edit Tenant Form */}
         <div className="glass-panel">
-          <h2 style={{color: editingId ? 'var(--warning-color)' : 'var(--text-primary)'}}>
+          <h2 style={{color: editingId ? 'var(--warning-color)' : 'var(--text-primary)', fontSize: '0.9rem', fontWeight: 'bold'}}>
             {editingId ? 'Edit Tenant Details' : 'Add New Tenant'}
           </h2>
           <form onSubmit={handleSubmit}>
@@ -216,7 +216,7 @@ export default function TenantsPage() {
             </div>
             
             <div className="form-group">
-              <label>WhatsApp Phone <span style={{fontSize: '0.75rem', color: 'var(--text-secondary)', fontWeight: '400'}}>(Digits Only, Prefix 91)</span> <span style={{color: '#ef4444'}}>*</span></label>
+              <label>WhatsApp Phone <span style={{fontSize: '0.9rem', color: 'var(--text-secondary)', fontWeight: '400'}}>(Digits Only, Prefix 91)</span> <span style={{color: '#ef4444'}}>*</span></label>
               <input type="tel" className="form-control" required value={formData.phone} onChange={handlePhoneChange} />
             </div>
 
@@ -417,7 +417,7 @@ export default function TenantsPage() {
 
             {roommateCount < 2 && (
               <div style={{marginTop: '1rem', textAlign: 'center'}}>
-                <button type="button" className="btn btn-outline" style={{padding: '0.4rem 0.8rem', fontSize: '0.85rem', width: 'fit-content', color: 'var(--text-success)', borderColor: 'var(--text-success)'}} onClick={() => setRoommateCount(prev => prev + 1)}>
+                <button type="button" className="btn btn-outline" style={{padding: '0.4rem 0.8rem', fontSize: '0.9rem', width: 'fit-content', color: 'var(--text-success)', borderColor: 'var(--text-success)'}} onClick={() => setRoommateCount(prev => prev + 1)}>
                   + {roommateCount === 0 ? 'Add Roommate' : 'Add Another Roommate'}
                 </button>
               </div>
@@ -445,7 +445,7 @@ export default function TenantsPage() {
               </div>
             </div>
 
-            <h3 style={{fontSize: '1rem', marginTop: '1rem', marginBottom: '0.5rem', color: 'var(--text-success)'}}>
+            <h3 style={{fontSize: '0.9rem', fontWeight: 'bold', marginTop: '1rem', marginBottom: '0.5rem', color: 'var(--text-success)'}}>
               {editingId ? 'Update Documents (Optional)' : 'Upload Documents'}
             </h3>
 
