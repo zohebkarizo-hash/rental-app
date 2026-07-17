@@ -274,7 +274,11 @@ export default function TenantsPage() {
                       <select 
                         className="form-control" 
                         style={{flex: '1', minWidth: '150px'}}
-                        onChange={(e) => document.getElementById('r1-unified-file-upload').setAttribute('data-doctype', e.target.value)}
+                        onChange={(e) => {
+                          const input = document.getElementById('r1-unified-file-upload');
+                          input.setAttribute('data-doctype', e.target.value);
+                          input.value = '';
+                        }}
                       >
                         <option value="roommate1Aadhar">Aadhar Card</option>
                         <option value="roommate1Passport">Passport</option>
@@ -289,7 +293,6 @@ export default function TenantsPage() {
                         onChange={(e) => {
                           const type = e.target.getAttribute('data-doctype');
                           handleFileChange(type, e);
-                          e.target.value = '';
                         }} 
                         style={{flex: '2', padding: '0.5rem', minWidth: '200px'}} 
                       />
@@ -304,7 +307,11 @@ export default function TenantsPage() {
                       return (
                         <span key={type} className="badge badge-paid" style={{display: 'flex', alignItems: 'center', gap: '4px'}}>
                           {displayType} Attached
-                          <button type="button" onClick={() => setFiles({...files, [type]: null})} style={{background: 'transparent', border: 'none', color: 'white', cursor: 'pointer', padding: '0 2px'}}>✖</button>
+                          <button type="button" onClick={() => {
+                            setFiles({...files, [type]: null});
+                            const input = document.getElementById('r1-unified-file-upload');
+                            if (input && input.getAttribute('data-doctype') === type) input.value = '';
+                          }} style={{background: 'transparent', border: 'none', color: 'white', cursor: 'pointer', padding: '0 2px'}}>✖</button>
                         </span>
                       )
                     })}
@@ -362,7 +369,11 @@ export default function TenantsPage() {
                       <select 
                         className="form-control" 
                         style={{flex: '1', minWidth: '150px'}}
-                        onChange={(e) => document.getElementById('r2-unified-file-upload').setAttribute('data-doctype', e.target.value)}
+                        onChange={(e) => {
+                          const input = document.getElementById('r2-unified-file-upload');
+                          input.setAttribute('data-doctype', e.target.value);
+                          input.value = '';
+                        }}
                       >
                         <option value="roommate2Aadhar">Aadhar Card</option>
                         <option value="roommate2Passport">Passport</option>
@@ -377,7 +388,6 @@ export default function TenantsPage() {
                         onChange={(e) => {
                           const type = e.target.getAttribute('data-doctype');
                           handleFileChange(type, e);
-                          e.target.value = '';
                         }} 
                         style={{flex: '2', padding: '0.5rem', minWidth: '200px'}} 
                       />
@@ -392,7 +402,11 @@ export default function TenantsPage() {
                       return (
                         <span key={type} className="badge badge-paid" style={{display: 'flex', alignItems: 'center', gap: '4px'}}>
                           {displayType} Attached
-                          <button type="button" onClick={() => setFiles({...files, [type]: null})} style={{background: 'transparent', border: 'none', color: 'white', cursor: 'pointer', padding: '0 2px'}}>✖</button>
+                          <button type="button" onClick={() => {
+                            setFiles({...files, [type]: null});
+                            const input = document.getElementById('r2-unified-file-upload');
+                            if (input && input.getAttribute('data-doctype') === type) input.value = '';
+                          }} style={{background: 'transparent', border: 'none', color: 'white', cursor: 'pointer', padding: '0 2px'}}>✖</button>
                         </span>
                       )
                     })}
@@ -480,7 +494,11 @@ export default function TenantsPage() {
                 <select 
                   className="form-control" 
                   style={{flex: '1', minWidth: '150px'}}
-                  onChange={(e) => document.getElementById('unified-file-upload').setAttribute('data-doctype', e.target.value)}
+                  onChange={(e) => {
+                    const input = document.getElementById('unified-file-upload');
+                    input.setAttribute('data-doctype', e.target.value);
+                    input.value = '';
+                  }}
                 >
                   <option value="aadhar">Aadhar Card</option>
                   <option value="passport">Passport</option>
@@ -496,7 +514,6 @@ export default function TenantsPage() {
                   onChange={(e) => {
                     const type = e.target.getAttribute('data-doctype');
                     handleFileChange(type, e);
-                    e.target.value = ''; // Reset so they can upload another type easily
                   }} 
                   style={{flex: '2', padding: '0.5rem', minWidth: '200px'}} 
                 />
@@ -512,7 +529,11 @@ export default function TenantsPage() {
                 return (
                   <span key={type} className="badge badge-paid" style={{display: 'flex', alignItems: 'center', gap: '4px'}}>
                     {formatLabel(type)} Attached
-                    <button type="button" onClick={() => setFiles({...files, [type]: null})} style={{background: 'transparent', border: 'none', color: 'white', cursor: 'pointer', padding: '0 2px'}}>✖</button>
+                    <button type="button" onClick={() => {
+                      setFiles({...files, [type]: null});
+                      const input = document.getElementById('unified-file-upload');
+                      if (input && input.getAttribute('data-doctype') === type) input.value = '';
+                    }} style={{background: 'transparent', border: 'none', color: 'white', cursor: 'pointer', padding: '0 2px'}}>✖</button>
                   </span>
                 )
               })}
