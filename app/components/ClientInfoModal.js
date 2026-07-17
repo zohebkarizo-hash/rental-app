@@ -21,7 +21,7 @@ export default function ClientInfoModal({ tenant, onClose }) {
               <p style={{margin: '0.5rem 0 0 0', fontWeight: '500'}}>+{tenant.phone}</p>
             </div>
             
-            <div style={{width: '64px', height: '64px', borderRadius: '50%', background: 'rgba(255,255,255,0.05)', border: '2px solid var(--primary-color)', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 4px 12px rgba(0,0,0,0.2)'}}>
+            <div style={{width: '64px', height: '64px', borderRadius: '8px', background: 'rgba(255,255,255,0.05)', border: '2px solid var(--primary-color)', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 4px 12px rgba(0,0,0,0.2)'}}>
               {tenant.photoUrl ? (
                 <img src={tenant.photoUrl} alt={tenant.name} style={{width: '100%', height: '100%', objectFit: 'cover'}} />
               ) : (
@@ -58,7 +58,7 @@ export default function ClientInfoModal({ tenant, onClose }) {
                   )}
                 </div>
                 
-                <div style={{width: '42px', height: '42px', borderRadius: '50%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0}}>
+                <div style={{width: '42px', height: '42px', borderRadius: '6px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0}}>
                   {tenant.roommate1PhotoUrl ? (
                     <img src={tenant.roommate1PhotoUrl} alt={tenant.roommate1Name} style={{width: '100%', height: '100%', objectFit: 'cover'}} />
                   ) : (
@@ -81,7 +81,7 @@ export default function ClientInfoModal({ tenant, onClose }) {
                   )}
                 </div>
                 
-                <div style={{width: '42px', height: '42px', borderRadius: '50%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0}}>
+                <div style={{width: '42px', height: '42px', borderRadius: '6px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0}}>
                   {tenant.roommate2PhotoUrl ? (
                     <img src={tenant.roommate2PhotoUrl} alt={tenant.roommate2Name} style={{width: '100%', height: '100%', objectFit: 'cover'}} />
                   ) : (
