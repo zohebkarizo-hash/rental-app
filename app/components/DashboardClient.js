@@ -109,20 +109,16 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
 
   return (
     <>
-      <button 
-        className="floating-cash-btn"
-        title="Quick Cash Entry"
-        onClick={() => setShowCashModal(true)}
-      >
-        <span style={{fontSize: '1.2rem'}}>💰</span>
-        <span className="floating-cash-btn-text">Cash Entry</span>
-      </button>
-
       {showCashModal && (
         <div style={{
-          position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-          background: 'rgba(0,0,0,0.8)', zIndex: 1000,
-          display: 'flex', alignItems: 'center', justifyContent: 'center'
+          position: 'fixed',
+          top: 0, left: 0, right: 0, bottom: 0,
+          backgroundColor: 'rgba(0,0,0,0.8)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          zIndex: 1000,
+          padding: '1rem'
         }}>
           <div className="glass-panel" style={{width: '100%', maxWidth: '400px'}}>
             <h2 style={{color: '#fff', marginBottom: '1rem'}}>Record Cash Payment</h2>
@@ -203,11 +199,22 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
         
         <div 
           className="glass-panel stat-card"
-          style={{cursor: 'pointer', border: activeView === 'pending' ? '2px solid var(--text-success)' : ''}}
           onClick={() => setActiveView(activeView === 'pending' ? null : 'pending')}
+          style={{cursor: 'pointer', border: activeView === 'pending' ? '1px solid var(--primary-color)' : '1px solid var(--border-color)'}}
         >
-          <div className="stat-label">Pending Rent <span style={{opacity: 0.5}}>&rarr;</span></div>
-          <div className="stat-value" style={{color: 'var(--warning-color)'}}>₹{pendingRentTotal.toLocaleString('en-IN', {minimumFractionDigits: 2})}</div>
+          <div className="stat-label" style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem', width: '100%'}}>
+            <span>PENDING RENT <span style={{opacity: 0.5}}>→</span></span>
+            <button 
+              className="btn btn-success"
+              style={{padding: '0.2rem 0.5rem', fontSize: '0.75rem', borderRadius: '4px', textTransform: 'none'}}
+              onClick={(e) => { e.stopPropagation(); setShowCashModal(true); }}
+            >
+              💰 Cash Entry
+            </button>
+          </div>
+          <div className="stat-value" style={{color: 'var(--warning-color)'}}>
+            ₹{pendingRentTotal.toLocaleString('en-IN', {minimumFractionDigits: 2})}
+          </div>
         </div>
       </div>
 
