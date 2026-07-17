@@ -109,14 +109,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
 
   return (
     <>
-      <button 
-        className="floating-cash-btn"
-        title="Quick Cash Entry"
-        onClick={() => setShowCashModal(true)}
-      >
-        <span style={{fontSize: '1.2rem'}}>💰</span>
-        <span className="floating-cash-btn-text">Cash Entry</span>
-      </button>
+
 
       {showCashModal && (
         <div style={{
@@ -221,7 +214,10 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
       {/* Detailed Drill-down Views */}
       {activeView === 'tenants' && (
         <div className="glass-panel animate-fade-in" style={{marginBottom: '2rem'}}>
-          <h2>Active Tenants List</h2>
+          <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem'}}>
+            <h2 style={{margin: 0}}>Active Tenants List</h2>
+            <button className="btn btn-success" style={{padding: '0.4rem 0.8rem', fontSize: '0.85rem'}} onClick={() => setShowCashModal(true)}>💰 Cash Entry</button>
+          </div>
           <div style={{overflowX: 'auto', overflowY: 'auto', maxHeight: '50vh'}}>
             <table className="data-table">
               <thead>
@@ -250,7 +246,10 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
 
       {activeView === 'deposits' && (
         <div className="glass-panel animate-fade-in" style={{marginBottom: '2rem'}}>
-          <h2>Deposits Breakdown</h2>
+          <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem'}}>
+            <h2 style={{margin: 0}}>Deposits Breakdown</h2>
+            <button className="btn btn-success" style={{padding: '0.4rem 0.8rem', fontSize: '0.85rem'}} onClick={() => setShowCashModal(true)}>💰 Cash Entry</button>
+          </div>
           <div style={{overflowX: 'auto', overflowY: 'auto', maxHeight: '50vh'}}>
             <table className="data-table">
               <thead>
@@ -279,7 +278,10 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
 
       {activeView === 'pending' && (
         <div className="glass-panel animate-fade-in" style={{marginBottom: '2rem'}}>
-          <h2>Pending Rent Invoices</h2>
+          <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem'}}>
+            <h2 style={{margin: 0}}>Pending Rent Invoices</h2>
+            <button className="btn btn-success" style={{padding: '0.4rem 0.8rem', fontSize: '0.85rem'}} onClick={() => setShowCashModal(true)}>💰 Cash Entry</button>
+          </div>
           <div style={{overflowX: 'auto', overflowY: 'auto', maxHeight: '40vh'}}>
             <table className="data-table">
               <thead>
@@ -348,7 +350,10 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
       )}
 
       <div className={`glass-panel ${activeView ? 'hide-on-mobile' : ''}`}>
-        <h2>Quick Actions</h2>
+        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem'}}>
+          <h2 style={{margin: 0}}>Quick Actions</h2>
+          <button className="btn btn-success" style={{padding: '0.4rem 0.8rem', fontSize: '0.85rem'}} onClick={() => setShowCashModal(true)}>💰 Cash Entry</button>
+        </div>
         <p style={{color: 'var(--text-secondary)', marginBottom: '1.5rem'}}>Manage your properties and generate rent invoices automatically.</p>
         <div style={{display: 'flex', gap: '1rem'}}>
           <Link href="/tenants" className="btn">
