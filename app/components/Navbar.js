@@ -17,8 +17,8 @@ export default function Navbar() {
       
       <div className="nav-links">
         {pathname !== '/' && <Link href="/">Dashboard</Link>}
-        <Link href="/tenants" className={pathname === '/tenants' ? 'active' : ''}>Tenants</Link>
-        <Link href="/invoices" className={pathname === '/invoices' ? 'active' : ''}>Invoices</Link>
+        {pathname !== '/tenants' && <Link href="/tenants">Tenants</Link>}
+        {pathname !== '/invoices' && <Link href="/invoices">Invoices</Link>}
       </div>
     </nav>
   )
