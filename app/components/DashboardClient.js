@@ -236,13 +236,13 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
               <tbody>
                 {activeTenants.map(t => (
                   <tr key={t.id}>
-                    <td>
+                    <td data-label="Unit/House">
                       <div style={{fontWeight: '600', color: '#ef4444'}}>Unit : {t.unitNo || '-'}</div>
                       <div style={{fontSize: '0.8rem', color: 'var(--text-secondary)'}}>House : {t.houseNo || '-'}</div>
                     </td>
-                    <td>{t.name}</td>
-                    <td>+{t.phone}</td>
-                    <td>₹{t.rentAmount.toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
+                    <td data-label="Name">{t.name}</td>
+                    <td data-label="WhatsApp Phone">+{t.phone}</td>
+                    <td data-label="Rent Amount">₹{t.rentAmount.toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
                   </tr>
                 ))}
                 {activeTenants.length === 0 && <tr><td colSpan="4" style={{textAlign: 'center'}}>No active tenants found.</td></tr>}
@@ -271,13 +271,13 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
               <tbody>
                 {activeTenants.map(t => (
                   <tr key={t.id}>
-                    <td>{t.name}</td>
-                    <td>
+                    <td data-label="Name">{t.name}</td>
+                    <td data-label="Unit/House">
                       <div style={{fontWeight: '600', color: '#ef4444'}}>Unit : {t.unitNo || '-'}</div>
                       <div style={{fontSize: '0.8rem', color: 'var(--text-secondary)'}}>House : {t.houseNo || '-'}</div>
                     </td>
-                    <td>{new Date(t.createdAt).toLocaleDateString('en-IN')}</td>
-                    <td style={{fontWeight: '600'}}>₹{t.deposit.toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
+                    <td data-label="Date of Deposit">{new Date(t.createdAt).toLocaleDateString('en-IN')}</td>
+                    <td data-label="Deposit Amount" style={{fontWeight: '600'}}>₹{t.deposit.toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
                   </tr>
                 ))}
                 {activeTenants.length === 0 && <tr><td colSpan="4" style={{textAlign: 'center'}}>No active deposits found.</td></tr>}

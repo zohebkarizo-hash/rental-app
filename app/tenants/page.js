@@ -327,16 +327,16 @@ export default function TenantsPage() {
                 <tbody>
                   {tenants.map(t => (
                     <tr key={t.id}>
-                      <td>
+                      <td data-label="Unit/House">
                         <div style={{fontWeight: '600', color: '#ef4444'}}>Unit : {t.unitNo || '-'}</div>
                         <div style={{fontSize: '0.8rem', color: 'var(--text-secondary)'}}>House : {t.houseNo || '-'}</div>
                       </td>
-                      <td>
+                      <td data-label="Name & Info">
                         <div>{t.name}</div>
                         <div style={{fontSize: '0.8rem', color: 'var(--text-secondary)'}}>+{t.phone}</div>
                       </td>
-                      <td>
-                        <div style={{display: 'flex', flexDirection: 'column', gap: '6px'}}>
+                      <td data-label="Documents">
+                        <div style={{display: 'flex', flexDirection: 'column', gap: '6px', alignItems: 'flex-end'}}>
                           {t.aadharUrl && <a href={t.aadharUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.5rem', fontSize: '0.7rem', width: 'fit-content', color: 'var(--text-primary)'}}><span className="bullet-3d"></span> Aadhar</a>}
                           {t.passportUrl && <a href={t.passportUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.5rem', fontSize: '0.7rem', width: 'fit-content', color: 'var(--text-primary)'}}><span className="bullet-3d"></span> Passport</a>}
                           {t.photoUrl && <a href={t.photoUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.5rem', fontSize: '0.7rem', width: 'fit-content', color: 'var(--text-primary)'}}><span className="bullet-3d"></span> Photo</a>}
@@ -344,10 +344,10 @@ export default function TenantsPage() {
                           {!t.aadharUrl && !t.passportUrl && !t.photoUrl && !t.agreementUrl && <span style={{fontSize: '0.75rem', color: 'var(--text-secondary)'}}>None</span>}
                         </div>
                       </td>
-                      <td>₹{t.deposit.toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
-                      <td>₹{t.rentAmount.toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
-                      <td>
-                        <div style={{display: 'flex', flexDirection: 'column', gap: '0.5rem', width: '100px'}}>
+                      <td data-label="Deposit">₹{t.deposit.toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
+                      <td data-label="Rent">₹{t.rentAmount.toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
+                      <td data-label="Actions">
+                        <div style={{display: 'flex', flexDirection: 'column', gap: '0.5rem', width: '100%'}}>
                           {t.isActive && (
                             <button 
                               className="btn btn-success" 
