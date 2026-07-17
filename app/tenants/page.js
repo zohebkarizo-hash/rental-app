@@ -337,10 +337,10 @@ export default function TenantsPage() {
                       </td>
                       <td>
                         <div style={{display: 'flex', flexDirection: 'column', gap: '6px'}}>
-                          {t.aadharUrl && <a href={t.aadharUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.5rem', fontSize: '0.7rem', width: 'fit-content'}}><span className="bullet-3d"></span> Aadhar</a>}
-                          {t.passportUrl && <a href={t.passportUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.5rem', fontSize: '0.7rem', width: 'fit-content'}}><span className="bullet-3d"></span> Passport</a>}
-                          {t.photoUrl && <a href={t.photoUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.5rem', fontSize: '0.7rem', width: 'fit-content'}}><span className="bullet-3d"></span> Photo</a>}
-                          {t.agreementUrl && <a href={t.agreementUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.5rem', fontSize: '0.7rem', width: 'fit-content'}}><span className="bullet-3d"></span> Agreement</a>}
+                          {t.aadharUrl && <a href={t.aadharUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.5rem', fontSize: '0.7rem', width: 'fit-content', color: 'var(--text-primary)'}}><span className="bullet-3d"></span> Aadhar</a>}
+                          {t.passportUrl && <a href={t.passportUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.5rem', fontSize: '0.7rem', width: 'fit-content', color: 'var(--text-primary)'}}><span className="bullet-3d"></span> Passport</a>}
+                          {t.photoUrl && <a href={t.photoUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.5rem', fontSize: '0.7rem', width: 'fit-content', color: 'var(--text-primary)'}}><span className="bullet-3d"></span> Photo</a>}
+                          {t.agreementUrl && <a href={t.agreementUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.5rem', fontSize: '0.7rem', width: 'fit-content', color: 'var(--text-primary)'}}><span className="bullet-3d"></span> Agreement</a>}
                           {!t.aadharUrl && !t.passportUrl && !t.photoUrl && !t.agreementUrl && <span style={{fontSize: '0.75rem', color: 'var(--text-secondary)'}}>None</span>}
                         </div>
                       </td>
