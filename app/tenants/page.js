@@ -273,29 +273,48 @@ export default function TenantsPage() {
                     <div style={{display: 'flex', gap: '0.5rem', flexWrap: 'wrap'}}>
                       <select 
                         className="form-control" 
-                        style={{flex: '1', minWidth: '150px'}}
+                        style={{flex: '1', minWidth: '120px'}}
                         onChange={(e) => {
                           const input = document.getElementById('r1-unified-file-upload');
                           input.setAttribute('data-doctype', e.target.value);
                           input.value = '';
+                          document.getElementById('r1-unified-camera-upload').value = '';
                         }}
                       >
                         <option value="roommate1Aadhar">Aadhar Card</option>
                         <option value="roommate1Passport">Passport</option>
                         <option value="roommate1Photo">Photo</option>
                       </select>
-                      <input 
-                        type="file" 
-                        id="r1-unified-file-upload"
-                        data-doctype="roommate1Aadhar"
-                        className="form-control" 
-                        accept="image/*,application/pdf" 
-                        onChange={(e) => {
-                          const type = e.target.getAttribute('data-doctype');
-                          handleFileChange(type, e);
-                        }} 
-                        style={{flex: '2', padding: '0.5rem', minWidth: '200px'}} 
-                      />
+                      <div style={{flex: '2', minWidth: '200px', display: 'flex', gap: '0.3rem'}}>
+                        <input 
+                          type="file" 
+                          id="r1-unified-file-upload"
+                          data-doctype="roommate1Aadhar"
+                          className="form-control" 
+                          accept="image/*,application/pdf" 
+                          onChange={(e) => {
+                            const type = e.target.getAttribute('data-doctype');
+                            handleFileChange(type, e);
+                          }} 
+                          style={{flex: '1', padding: '0.5rem'}} 
+                        />
+                        <button type="button" className="btn btn-outline" style={{padding: '0.5rem 0.8rem', flexShrink: 0, borderColor: 'var(--border-color)', color: 'var(--text-primary)'}} onClick={() => document.getElementById('r1-unified-camera-upload').click()} title="Open Camera">📷</button>
+                        <input 
+                          type="file" 
+                          id="r1-unified-camera-upload"
+                          accept="image/*" 
+                          capture="environment" 
+                          style={{display: 'none'}} 
+                          onChange={(e) => {
+                            const mainInput = document.getElementById('r1-unified-file-upload');
+                            const type = mainInput.getAttribute('data-doctype');
+                            handleFileChange(type, e);
+                            // Transfer file object to main input isn't directly possible due to security, but state handles it. 
+                            // We just clear main input so it doesn't show a stale name.
+                            mainInput.value = '';
+                          }} 
+                        />
+                      </div>
                     </div>
                   </div>
                   
@@ -368,29 +387,46 @@ export default function TenantsPage() {
                     <div style={{display: 'flex', gap: '0.5rem', flexWrap: 'wrap'}}>
                       <select 
                         className="form-control" 
-                        style={{flex: '1', minWidth: '150px'}}
+                        style={{flex: '1', minWidth: '120px'}}
                         onChange={(e) => {
                           const input = document.getElementById('r2-unified-file-upload');
                           input.setAttribute('data-doctype', e.target.value);
                           input.value = '';
+                          document.getElementById('r2-unified-camera-upload').value = '';
                         }}
                       >
                         <option value="roommate2Aadhar">Aadhar Card</option>
                         <option value="roommate2Passport">Passport</option>
                         <option value="roommate2Photo">Photo</option>
                       </select>
-                      <input 
-                        type="file" 
-                        id="r2-unified-file-upload"
-                        data-doctype="roommate2Aadhar"
-                        className="form-control" 
-                        accept="image/*,application/pdf" 
-                        onChange={(e) => {
-                          const type = e.target.getAttribute('data-doctype');
-                          handleFileChange(type, e);
-                        }} 
-                        style={{flex: '2', padding: '0.5rem', minWidth: '200px'}} 
-                      />
+                      <div style={{flex: '2', minWidth: '200px', display: 'flex', gap: '0.3rem'}}>
+                        <input 
+                          type="file" 
+                          id="r2-unified-file-upload"
+                          data-doctype="roommate2Aadhar"
+                          className="form-control" 
+                          accept="image/*,application/pdf" 
+                          onChange={(e) => {
+                            const type = e.target.getAttribute('data-doctype');
+                            handleFileChange(type, e);
+                          }} 
+                          style={{flex: '1', padding: '0.5rem'}} 
+                        />
+                        <button type="button" className="btn btn-outline" style={{padding: '0.5rem 0.8rem', flexShrink: 0, borderColor: 'var(--border-color)', color: 'var(--text-primary)'}} onClick={() => document.getElementById('r2-unified-camera-upload').click()} title="Open Camera">📷</button>
+                        <input 
+                          type="file" 
+                          id="r2-unified-camera-upload"
+                          accept="image/*" 
+                          capture="environment" 
+                          style={{display: 'none'}} 
+                          onChange={(e) => {
+                            const mainInput = document.getElementById('r2-unified-file-upload');
+                            const type = mainInput.getAttribute('data-doctype');
+                            handleFileChange(type, e);
+                            mainInput.value = '';
+                          }} 
+                        />
+                      </div>
                     </div>
                   </div>
                   
@@ -493,11 +529,12 @@ export default function TenantsPage() {
               <div style={{display: 'flex', gap: '0.5rem', flexWrap: 'wrap'}}>
                 <select 
                   className="form-control" 
-                  style={{flex: '1', minWidth: '150px'}}
+                  style={{flex: '1', minWidth: '120px'}}
                   onChange={(e) => {
                     const input = document.getElementById('unified-file-upload');
                     input.setAttribute('data-doctype', e.target.value);
                     input.value = '';
+                    document.getElementById('unified-camera-upload').value = '';
                   }}
                 >
                   <option value="aadhar">Aadhar Card</option>
@@ -505,18 +542,34 @@ export default function TenantsPage() {
                   <option value="photo">Tenant Photo</option>
                   <option value="agreement">Rental Agreement</option>
                 </select>
-                <input 
-                  type="file" 
-                  id="unified-file-upload"
-                  data-doctype="aadhar"
-                  className="form-control" 
-                  accept="image/*,application/pdf" 
-                  onChange={(e) => {
-                    const type = e.target.getAttribute('data-doctype');
-                    handleFileChange(type, e);
-                  }} 
-                  style={{flex: '2', padding: '0.5rem', minWidth: '200px'}} 
-                />
+                <div style={{flex: '2', minWidth: '200px', display: 'flex', gap: '0.3rem'}}>
+                  <input 
+                    type="file" 
+                    id="unified-file-upload"
+                    data-doctype="aadhar"
+                    className="form-control" 
+                    accept="image/*,application/pdf" 
+                    onChange={(e) => {
+                      const type = e.target.getAttribute('data-doctype');
+                      handleFileChange(type, e);
+                    }} 
+                    style={{flex: '1', padding: '0.5rem'}} 
+                  />
+                  <button type="button" className="btn btn-outline" style={{padding: '0.5rem 0.8rem', flexShrink: 0, borderColor: 'var(--border-color)', color: 'var(--text-primary)'}} onClick={() => document.getElementById('unified-camera-upload').click()} title="Open Camera">📷</button>
+                  <input 
+                    type="file" 
+                    id="unified-camera-upload"
+                    accept="image/*" 
+                    capture="environment" 
+                    style={{display: 'none'}} 
+                    onChange={(e) => {
+                      const mainInput = document.getElementById('unified-file-upload');
+                      const type = mainInput.getAttribute('data-doctype');
+                      handleFileChange(type, e);
+                      mainInput.value = '';
+                    }} 
+                  />
+                </div>
               </div>
             </div>
             
