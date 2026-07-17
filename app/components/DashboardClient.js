@@ -40,6 +40,22 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
     }
   }
 
+  const handleRejectPayment = async (id) => {
+    if (!confirm('Are you sure you want to reject this payment claim and set it back to Pending?')) return;
+    
+    const res = await fetch(`/api/invoices/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: 'PENDING' })
+    })
+    
+    if (res.ok) {
+      router.refresh();
+    } else {
+      alert('Failed to reject payment')
+    }
+  }
+
   return (
     <>
       <div className="dashboard-grid">
@@ -148,22 +164,48 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
                   <tr key={inv.id}>
                     <td>{inv.tenant.name}</td>
                     <td>{new Date(inv.dueDate).toLocaleDateString('en-IN')}</td>
-                    <td style={{color: 'var(--warning-color)', fontWeight: '600'}}>₹{inv.amountDue.toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
+                    <td style={{color: inv.status === 'VERIFYING' ? 'var(--warning-color)' : 'var(--warning-color)', fontWeight: '600'}}>
+                      ₹{inv.amountDue.toLocaleString('en-IN', {minimumFractionDigits: 2})}
+                      {inv.status === 'VERIFYING' && <div style={{fontSize: '0.75rem', marginTop: '0.2rem'}}>⏳ Tenant claims paid</div>}
+                    </td>
                     <td style={{display: 'flex', gap: '0.5rem', justifyContent: 'flex-end', flexWrap: 'nowrap'}}>
-                      <button 
-                        className="btn btn-outline" 
-                        style={{padding: '0.3rem 0.6rem', fontSize: '0.75rem', fontWeight: 'bold', borderColor: 'var(--text-success)', color: 'var(--text-success)'}}
-                        onClick={() => handleMarkPaid(inv.id)}
-                      >
-                        Cash Received
-                      </button>
-                      <button 
-                        className="btn btn-danger" 
-                        style={{padding: '0.3rem 0.6rem', fontSize: '0.75rem', fontWeight: 'bold'}}
-                        onClick={() => handleSendStrictReminder(inv)}
-                      >
-                        Strict Reminder
-                      </button>
+                      {inv.status === 'VERIFYING' ? (
+                        <>
+                          <button 
+                            className="btn btn-success" 
+                            style={{padding: '0.3rem 0.6rem', fontSize: '0.75rem', fontWeight: 'bold'}}
+                            onClick={() => handleMarkPaid(inv.id)}
+                            title="Confirm payment received"
+                          >
+                            Confirm
+                          </button>
+                          <button 
+                            className="btn btn-danger" 
+                            style={{padding: '0.3rem 0.6rem', fontSize: '0.75rem', fontWeight: 'bold'}}
+                            onClick={() => handleRejectPayment(inv.id)}
+                            title="Reject payment claim"
+                          >
+                            Reject
+                          </button>
+                        </>
+                      ) : (
+                        <>
+                          <button 
+                            className="btn btn-outline" 
+                            style={{padding: '0.3rem 0.6rem', fontSize: '0.75rem', fontWeight: 'bold', borderColor: 'var(--text-success)', color: 'var(--text-success)'}}
+                            onClick={() => handleMarkPaid(inv.id)}
+                          >
+                            Cash Received
+                          </button>
+                          <button 
+                            className="btn btn-danger" 
+                            style={{padding: '0.3rem 0.6rem', fontSize: '0.75rem', fontWeight: 'bold'}}
+                            onClick={() => handleSendStrictReminder(inv)}
+                          >
+                            Strict Reminder
+                          </button>
+                        </>
+                      )}
                     </td>
                   </tr>
                 ))}

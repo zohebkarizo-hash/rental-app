@@ -13,7 +13,7 @@ export default function MarkPaidButton({ invoiceId }) {
       const res = await fetch(`/api/invoices/${invoiceId}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status: 'PAID' })
+        body: JSON.stringify({ status: 'VERIFYING' })
       })
       if (res.ok) {
         setDone(true)

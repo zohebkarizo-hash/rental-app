@@ -11,7 +11,9 @@ export default async function Dashboard() {
   })
   
   const pendingInvoices = await prisma.invoice.findMany({
-    where: { status: 'PENDING' },
+    where: { 
+      status: { in: ['PENDING', 'VERIFYING'] } 
+    },
     include: { tenant: true },
     orderBy: { dueDate: 'asc' }
   })

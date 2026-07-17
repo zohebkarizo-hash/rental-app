@@ -127,6 +127,22 @@ export default function InvoicesPage() {
     }
   }
 
+  const handleRejectPayment = async (id) => {
+    if (!confirm('Are you sure you want to reject this payment claim and set it back to Pending?')) return;
+    
+    const res = await fetch(`/api/invoices/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: 'PENDING' })
+    })
+    
+    if (res.ok) {
+      fetchInvoices()
+    } else {
+      alert('Failed to reject payment')
+    }
+  }
+
   return (
     <main className="container animate-fade-in">
       <div className="flex-between">
@@ -172,8 +188,8 @@ export default function InvoicesPage() {
                     <td>{inv.tenant?.name || 'Unknown'}</td>
                     <td>₹{inv.amountDue.toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
                     <td>
-                      <span className={`badge ${inv.status === 'PAID' ? 'badge-paid' : 'badge-pending'}`}>
-                        {inv.status === 'PENDING' ? 'Pending' : inv.status === 'PAID' ? 'Paid' : inv.status}
+                      <span className={`badge ${inv.status === 'PAID' ? 'badge-paid' : inv.status === 'VERIFYING' ? 'badge-warning' : 'badge-pending'}`}>
+                        {inv.status === 'PENDING' ? 'Pending' : inv.status === 'PAID' ? 'Paid' : 'Verifying'}
                       </span>
                     </td>
                     <td>
@@ -193,6 +209,26 @@ export default function InvoicesPage() {
                         >
                           Cash Received
                         </button>
+                      )}
+                      {inv.status === 'VERIFYING' && (
+                        <>
+                          <button 
+                            className="btn btn-success" 
+                            style={{padding: '0.4rem 0.6rem', fontSize: '0.75rem'}}
+                            onClick={() => handleMarkPaid(inv.id)}
+                            title="Confirm you received the money"
+                          >
+                            Confirm Paid
+                          </button>
+                          <button 
+                            className="btn btn-danger" 
+                            style={{padding: '0.4rem 0.6rem', fontSize: '0.75rem'}}
+                            onClick={() => handleRejectPayment(inv.id)}
+                            title="Reject claim and set to Pending"
+                          >
+                            Reject
+                          </button>
+                        </>
                       )}
                       <button 
                         className="btn btn-outline" 
