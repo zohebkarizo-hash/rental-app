@@ -27,7 +27,7 @@ export default async function Dashboard() {
 
   return (
     <main className="container animate-fade-in">
-      <h1>Dashboard:</h1>
+
       <DashboardClient 
         activeTenants={activeTenants} 
         pendingInvoices={pendingInvoices} 
