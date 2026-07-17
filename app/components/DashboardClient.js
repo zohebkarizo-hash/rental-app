@@ -109,15 +109,14 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
 
   return (
     <>
-      <div style={{display: 'flex', justifyContent: 'flex-end', marginBottom: '1.5rem'}}>
-        <button 
-          className="btn btn-success" 
-          style={{fontWeight: 'bold'}}
-          onClick={() => setShowCashModal(true)}
-        >
-          💰 Quick Cash Entry
-        </button>
-      </div>
+      <button 
+        className="floating-cash-btn"
+        title="Quick Cash Entry"
+        onClick={() => setShowCashModal(true)}
+      >
+        <span style={{fontSize: '1.2rem'}}>💰</span>
+        <span className="floating-cash-btn-text">Cash Entry</span>
+      </button>
 
       {showCashModal && (
         <div style={{
