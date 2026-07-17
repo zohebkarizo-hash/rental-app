@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma'
 import { notFound } from 'next/navigation'
+import MarkPaidButton from './MarkPaidButton'
 
 export default async function PaymentPage({ params }) {
   const { id } = await params;
@@ -36,36 +37,47 @@ export default async function PaymentPage({ params }) {
           {new Date(invoice.createdAt).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })} Rent
         </p>
 
-        <a 
-          href={upiUrl} 
-          className="btn btn-success" 
-          style={{ 
-            display: 'block', 
-            width: '100%', 
-            padding: '1rem', 
-            fontSize: '1.1rem', 
-            fontWeight: '600', 
-            marginBottom: '2rem',
-            textDecoration: 'none'
-          }}
-        >
-          Pay via UPI App
-        </a>
+        {invoice.status === 'PAID' ? (
+          <div style={{ padding: '2rem', backgroundColor: 'var(--bg-card)', border: '1px solid var(--text-success)', borderRadius: '12px', color: 'var(--text-success)' }}>
+            <h2 style={{ margin: '0 0 1rem 0' }}>✓ Payment Cleared</h2>
+            <p style={{ margin: 0, color: 'var(--text-secondary)' }}>This invoice has been marked as paid.</p>
+          </div>
+        ) : (
+          <>
+            <a 
+              href={upiUrl} 
+              className="btn btn-success" 
+              style={{ 
+                display: 'block', 
+                width: '100%', 
+                padding: '1rem', 
+                fontSize: '1.1rem', 
+                fontWeight: '600', 
+                marginBottom: '2rem',
+                textDecoration: 'none'
+              }}
+            >
+              Pay via UPI App
+            </a>
 
-        <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '2rem' }}>
-          <p style={{ color: 'var(--text-secondary)', marginBottom: '1rem', fontSize: '0.9rem' }}>Or scan this QR Code from another phone:</p>
-          <img 
-            src={qrUrl} 
-            alt="UPI QR Code" 
-            style={{ 
-              borderRadius: '12px', 
-              border: '4px solid white', 
-              width: '200px', 
-              height: '200px', 
-              margin: '0 auto' 
-            }} 
-          />
-        </div>
+            <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '2rem' }}>
+              <p style={{ color: 'var(--text-secondary)', marginBottom: '1rem', fontSize: '0.9rem' }}>Or scan this QR Code from another phone:</p>
+              <img 
+                src={qrUrl} 
+                alt="UPI QR Code" 
+                style={{ 
+                  borderRadius: '12px', 
+                  border: '4px solid white', 
+                  width: '200px', 
+                  height: '200px', 
+                  margin: '0 auto' 
+                }} 
+              />
+            </div>
+            
+            <MarkPaidButton invoiceId={invoice.id} />
+          </>
+        )}
       </div>
     </main>
   )
