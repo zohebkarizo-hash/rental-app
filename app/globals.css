@@ -266,7 +266,7 @@ h3 {
 }
 
 .client-name-link {
-  color: var(--primary-color);
+  color: var(--text-success);
   cursor: pointer;
   font-weight: 500;
   transition: all 0.2s ease;

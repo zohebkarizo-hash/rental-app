@@ -417,7 +417,7 @@ export default function TenantsPage() {
 
             {roommateCount < 2 && (
               <div style={{marginTop: '1rem', textAlign: 'center'}}>
-                <button type="button" className="btn btn-outline" style={{padding: '0.4rem 0.8rem', fontSize: '0.85rem', width: 'fit-content', color: 'var(--primary-color)', borderColor: 'var(--primary-color)'}} onClick={() => setRoommateCount(prev => prev + 1)}>
+                <button type="button" className="btn btn-outline" style={{padding: '0.4rem 0.8rem', fontSize: '0.85rem', width: 'fit-content', color: 'var(--text-success)', borderColor: 'var(--text-success)'}} onClick={() => setRoommateCount(prev => prev + 1)}>
                   + {roommateCount === 0 ? 'Add Roommate' : 'Add Another Roommate'}
                 </button>
               </div>
@@ -445,7 +445,7 @@ export default function TenantsPage() {
               </div>
             </div>
 
-            <h3 style={{fontSize: '1rem', marginTop: '1rem', marginBottom: '0.5rem', color: 'var(--primary-color)'}}>
+            <h3 style={{fontSize: '1rem', marginTop: '1rem', marginBottom: '0.5rem', color: 'var(--text-success)'}}>
               {editingId ? 'Update Documents (Optional)' : 'Upload Documents'}
             </h3>
 
