@@ -215,7 +215,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
       {activeView === 'tenants' && (
         <div className="glass-panel animate-fade-in" style={{marginBottom: '2rem'}}>
           <h2>Active Tenants List</h2>
-          <div style={{overflowX: 'auto'}}>
+          <div style={{overflowX: 'auto', overflowY: 'auto', maxHeight: '50vh'}}>
             <table className="data-table">
               <thead>
                 <tr>
@@ -244,7 +244,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
       {activeView === 'deposits' && (
         <div className="glass-panel animate-fade-in" style={{marginBottom: '2rem'}}>
           <h2>Deposits Breakdown</h2>
-          <div style={{overflowX: 'auto'}}>
+          <div style={{overflowX: 'auto', overflowY: 'auto', maxHeight: '50vh'}}>
             <table className="data-table">
               <thead>
                 <tr>
@@ -273,7 +273,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
       {activeView === 'pending' && (
         <div className="glass-panel animate-fade-in" style={{marginBottom: '2rem'}}>
           <h2>Pending Rent Invoices</h2>
-          <div style={{overflowX: 'auto'}}>
+          <div style={{overflowX: 'auto', overflowY: 'auto', maxHeight: '40vh'}}>
             <table className="data-table">
               <thead>
                 <tr>
