@@ -177,22 +177,22 @@ export default function TenantsPage() {
           </h2>
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label>Name</label>
+              <label>Name <span style={{color: 'var(--primary-color)'}}>*</span></label>
               <input type="text" className="form-control" required value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
             </div>
             
             <div className="form-group">
-              <label>WhatsApp Phone (Digits Only, Prefix 91)</label>
+              <label>WhatsApp Phone (Digits Only, Prefix 91) <span style={{color: 'var(--primary-color)'}}>*</span></label>
               <input type="tel" className="form-control" required value={formData.phone} onChange={handlePhoneChange} />
             </div>
 
             <div className="form-grid">
               <div className="form-group">
-                <label>Roommate 1 Name (Optional)</label>
+                <label>Roommate 1 Name</label>
                 <input type="text" className="form-control" value={formData.roommate1Name} onChange={e => setFormData({...formData, roommate1Name: e.target.value})} />
               </div>
               <div className="form-group">
-                <label>Roommate 1 Phone (Optional)</label>
+                <label>Roommate 1 Phone</label>
                 <input type="tel" className="form-control" value={formData.roommate1Phone} onChange={e => {
                   const val = e.target.value.replace(/\D/g, '');
                   if (val === '' || val.startsWith('91')) setFormData({...formData, roommate1Phone: val});
@@ -202,11 +202,11 @@ export default function TenantsPage() {
 
             <div className="form-grid">
               <div className="form-group">
-                <label>Roommate 2 Name (Optional)</label>
+                <label>Roommate 2 Name</label>
                 <input type="text" className="form-control" value={formData.roommate2Name} onChange={e => setFormData({...formData, roommate2Name: e.target.value})} />
               </div>
               <div className="form-group">
-                <label>Roommate 2 Phone (Optional)</label>
+                <label>Roommate 2 Phone</label>
                 <input type="tel" className="form-control" value={formData.roommate2Phone} onChange={e => {
                   const val = e.target.value.replace(/\D/g, '');
                   if (val === '' || val.startsWith('91')) setFormData({...formData, roommate2Phone: val});
