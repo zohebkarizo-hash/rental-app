@@ -32,7 +32,13 @@ export default function TenantsPage() {
 
   const handleFileChange = (type, e) => {
     if (e.target.files && e.target.files[0]) {
-      setFiles({ ...files, [type]: e.target.files[0] })
+      const file = e.target.files[0];
+      if (file.size > 4.5 * 1024 * 1024) {
+        alert(`The file for ${type} is too large (max 4.5MB allowed). Please select a smaller file.`);
+        e.target.value = '';
+        return;
+      }
+      setFiles({ ...files, [type]: file })
       // If they upload a new one, we no longer consider the old one "removed" explicitly (it will just be overwritten)
       setRemovedDocs({ ...removedDocs, [type]: false })
     }
@@ -132,7 +138,13 @@ export default function TenantsPage() {
           const blob = await uploadRes.json();
           uploadedUrls[`${key}Url`] = blob.url;
         } else {
-          alert(`Failed to upload ${key}. Please ensure Vercel Blob is configured.`);
+          let errMsg = uploadRes.statusText;
+          try {
+            const errData = await uploadRes.json();
+            if (errData.error) errMsg = errData.error;
+          } catch (e) {}
+          
+          alert(`Failed to upload ${key}. Error: ${errMsg}. Please ensure Vercel Blob is configured and you are not exceeding free tier limits.`);
           setUploading(false);
           return;
         }
@@ -253,7 +265,7 @@ export default function TenantsPage() {
                         accept="image/*,application/pdf" 
                         onChange={(e) => {
                           const type = e.target.getAttribute('data-doctype');
-                          setFiles({...files, [type]: e.target.files[0]});
+                          handleFileChange(type, e);
                           e.target.value = '';
                         }} 
                         style={{flex: '2', padding: '0.5rem', minWidth: '200px'}} 
@@ -304,7 +316,7 @@ export default function TenantsPage() {
                         accept="image/*,application/pdf" 
                         onChange={(e) => {
                           const type = e.target.getAttribute('data-doctype');
-                          setFiles({...files, [type]: e.target.files[0]});
+                          handleFileChange(type, e);
                           e.target.value = '';
                         }} 
                         style={{flex: '2', padding: '0.5rem', minWidth: '200px'}} 
