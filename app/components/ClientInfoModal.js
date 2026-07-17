@@ -25,16 +25,30 @@ export default function ClientInfoModal({ tenant, onClose }) {
             <h4 style={{margin: '0 0 0.8rem 0', color: 'var(--text-secondary)', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.5px'}}>Roommates</h4>
             
             {tenant.roommate1Name && (
-              <div style={{marginBottom: tenant.roommate2Name ? '0.8rem' : '0'}}>
-                <div style={{fontWeight: '500'}}>{tenant.roommate1Name}</div>
-                <div style={{fontSize: '0.85rem', color: 'var(--text-secondary)'}}>+{tenant.roommate1Phone}</div>
+              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: tenant.roommate2Name ? '1rem' : '0'}}>
+                <div>
+                  <div style={{fontWeight: '500'}}>{tenant.roommate1Name}</div>
+                  <div style={{fontSize: '0.85rem', color: 'var(--text-secondary)'}}>+{tenant.roommate1Phone}</div>
+                </div>
+                <div style={{display: 'flex', gap: '4px', flexWrap: 'wrap', justifyContent: 'flex-end', maxWidth: '60%'}}>
+                  {tenant.roommate1AadharUrl && <a href={tenant.roommate1AadharUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.4rem', fontSize: '0.7rem', color: 'var(--text-primary)'}}><span className="bullet-3d"></span> Aadhar</a>}
+                  {tenant.roommate1PassportUrl && <a href={tenant.roommate1PassportUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.4rem', fontSize: '0.7rem', color: 'var(--text-primary)'}}><span className="bullet-3d"></span> Passport</a>}
+                  {tenant.roommate1PhotoUrl && <a href={tenant.roommate1PhotoUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.4rem', fontSize: '0.7rem', color: 'var(--text-primary)'}}><span className="bullet-3d"></span> Photo</a>}
+                </div>
               </div>
             )}
 
             {tenant.roommate2Name && (
-              <div>
-                <div style={{fontWeight: '500'}}>{tenant.roommate2Name}</div>
-                <div style={{fontSize: '0.85rem', color: 'var(--text-secondary)'}}>+{tenant.roommate2Phone}</div>
+              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start'}}>
+                <div>
+                  <div style={{fontWeight: '500'}}>{tenant.roommate2Name}</div>
+                  <div style={{fontSize: '0.85rem', color: 'var(--text-secondary)'}}>+{tenant.roommate2Phone}</div>
+                </div>
+                <div style={{display: 'flex', gap: '4px', flexWrap: 'wrap', justifyContent: 'flex-end', maxWidth: '60%'}}>
+                  {tenant.roommate2AadharUrl && <a href={tenant.roommate2AadharUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.4rem', fontSize: '0.7rem', color: 'var(--text-primary)'}}><span className="bullet-3d"></span> Aadhar</a>}
+                  {tenant.roommate2PassportUrl && <a href={tenant.roommate2PassportUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.4rem', fontSize: '0.7rem', color: 'var(--text-primary)'}}><span className="bullet-3d"></span> Passport</a>}
+                  {tenant.roommate2PhotoUrl && <a href={tenant.roommate2PhotoUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.4rem', fontSize: '0.7rem', color: 'var(--text-primary)'}}><span className="bullet-3d"></span> Photo</a>}
+                </div>
               </div>
             )}
           </div>

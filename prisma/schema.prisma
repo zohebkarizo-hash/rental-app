@@ -24,8 +24,14 @@ model Tenant {
   agreementUrl String?
   roommate1Name String?
   roommate1Phone String?
+  roommate1AadharUrl String?
+  roommate1PassportUrl String?
+  roommate1PhotoUrl String?
   roommate2Name String?
   roommate2Phone String?
+  roommate2AadharUrl String?
+  roommate2PassportUrl String?
+  roommate2PhotoUrl String?
   isActive    Boolean   @default(true)
   invoices    Invoice[]
 }

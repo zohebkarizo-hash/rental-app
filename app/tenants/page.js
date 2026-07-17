@@ -13,7 +13,7 @@ export default function TenantsPage() {
   const [currentDocs, setCurrentDocs] = useState({ aadharUrl: null, passportUrl: null, photoUrl: null, agreementUrl: null })
   const [removedDocs, setRemovedDocs] = useState({ aadhar: false, passport: false, photo: false, agreement: false })
 
-  const [files, setFiles] = useState({ aadhar: null, passport: null, photo: null, agreement: null })
+  const [files, setFiles] = useState({ aadhar: null, passport: null, photo: null, agreement: null, roommate1Aadhar: null, roommate1Passport: null, roommate1Photo: null, roommate2Aadhar: null, roommate2Passport: null, roommate2Photo: null })
   const [formData, setFormData] = useState({ name: '', phone: '91', houseNo: '', unitNo: '', deposit: '', rentAmount: '', roommate1Name: '', roommate1Phone: '91', roommate2Name: '', roommate2Phone: '91' })
   const [selectedClient, setSelectedClient] = useState(null)
   const [roommateCount, setRoommateCount] = useState(0)
@@ -75,10 +75,16 @@ export default function TenantsPage() {
       aadharUrl: tenant.aadharUrl,
       passportUrl: tenant.passportUrl,
       photoUrl: tenant.photoUrl,
-      agreementUrl: tenant.agreementUrl
+      agreementUrl: tenant.agreementUrl,
+      roommate1AadharUrl: tenant.roommate1AadharUrl,
+      roommate1PassportUrl: tenant.roommate1PassportUrl,
+      roommate1PhotoUrl: tenant.roommate1PhotoUrl,
+      roommate2AadharUrl: tenant.roommate2AadharUrl,
+      roommate2PassportUrl: tenant.roommate2PassportUrl,
+      roommate2PhotoUrl: tenant.roommate2PhotoUrl
     })
-    setRemovedDocs({ aadhar: false, passport: false, photo: false, agreement: false })
-    setFiles({ aadhar: null, passport: null, photo: null, agreement: null })
+    setRemovedDocs({ aadhar: false, passport: false, photo: false, agreement: false, roommate1Aadhar: false, roommate1Passport: false, roommate1Photo: false, roommate2Aadhar: false, roommate2Passport: false, roommate2Photo: false })
+    setFiles({ aadhar: null, passport: null, photo: null, agreement: null, roommate1Aadhar: null, roommate1Passport: null, roommate1Photo: null, roommate2Aadhar: null, roommate2Passport: null, roommate2Photo: null })
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
@@ -86,9 +92,9 @@ export default function TenantsPage() {
     setEditingId(null)
     setFormData({ name: '', phone: '91', houseNo: '', unitNo: '', deposit: '', rentAmount: '', roommate1Name: '', roommate1Phone: '91', roommate2Name: '', roommate2Phone: '91' })
     setRoommateCount(0)
-    setFiles({ aadhar: null, passport: null, photo: null, agreement: null })
-    setCurrentDocs({ aadharUrl: null, passportUrl: null, photoUrl: null, agreementUrl: null })
-    setRemovedDocs({ aadhar: false, passport: false, photo: false, agreement: false })
+    setFiles({ aadhar: null, passport: null, photo: null, agreement: null, roommate1Aadhar: null, roommate1Passport: null, roommate1Photo: null, roommate2Aadhar: null, roommate2Passport: null, roommate2Photo: null })
+    setCurrentDocs({ aadharUrl: null, passportUrl: null, photoUrl: null, agreementUrl: null, roommate1AadharUrl: null, roommate1PassportUrl: null, roommate1PhotoUrl: null, roommate2AadharUrl: null, roommate2PassportUrl: null, roommate2PhotoUrl: null })
+    setRemovedDocs({ aadhar: false, passport: false, photo: false, agreement: false, roommate1Aadhar: false, roommate1Passport: false, roommate1Photo: false, roommate2Aadhar: false, roommate2Passport: false, roommate2Photo: false })
   }
 
   const handleSubmit = async (e) => {
@@ -97,10 +103,14 @@ export default function TenantsPage() {
     
     let uploadedUrls = {};
     if (!editingId) {
-      uploadedUrls = { aadharUrl: null, passportUrl: null, photoUrl: null, agreementUrl: null };
+      uploadedUrls = { 
+        aadharUrl: null, passportUrl: null, photoUrl: null, agreementUrl: null,
+        roommate1AadharUrl: null, roommate1PassportUrl: null, roommate1PhotoUrl: null,
+        roommate2AadharUrl: null, roommate2PassportUrl: null, roommate2PhotoUrl: null
+      };
     } else {
       // In Edit Mode, set any explicitly removed docs to null so the backend clears them
-      ['aadhar', 'passport', 'photo', 'agreement'].forEach(type => {
+      ['aadhar', 'passport', 'photo', 'agreement', 'roommate1Aadhar', 'roommate1Passport', 'roommate1Photo', 'roommate2Aadhar', 'roommate2Passport', 'roommate2Photo'].forEach(type => {
         if (removedDocs[type]) {
           uploadedUrls[`${type}Url`] = null;
         }
@@ -222,6 +232,23 @@ export default function TenantsPage() {
                     }} />
                   </div>
                 </div>
+                <div style={{marginTop: '0.8rem', padding: '0.5rem', background: 'rgba(0,0,0,0.1)', borderRadius: '4px'}}>
+                  <label style={{fontSize: '0.75rem', color: 'var(--text-secondary)', marginBottom: '0.5rem', display: 'block'}}>Roommate 1 Documents (Optional)</label>
+                  <div style={{display: 'flex', gap: '8px', flexWrap: 'wrap'}}>
+                    <div style={{flex: '1', minWidth: '120px'}}>
+                      <label style={{fontSize: '0.7rem'}}>Aadhar {currentDocs.roommate1AadharUrl && !removedDocs.roommate1Aadhar && <span style={{color: 'var(--text-success)'}}>✓ Saved</span>}</label>
+                      <input type="file" className="form-control" style={{padding: '0.2rem', fontSize: '0.75rem'}} accept="image/*,.pdf" onChange={e => setFiles({...files, roommate1Aadhar: e.target.files[0]})} />
+                    </div>
+                    <div style={{flex: '1', minWidth: '120px'}}>
+                      <label style={{fontSize: '0.7rem'}}>Passport {currentDocs.roommate1PassportUrl && !removedDocs.roommate1Passport && <span style={{color: 'var(--text-success)'}}>✓ Saved</span>}</label>
+                      <input type="file" className="form-control" style={{padding: '0.2rem', fontSize: '0.75rem'}} accept="image/*,.pdf" onChange={e => setFiles({...files, roommate1Passport: e.target.files[0]})} />
+                    </div>
+                    <div style={{flex: '1', minWidth: '120px'}}>
+                      <label style={{fontSize: '0.7rem'}}>Photo {currentDocs.roommate1PhotoUrl && !removedDocs.roommate1Photo && <span style={{color: 'var(--text-success)'}}>✓ Saved</span>}</label>
+                      <input type="file" className="form-control" style={{padding: '0.2rem', fontSize: '0.75rem'}} accept="image/*" onChange={e => setFiles({...files, roommate1Photo: e.target.files[0]})} />
+                    </div>
+                  </div>
+                </div>
               </div>
             )}
 
@@ -242,6 +269,23 @@ export default function TenantsPage() {
                       const val = e.target.value.replace(/\D/g, '');
                       if (val === '' || val.startsWith('91')) setFormData({...formData, roommate2Phone: val});
                     }} />
+                  </div>
+                </div>
+                <div style={{marginTop: '0.8rem', padding: '0.5rem', background: 'rgba(0,0,0,0.1)', borderRadius: '4px'}}>
+                  <label style={{fontSize: '0.75rem', color: 'var(--text-secondary)', marginBottom: '0.5rem', display: 'block'}}>Roommate 2 Documents (Optional)</label>
+                  <div style={{display: 'flex', gap: '8px', flexWrap: 'wrap'}}>
+                    <div style={{flex: '1', minWidth: '120px'}}>
+                      <label style={{fontSize: '0.7rem'}}>Aadhar {currentDocs.roommate2AadharUrl && !removedDocs.roommate2Aadhar && <span style={{color: 'var(--text-success)'}}>✓ Saved</span>}</label>
+                      <input type="file" className="form-control" style={{padding: '0.2rem', fontSize: '0.75rem'}} accept="image/*,.pdf" onChange={e => setFiles({...files, roommate2Aadhar: e.target.files[0]})} />
+                    </div>
+                    <div style={{flex: '1', minWidth: '120px'}}>
+                      <label style={{fontSize: '0.7rem'}}>Passport {currentDocs.roommate2PassportUrl && !removedDocs.roommate2Passport && <span style={{color: 'var(--text-success)'}}>✓ Saved</span>}</label>
+                      <input type="file" className="form-control" style={{padding: '0.2rem', fontSize: '0.75rem'}} accept="image/*,.pdf" onChange={e => setFiles({...files, roommate2Passport: e.target.files[0]})} />
+                    </div>
+                    <div style={{flex: '1', minWidth: '120px'}}>
+                      <label style={{fontSize: '0.7rem'}}>Photo {currentDocs.roommate2PhotoUrl && !removedDocs.roommate2Photo && <span style={{color: 'var(--text-success)'}}>✓ Saved</span>}</label>
+                      <input type="file" className="form-control" style={{padding: '0.2rem', fontSize: '0.75rem'}} accept="image/*" onChange={e => setFiles({...files, roommate2Photo: e.target.files[0]})} />
+                    </div>
                   </div>
                 </div>
               </div>

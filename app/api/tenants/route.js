@@ -29,8 +29,14 @@ export async function POST(request) {
         agreementUrl: data.agreementUrl || null,
         roommate1Name: data.roommate1Name || null,
         roommate1Phone: data.roommate1Phone || null,
+        roommate1AadharUrl: data.roommate1AadharUrl || null,
+        roommate1PassportUrl: data.roommate1PassportUrl || null,
+        roommate1PhotoUrl: data.roommate1PhotoUrl || null,
         roommate2Name: data.roommate2Name || null,
-        roommate2Phone: data.roommate2Phone || null
+        roommate2Phone: data.roommate2Phone || null,
+        roommate2AadharUrl: data.roommate2AadharUrl || null,
+        roommate2PassportUrl: data.roommate2PassportUrl || null,
+        roommate2PhotoUrl: data.roommate2PhotoUrl || null
       },
     })
     return NextResponse.json(tenant)
