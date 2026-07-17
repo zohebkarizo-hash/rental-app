@@ -177,12 +177,12 @@ export default function TenantsPage() {
           </h2>
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label>Name <span style={{color: 'var(--primary-color)'}}>*</span></label>
+              <label>Name <span style={{color: '#ef4444'}}>*</span></label>
               <input type="text" className="form-control" required value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
             </div>
             
             <div className="form-group">
-              <label>WhatsApp Phone (Digits Only, Prefix 91) <span style={{color: 'var(--primary-color)'}}>*</span></label>
+              <label>WhatsApp Phone (Digits Only, Prefix 91) <span style={{color: '#ef4444'}}>*</span></label>
               <input type="tel" className="form-control" required value={formData.phone} onChange={handlePhoneChange} />
             </div>
 
