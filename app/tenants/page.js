@@ -221,31 +221,31 @@ export default function TenantsPage() {
                 }}>×</button>
                 <div className="form-grid">
                   <div className="form-group">
-                    <label>Roommate 1 Name</label>
+                    <label>Roommate Name</label>
                     <input type="text" className="form-control" value={formData.roommate1Name} onChange={e => setFormData({...formData, roommate1Name: e.target.value})} />
                   </div>
                   <div className="form-group">
-                    <label>Roommate 1 Phone</label>
+                    <label>Roommate Phone</label>
                     <input type="tel" className="form-control" value={formData.roommate1Phone} onChange={e => {
                       const val = e.target.value.replace(/\D/g, '');
                       if (val === '' || val.startsWith('91')) setFormData({...formData, roommate1Phone: val});
                     }} />
                   </div>
                 </div>
-                <div style={{marginTop: '0.8rem', padding: '0.5rem', background: 'rgba(0,0,0,0.1)', borderRadius: '4px'}}>
-                  <label style={{fontSize: '0.75rem', color: 'var(--text-secondary)', marginBottom: '0.5rem', display: 'block'}}>Roommate 1 Documents (Optional)</label>
-                  <div style={{display: 'flex', gap: '8px', flexWrap: 'wrap'}}>
-                    <div style={{flex: '1', minWidth: '120px'}}>
-                      <label style={{fontSize: '0.7rem'}}>Aadhar {currentDocs.roommate1AadharUrl && !removedDocs.roommate1Aadhar && <span style={{color: 'var(--text-success)'}}>✓ Saved</span>}</label>
-                      <input type="file" className="form-control" style={{padding: '0.2rem', fontSize: '0.75rem'}} accept="image/*,.pdf" onChange={e => setFiles({...files, roommate1Aadhar: e.target.files[0]})} />
+                <div style={{marginTop: '0.8rem', paddingTop: '0.8rem', borderTop: '1px solid var(--border-color)'}}>
+                  <label style={{fontSize: '0.85rem', color: 'var(--primary-color)', marginBottom: '0.8rem', display: 'block', fontWeight: '500'}}>Roommate Documents</label>
+                  <div className="form-grid">
+                    <div className="form-group">
+                      <label>Aadhar Card {currentDocs.roommate1AadharUrl && !removedDocs.roommate1Aadhar && <span style={{color: 'var(--text-success)'}}>(Saved)</span>}</label>
+                      <input type="file" className="form-control" accept="image/*,.pdf" onChange={e => setFiles({...files, roommate1Aadhar: e.target.files[0]})} />
                     </div>
-                    <div style={{flex: '1', minWidth: '120px'}}>
-                      <label style={{fontSize: '0.7rem'}}>Passport {currentDocs.roommate1PassportUrl && !removedDocs.roommate1Passport && <span style={{color: 'var(--text-success)'}}>✓ Saved</span>}</label>
-                      <input type="file" className="form-control" style={{padding: '0.2rem', fontSize: '0.75rem'}} accept="image/*,.pdf" onChange={e => setFiles({...files, roommate1Passport: e.target.files[0]})} />
+                    <div className="form-group">
+                      <label>Passport {currentDocs.roommate1PassportUrl && !removedDocs.roommate1Passport && <span style={{color: 'var(--text-success)'}}>(Saved)</span>}</label>
+                      <input type="file" className="form-control" accept="image/*,.pdf" onChange={e => setFiles({...files, roommate1Passport: e.target.files[0]})} />
                     </div>
-                    <div style={{flex: '1', minWidth: '120px'}}>
-                      <label style={{fontSize: '0.7rem'}}>Photo {currentDocs.roommate1PhotoUrl && !removedDocs.roommate1Photo && <span style={{color: 'var(--text-success)'}}>✓ Saved</span>}</label>
-                      <input type="file" className="form-control" style={{padding: '0.2rem', fontSize: '0.75rem'}} accept="image/*" onChange={e => setFiles({...files, roommate1Photo: e.target.files[0]})} />
+                    <div className="form-group">
+                      <label>Photo {currentDocs.roommate1PhotoUrl && !removedDocs.roommate1Photo && <span style={{color: 'var(--text-success)'}}>(Saved)</span>}</label>
+                      <input type="file" className="form-control" accept="image/*" onChange={e => setFiles({...files, roommate1Photo: e.target.files[0]})} />
                     </div>
                   </div>
                 </div>
@@ -260,31 +260,31 @@ export default function TenantsPage() {
                 }}>×</button>
                 <div className="form-grid">
                   <div className="form-group">
-                    <label>Roommate 2 Name</label>
+                    <label>Roommate Name</label>
                     <input type="text" className="form-control" value={formData.roommate2Name} onChange={e => setFormData({...formData, roommate2Name: e.target.value})} />
                   </div>
                   <div className="form-group">
-                    <label>Roommate 2 Phone</label>
+                    <label>Roommate Phone</label>
                     <input type="tel" className="form-control" value={formData.roommate2Phone} onChange={e => {
                       const val = e.target.value.replace(/\D/g, '');
                       if (val === '' || val.startsWith('91')) setFormData({...formData, roommate2Phone: val});
                     }} />
                   </div>
                 </div>
-                <div style={{marginTop: '0.8rem', padding: '0.5rem', background: 'rgba(0,0,0,0.1)', borderRadius: '4px'}}>
-                  <label style={{fontSize: '0.75rem', color: 'var(--text-secondary)', marginBottom: '0.5rem', display: 'block'}}>Roommate 2 Documents (Optional)</label>
-                  <div style={{display: 'flex', gap: '8px', flexWrap: 'wrap'}}>
-                    <div style={{flex: '1', minWidth: '120px'}}>
-                      <label style={{fontSize: '0.7rem'}}>Aadhar {currentDocs.roommate2AadharUrl && !removedDocs.roommate2Aadhar && <span style={{color: 'var(--text-success)'}}>✓ Saved</span>}</label>
-                      <input type="file" className="form-control" style={{padding: '0.2rem', fontSize: '0.75rem'}} accept="image/*,.pdf" onChange={e => setFiles({...files, roommate2Aadhar: e.target.files[0]})} />
+                <div style={{marginTop: '0.8rem', paddingTop: '0.8rem', borderTop: '1px solid var(--border-color)'}}>
+                  <label style={{fontSize: '0.85rem', color: 'var(--primary-color)', marginBottom: '0.8rem', display: 'block', fontWeight: '500'}}>Roommate Documents</label>
+                  <div className="form-grid">
+                    <div className="form-group">
+                      <label>Aadhar Card {currentDocs.roommate2AadharUrl && !removedDocs.roommate2Aadhar && <span style={{color: 'var(--text-success)'}}>(Saved)</span>}</label>
+                      <input type="file" className="form-control" accept="image/*,.pdf" onChange={e => setFiles({...files, roommate2Aadhar: e.target.files[0]})} />
                     </div>
-                    <div style={{flex: '1', minWidth: '120px'}}>
-                      <label style={{fontSize: '0.7rem'}}>Passport {currentDocs.roommate2PassportUrl && !removedDocs.roommate2Passport && <span style={{color: 'var(--text-success)'}}>✓ Saved</span>}</label>
-                      <input type="file" className="form-control" style={{padding: '0.2rem', fontSize: '0.75rem'}} accept="image/*,.pdf" onChange={e => setFiles({...files, roommate2Passport: e.target.files[0]})} />
+                    <div className="form-group">
+                      <label>Passport {currentDocs.roommate2PassportUrl && !removedDocs.roommate2Passport && <span style={{color: 'var(--text-success)'}}>(Saved)</span>}</label>
+                      <input type="file" className="form-control" accept="image/*,.pdf" onChange={e => setFiles({...files, roommate2Passport: e.target.files[0]})} />
                     </div>
-                    <div style={{flex: '1', minWidth: '120px'}}>
-                      <label style={{fontSize: '0.7rem'}}>Photo {currentDocs.roommate2PhotoUrl && !removedDocs.roommate2Photo && <span style={{color: 'var(--text-success)'}}>✓ Saved</span>}</label>
-                      <input type="file" className="form-control" style={{padding: '0.2rem', fontSize: '0.75rem'}} accept="image/*" onChange={e => setFiles({...files, roommate2Photo: e.target.files[0]})} />
+                    <div className="form-group">
+                      <label>Photo {currentDocs.roommate2PhotoUrl && !removedDocs.roommate2Photo && <span style={{color: 'var(--text-success)'}}>(Saved)</span>}</label>
+                      <input type="file" className="form-control" accept="image/*" onChange={e => setFiles({...files, roommate2Photo: e.target.files[0]})} />
                     </div>
                   </div>
                 </div>
