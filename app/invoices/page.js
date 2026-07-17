@@ -233,23 +233,29 @@ export default function InvoicesPage() {
                           </button>
                         </>
                       )}
-                      <button 
-                        className="btn btn-outline" 
-                        style={{padding: '0.4rem 0.6rem', fontSize: '0.75rem'}}
-                        onClick={() => setPreviewInvoice(inv)}
-                      >
-                        Preview
-                      </button>
+                      {inv.status !== 'PAID' ? (
+                        <>
+                          <button 
+                            className="btn btn-outline" 
+                            style={{padding: '0.4rem 0.6rem', fontSize: '0.75rem'}}
+                            onClick={() => setPreviewInvoice(inv)}
+                          >
+                            Preview
+                          </button>
 
-                      <button 
-                        className="btn btn-outline" 
-                        style={{padding: '0.4rem 0.6rem', fontSize: '0.75rem', borderColor: '#25D366', color: '#25D366'}}
-                        onClick={() => handleSendWhatsApp(inv.id)}
-                        disabled={sendingId === inv.id}
-                        title="Send silently in background via Twilio API"
-                      >
-                        {sendingId === inv.id ? '...' : 'Auto WA'}
-                      </button>
+                          <button 
+                            className="btn btn-outline" 
+                            style={{padding: '0.4rem 0.6rem', fontSize: '0.75rem', borderColor: '#25D366', color: '#25D366'}}
+                            onClick={() => handleSendWhatsApp(inv.id)}
+                            disabled={sendingId === inv.id}
+                            title="Send silently in background via Twilio API"
+                          >
+                            {sendingId === inv.id ? '...' : 'Auto WA'}
+                          </button>
+                        </>
+                      ) : (
+                        <span style={{color: 'var(--text-success)', fontSize: '0.8rem', fontStyle: 'italic', padding: '0.4rem 0'}}>No actions needed</span>
+                      )}
                     </td>
                   </tr>
                 ))}
