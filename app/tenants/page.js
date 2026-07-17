@@ -316,7 +316,7 @@ export default function TenantsPage() {
               <table className="data-table">
                 <thead>
                   <tr>
-                    <th>House/Unit</th>
+                    <th>Unit/House</th>
                     <th>Name & Info</th>
                     <th>Documents</th>
                     <th>Deposit</th>
@@ -328,8 +328,8 @@ export default function TenantsPage() {
                   {tenants.map(t => (
                     <tr key={t.id}>
                       <td>
-                        <div style={{fontWeight: '600'}}>House {t.houseNo || '-'}</div>
-                        <div style={{fontSize: '0.8rem', color: 'var(--text-secondary)'}}>Unit {t.unitNo || '-'}</div>
+                        <div style={{fontWeight: '600'}}>Unit {t.unitNo || '-'}</div>
+                        <div style={{fontSize: '0.8rem', color: 'var(--text-secondary)'}}>House {t.houseNo || '-'}</div>
                       </td>
                       <td>
                         <div>{t.name}</div>

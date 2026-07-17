@@ -227,7 +227,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
             <table className="data-table">
               <thead>
                 <tr>
-                  <th>House/Unit</th>
+                  <th>Unit/House</th>
                   <th>Name</th>
                   <th>WhatsApp Phone</th>
                   <th>Rent Amount</th>
@@ -236,7 +236,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
               <tbody>
                 {activeTenants.map(t => (
                   <tr key={t.id}>
-                    <td>House {t.houseNo || '-'}, Unit {t.unitNo || '-'}</td>
+                    <td>Unit {t.unitNo || '-'}, House {t.houseNo || '-'}</td>
                     <td>{t.name}</td>
                     <td>+{t.phone}</td>
                     <td>₹{t.rentAmount.toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
@@ -260,7 +260,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
               <thead>
                 <tr>
                   <th>Name</th>
-                  <th>House/Unit</th>
+                  <th>Unit/House</th>
                   <th>Date of Deposit</th>
                   <th>Deposit Amount</th>
                 </tr>
@@ -269,7 +269,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
                 {activeTenants.map(t => (
                   <tr key={t.id}>
                     <td>{t.name}</td>
-                    <td>House {t.houseNo || '-'}, Unit {t.unitNo || '-'}</td>
+                    <td>Unit {t.unitNo || '-'}, House {t.houseNo || '-'}</td>
                     <td>{new Date(t.createdAt).toLocaleDateString('en-IN')}</td>
                     <td style={{fontWeight: '600'}}>₹{t.deposit.toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
                   </tr>
