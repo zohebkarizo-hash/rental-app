@@ -366,10 +366,10 @@ export default function TenantsPage() {
                           </button>
                           <button 
                             className={`btn ${t.isActive ? 'btn-danger' : 'btn-success'}`} 
-                            style={{padding: '0.4rem 0.8rem', fontSize: '0.75rem', width: '100%', textAlign: 'center'}}
+                            style={{padding: '0.4rem 0.8rem', fontSize: '0.75rem', width: '100%', textAlign: 'center', whiteSpace: 'nowrap'}}
                             onClick={() => handleToggleActive(t.id, t.isActive)}
                           >
-                            {t.isActive ? 'Mark Vacated' : 'Restore'}
+                            {t.isActive ? 'Vacate' : 'Restore'}
                           </button>
                         </div>
                       </td>
