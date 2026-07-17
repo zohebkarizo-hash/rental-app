@@ -245,7 +245,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
                     </td>
                     <td>
                       <span 
-                        style={{color: 'var(--primary-color)', cursor: 'pointer', textDecoration: 'underline', fontWeight: '500'}} 
+                        className="client-name-link"
                         onClick={() => setSelectedClient(t)}
                       >
                         {t.name}
@@ -292,7 +292,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
                   <tr key={t.id}>
                     <td>
                       <span 
-                        style={{color: 'var(--primary-color)', cursor: 'pointer', textDecoration: 'underline', fontWeight: '500'}} 
+                        className="client-name-link"
                         onClick={() => setSelectedClient(t)}
                       >
                         {t.name}

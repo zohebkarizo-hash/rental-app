@@ -265,6 +265,17 @@ h3 {
   color: var(--text-success);
 }
 
+.client-name-link {
+  color: var(--primary-color);
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+.client-name-link:hover {
+  color: var(--text-primary);
+  text-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
+}
+
 /* Dashboard Grid */
 .dashboard-grid {
   display: grid;

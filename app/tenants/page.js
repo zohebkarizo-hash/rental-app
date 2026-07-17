@@ -367,7 +367,7 @@ export default function TenantsPage() {
                       </td>
                       <td data-label="Name & Info">
                         <span 
-                          style={{color: 'var(--primary-color)', cursor: 'pointer', textDecoration: 'underline', fontWeight: '500'}} 
+                          className="client-name-link"
                           onClick={() => setSelectedClient(t)}
                         >
                           {t.name}
