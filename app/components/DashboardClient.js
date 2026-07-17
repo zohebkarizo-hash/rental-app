@@ -2,9 +2,11 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import ClientInfoModal from './ClientInfoModal'
 
 export default function DashboardClient({ activeTenants, pendingInvoices, totalDeposit }) {
   const [activeView, setActiveView] = useState(null) // 'tenants', 'deposits', 'pending'
+  const [selectedClient, setSelectedClient] = useState(null)
   const router = useRouter()
 
   const pendingRentTotal = pendingInvoices.reduce((sum, inv) => sum + inv.amountDue, 0)
@@ -241,7 +243,14 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
                       <div style={{fontWeight: '600', color: '#ef4444'}}>Unit : {t.unitNo || '-'}</div>
                       <div style={{fontSize: '0.8rem', color: 'var(--text-secondary)'}}>House : {t.houseNo || '-'}</div>
                     </td>
-                    <td>{t.name}</td>
+                    <td>
+                      <span 
+                        style={{color: 'var(--primary-color)', cursor: 'pointer', textDecoration: 'underline', fontWeight: '500'}} 
+                        onClick={() => setSelectedClient(t)}
+                      >
+                        {t.name}
+                      </span>
+                    </td>
                     <td>+{t.phone}</td>
                     <td>
                       <div style={{display: 'flex', flexDirection: 'column', gap: '6px', alignItems: 'flex-start'}}>
@@ -281,7 +290,14 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
               <tbody>
                 {activeTenants.map(t => (
                   <tr key={t.id}>
-                    <td>{t.name}</td>
+                    <td>
+                      <span 
+                        style={{color: 'var(--primary-color)', cursor: 'pointer', textDecoration: 'underline', fontWeight: '500'}} 
+                        onClick={() => setSelectedClient(t)}
+                      >
+                        {t.name}
+                      </span>
+                    </td>
                     <td>
                       <div style={{fontWeight: '600', color: '#ef4444'}}>Unit : {t.unitNo || '-'}</div>
                       <div style={{fontSize: '0.8rem', color: 'var(--text-secondary)'}}>House : {t.houseNo || '-'}</div>
@@ -385,6 +401,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
           </Link>
         </div>
       </div>
+      <ClientInfoModal tenant={selectedClient} onClose={() => setSelectedClient(null)} />
     </>
   )
 }

@@ -1,5 +1,6 @@
 "use client"
 import { useState, useEffect } from 'react'
+import ClientInfoModal from '../components/ClientInfoModal'
 
 export default function TenantsPage() {
   const [tenants, setTenants] = useState([])
@@ -13,7 +14,8 @@ export default function TenantsPage() {
   const [removedDocs, setRemovedDocs] = useState({ aadhar: false, passport: false, photo: false, agreement: false })
 
   const [files, setFiles] = useState({ aadhar: null, passport: null, photo: null, agreement: null })
-  const [formData, setFormData] = useState({ name: '', phone: '91', houseNo: '', unitNo: '', deposit: '', rentAmount: '' })
+  const [formData, setFormData] = useState({ name: '', phone: '91', houseNo: '', unitNo: '', deposit: '', rentAmount: '', roommate1Name: '', roommate1Phone: '91', roommate2Name: '', roommate2Phone: '91' })
+  const [selectedClient, setSelectedClient] = useState(null)
 
   useEffect(() => {
     fetchTenants()
@@ -51,8 +53,12 @@ export default function TenantsPage() {
       phone: tenant.phone,
       houseNo: tenant.houseNo || '',
       unitNo: tenant.unitNo || '',
-      deposit: tenant.deposit,
-      rentAmount: tenant.rentAmount
+      deposit: tenant.deposit.toString(),
+      rentAmount: tenant.rentAmount.toString(),
+      roommate1Name: tenant.roommate1Name || '',
+      roommate1Phone: tenant.roommate1Phone || '91',
+      roommate2Name: tenant.roommate2Name || '',
+      roommate2Phone: tenant.roommate2Phone || '91'
     })
     setCurrentDocs({
       aadharUrl: tenant.aadharUrl,
@@ -67,7 +73,7 @@ export default function TenantsPage() {
 
   const cancelEdit = () => {
     setEditingId(null)
-    setFormData({ name: '', phone: '91', houseNo: '', unitNo: '', deposit: '', rentAmount: '' })
+    setFormData({ name: '', phone: '91', houseNo: '', unitNo: '', deposit: '', rentAmount: '', roommate1Name: '', roommate1Phone: '91', roommate2Name: '', roommate2Phone: '91' })
     setFiles({ aadhar: null, passport: null, photo: null, agreement: null })
     setCurrentDocs({ aadharUrl: null, passportUrl: null, photoUrl: null, agreementUrl: null })
     setRemovedDocs({ aadhar: false, passport: false, photo: false, agreement: false })
@@ -178,6 +184,34 @@ export default function TenantsPage() {
             <div className="form-group">
               <label>WhatsApp Phone (Digits Only, Prefix 91)</label>
               <input type="tel" className="form-control" required value={formData.phone} onChange={handlePhoneChange} />
+            </div>
+
+            <div className="form-grid">
+              <div className="form-group">
+                <label>Roommate 1 Name (Optional)</label>
+                <input type="text" className="form-control" value={formData.roommate1Name} onChange={e => setFormData({...formData, roommate1Name: e.target.value})} />
+              </div>
+              <div className="form-group">
+                <label>Roommate 1 Phone (Optional)</label>
+                <input type="tel" className="form-control" value={formData.roommate1Phone} onChange={e => {
+                  const val = e.target.value.replace(/\D/g, '');
+                  if (val === '' || val.startsWith('91')) setFormData({...formData, roommate1Phone: val});
+                }} />
+              </div>
+            </div>
+
+            <div className="form-grid">
+              <div className="form-group">
+                <label>Roommate 2 Name (Optional)</label>
+                <input type="text" className="form-control" value={formData.roommate2Name} onChange={e => setFormData({...formData, roommate2Name: e.target.value})} />
+              </div>
+              <div className="form-group">
+                <label>Roommate 2 Phone (Optional)</label>
+                <input type="tel" className="form-control" value={formData.roommate2Phone} onChange={e => {
+                  const val = e.target.value.replace(/\D/g, '');
+                  if (val === '' || val.startsWith('91')) setFormData({...formData, roommate2Phone: val});
+                }} />
+              </div>
             </div>
             
             <div className="form-grid">
@@ -332,7 +366,12 @@ export default function TenantsPage() {
                         <div style={{fontSize: '0.8rem', color: 'var(--text-secondary)'}}>House : {t.houseNo || '-'}</div>
                       </td>
                       <td data-label="Name & Info">
-                        <div>{t.name}</div>
+                        <span 
+                          style={{color: 'var(--primary-color)', cursor: 'pointer', textDecoration: 'underline', fontWeight: '500'}} 
+                          onClick={() => setSelectedClient(t)}
+                        >
+                          {t.name}
+                        </span>
                         <div style={{fontSize: '0.8rem', color: 'var(--text-secondary)'}}>+{t.phone}</div>
                       </td>
                       <td data-label="Documents">
@@ -384,6 +423,8 @@ export default function TenantsPage() {
           )}
         </div>
       </div>
+
+      <ClientInfoModal tenant={selectedClient} onClose={() => setSelectedClient(null)} />
     </main>
   )
 }

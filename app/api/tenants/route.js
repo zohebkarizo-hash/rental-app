@@ -26,7 +26,11 @@ export async function POST(request) {
         aadharUrl: data.aadharUrl || null,
         passportUrl: data.passportUrl || null,
         photoUrl: data.photoUrl || null,
-        agreementUrl: data.agreementUrl || null
+        agreementUrl: data.agreementUrl || null,
+        roommate1Name: data.roommate1Name || null,
+        roommate1Phone: data.roommate1Phone || null,
+        roommate2Name: data.roommate2Name || null,
+        roommate2Phone: data.roommate2Phone || null
       },
     })
     return NextResponse.json(tenant)
