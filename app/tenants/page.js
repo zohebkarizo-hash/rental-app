@@ -233,19 +233,31 @@ export default function TenantsPage() {
                   </div>
                 </div>
                 <div style={{marginTop: '0.8rem', paddingTop: '0.8rem', borderTop: '1px solid var(--border-color)'}}>
-                  <label style={{fontSize: '0.85rem', color: 'var(--primary-color)', marginBottom: '0.8rem', display: 'block', fontWeight: '500'}}>Roommate Documents</label>
-                  <div className="form-grid">
-                    <div className="form-group">
-                      <label>Aadhar Card {currentDocs.roommate1AadharUrl && !removedDocs.roommate1Aadhar && <span style={{color: 'var(--text-success)'}}>(Saved)</span>}</label>
-                      <input type="file" className="form-control" accept="image/*,.pdf" onChange={e => setFiles({...files, roommate1Aadhar: e.target.files[0]})} />
-                    </div>
-                    <div className="form-group">
-                      <label>Passport {currentDocs.roommate1PassportUrl && !removedDocs.roommate1Passport && <span style={{color: 'var(--text-success)'}}>(Saved)</span>}</label>
-                      <input type="file" className="form-control" accept="image/*,.pdf" onChange={e => setFiles({...files, roommate1Passport: e.target.files[0]})} />
-                    </div>
-                    <div className="form-group">
-                      <label>Photo {currentDocs.roommate1PhotoUrl && !removedDocs.roommate1Photo && <span style={{color: 'var(--text-success)'}}>(Saved)</span>}</label>
-                      <input type="file" className="form-control" accept="image/*" onChange={e => setFiles({...files, roommate1Photo: e.target.files[0]})} />
+                  <h3 style={{fontSize: '0.9rem', marginBottom: '0.5rem', color: 'var(--primary-color)'}}>Roommate Documents</h3>
+                  <div className="form-group" style={{marginBottom: '0.5rem'}}>
+                    <div style={{display: 'flex', gap: '0.5rem', flexWrap: 'wrap'}}>
+                      <select 
+                        className="form-control" 
+                        style={{flex: '1', minWidth: '150px'}}
+                        onChange={(e) => document.getElementById('r1-unified-file-upload').setAttribute('data-doctype', e.target.value)}
+                      >
+                        <option value="roommate1Aadhar">Aadhar Card</option>
+                        <option value="roommate1Passport">Passport</option>
+                        <option value="roommate1Photo">Photo</option>
+                      </select>
+                      <input 
+                        type="file" 
+                        id="r1-unified-file-upload"
+                        data-doctype="roommate1Aadhar"
+                        className="form-control" 
+                        accept="image/*,application/pdf" 
+                        onChange={(e) => {
+                          const type = e.target.getAttribute('data-doctype');
+                          setFiles({...files, [type]: e.target.files[0]});
+                          e.target.value = '';
+                        }} 
+                        style={{flex: '2', padding: '0.5rem', minWidth: '200px'}} 
+                      />
                     </div>
                   </div>
                 </div>
@@ -272,19 +284,31 @@ export default function TenantsPage() {
                   </div>
                 </div>
                 <div style={{marginTop: '0.8rem', paddingTop: '0.8rem', borderTop: '1px solid var(--border-color)'}}>
-                  <label style={{fontSize: '0.85rem', color: 'var(--primary-color)', marginBottom: '0.8rem', display: 'block', fontWeight: '500'}}>Roommate Documents</label>
-                  <div className="form-grid">
-                    <div className="form-group">
-                      <label>Aadhar Card {currentDocs.roommate2AadharUrl && !removedDocs.roommate2Aadhar && <span style={{color: 'var(--text-success)'}}>(Saved)</span>}</label>
-                      <input type="file" className="form-control" accept="image/*,.pdf" onChange={e => setFiles({...files, roommate2Aadhar: e.target.files[0]})} />
-                    </div>
-                    <div className="form-group">
-                      <label>Passport {currentDocs.roommate2PassportUrl && !removedDocs.roommate2Passport && <span style={{color: 'var(--text-success)'}}>(Saved)</span>}</label>
-                      <input type="file" className="form-control" accept="image/*,.pdf" onChange={e => setFiles({...files, roommate2Passport: e.target.files[0]})} />
-                    </div>
-                    <div className="form-group">
-                      <label>Photo {currentDocs.roommate2PhotoUrl && !removedDocs.roommate2Photo && <span style={{color: 'var(--text-success)'}}>(Saved)</span>}</label>
-                      <input type="file" className="form-control" accept="image/*" onChange={e => setFiles({...files, roommate2Photo: e.target.files[0]})} />
+                  <h3 style={{fontSize: '0.9rem', marginBottom: '0.5rem', color: 'var(--primary-color)'}}>Roommate Documents</h3>
+                  <div className="form-group" style={{marginBottom: '0.5rem'}}>
+                    <div style={{display: 'flex', gap: '0.5rem', flexWrap: 'wrap'}}>
+                      <select 
+                        className="form-control" 
+                        style={{flex: '1', minWidth: '150px'}}
+                        onChange={(e) => document.getElementById('r2-unified-file-upload').setAttribute('data-doctype', e.target.value)}
+                      >
+                        <option value="roommate2Aadhar">Aadhar Card</option>
+                        <option value="roommate2Passport">Passport</option>
+                        <option value="roommate2Photo">Photo</option>
+                      </select>
+                      <input 
+                        type="file" 
+                        id="r2-unified-file-upload"
+                        data-doctype="roommate2Aadhar"
+                        className="form-control" 
+                        accept="image/*,application/pdf" 
+                        onChange={(e) => {
+                          const type = e.target.getAttribute('data-doctype');
+                          setFiles({...files, [type]: e.target.files[0]});
+                          e.target.value = '';
+                        }} 
+                        style={{flex: '2', padding: '0.5rem', minWidth: '200px'}} 
+                      />
                     </div>
                   </div>
                 </div>
@@ -330,13 +354,20 @@ export default function TenantsPage() {
               <div style={{marginBottom: '1rem', padding: '0.75rem', background: 'rgba(0,0,0,0.2)', borderRadius: '8px'}}>
                 <label style={{fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '0.5rem', display: 'block'}}>Current Saved Documents:</label>
                 <div style={{display: 'flex', gap: '0.5rem', flexWrap: 'wrap'}}>
-                  {['aadhar', 'passport', 'photo', 'agreement'].map(type => {
+                  {['aadhar', 'passport', 'photo', 'agreement', 'roommate1Aadhar', 'roommate1Passport', 'roommate1Photo', 'roommate2Aadhar', 'roommate2Passport', 'roommate2Photo'].map(type => {
                     const hasDoc = currentDocs[`${type}Url`];
                     const isRemoved = removedDocs[type];
+                    
+                    const formatLabel = (t) => {
+                      if (t.startsWith('roommate1')) return `Roommate 1 ${t.replace('roommate1', '')}`;
+                      if (t.startsWith('roommate2')) return `Roommate 2 ${t.replace('roommate2', '')}`;
+                      return t.charAt(0).toUpperCase() + t.slice(1);
+                    }
+
                     if (hasDoc && !isRemoved) {
                       return (
                         <span key={type} className="badge" style={{background: 'rgba(0,0,0,0.05)', color: 'var(--text-primary)', display: 'flex', gap: '6px', alignItems: 'center'}}>
-                          {type.charAt(0).toUpperCase() + type.slice(1)}
+                          {formatLabel(type)}
                           <button 
                             type="button" 
                             onClick={() => setRemovedDocs({...removedDocs, [type]: true})} 
@@ -350,13 +381,13 @@ export default function TenantsPage() {
                     } else if (hasDoc && isRemoved) {
                       return (
                         <span key={type} className="badge" style={{background: 'rgba(239, 68, 68, 0.2)', color: '#ef4444', textDecoration: 'line-through'}}>
-                          {type.charAt(0).toUpperCase() + type.slice(1)} (Will be deleted)
+                          {formatLabel(type)} (Will be deleted)
                         </span>
                       )
                     }
                     return null;
                   })}
-                  {!currentDocs.aadharUrl && !currentDocs.passportUrl && !currentDocs.photoUrl && !currentDocs.agreementUrl && (
+                  {!Object.values(currentDocs).some(val => val !== null) && (
                     <span style={{fontSize: '0.8rem', color: 'var(--text-secondary)'}}>No documents saved currently.</span>
                   )}
                 </div>
@@ -392,12 +423,20 @@ export default function TenantsPage() {
             
             {/* Show attached files */}
             <div style={{display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1.5rem'}}>
-              {Object.entries(files).map(([type, file]) => file && (
-                <span key={type} className="badge badge-paid" style={{display: 'flex', alignItems: 'center', gap: '4px'}}>
-                  {type.charAt(0).toUpperCase() + type.slice(1)} Attached
-                  <button type="button" onClick={() => setFiles({...files, [type]: null})} style={{background: 'transparent', border: 'none', color: 'white', cursor: 'pointer', padding: '0 2px'}}>✖</button>
-                </span>
-              ))}
+              {Object.entries(files).map(([type, file]) => {
+                if (!file) return null;
+                const formatLabel = (t) => {
+                  if (t.startsWith('roommate1')) return `Roommate 1 ${t.replace('roommate1', '')}`;
+                  if (t.startsWith('roommate2')) return `Roommate 2 ${t.replace('roommate2', '')}`;
+                  return t.charAt(0).toUpperCase() + t.slice(1);
+                }
+                return (
+                  <span key={type} className="badge badge-paid" style={{display: 'flex', alignItems: 'center', gap: '4px'}}>
+                    {formatLabel(type)} Attached
+                    <button type="button" onClick={() => setFiles({...files, [type]: null})} style={{background: 'transparent', border: 'none', color: 'white', cursor: 'pointer', padding: '0 2px'}}>✖</button>
+                  </span>
+                )
+              })}
             </div>
 
             <div style={{display: 'flex', gap: '0.5rem'}}>
