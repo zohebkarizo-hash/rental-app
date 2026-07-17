@@ -59,8 +59,130 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
     }
   }
 
+  const [showCashModal, setShowCashModal] = useState(false);
+  const [selectedTenantId, setSelectedTenantId] = useState('');
+  const [selectedInvoiceId, setSelectedInvoiceId] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Group pending invoices by tenant for the modal
+  const pendingByTenant = pendingInvoices.reduce((acc, inv) => {
+    if (!acc[inv.tenantId]) {
+      acc[inv.tenantId] = { tenant: inv.tenant, invoices: [] };
+    }
+    acc[inv.tenantId].invoices.push(inv);
+    return acc;
+  }, {});
+  const tenantsWithPending = Object.values(pendingByTenant);
+
+  const handleTenantSelect = (e) => {
+    const tid = parseInt(e.target.value);
+    setSelectedTenantId(tid);
+    if (tid && pendingByTenant[tid]) {
+      // Auto-select the oldest invoice (they are sorted by dueDate asc)
+      setSelectedInvoiceId(pendingByTenant[tid].invoices[0].id);
+    } else {
+      setSelectedInvoiceId('');
+    }
+  };
+
+  const handleGlobalMarkPaid = async (e) => {
+    e.preventDefault();
+    if (!selectedInvoiceId) return;
+    
+    setIsSubmitting(true);
+    const res = await fetch(`/api/invoices/${selectedInvoiceId}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: 'PAID' })
+    });
+    
+    setIsSubmitting(false);
+    if (res.ok) {
+      setShowCashModal(false);
+      setSelectedTenantId('');
+      setSelectedInvoiceId('');
+      router.refresh();
+    } else {
+      alert('Failed to mark as paid');
+    }
+  };
+
   return (
     <>
+      <div style={{display: 'flex', justifyContent: 'flex-end', marginBottom: '1.5rem'}}>
+        <button 
+          className="btn btn-success" 
+          style={{fontWeight: 'bold'}}
+          onClick={() => setShowCashModal(true)}
+        >
+          💰 Quick Cash Entry
+        </button>
+      </div>
+
+      {showCashModal && (
+        <div style={{
+          position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+          background: 'rgba(0,0,0,0.8)', zIndex: 1000,
+          display: 'flex', alignItems: 'center', justifyContent: 'center'
+        }}>
+          <div className="glass-panel" style={{width: '100%', maxWidth: '400px'}}>
+            <h2 style={{color: '#fff', marginBottom: '1rem'}}>Record Cash Payment</h2>
+            
+            {tenantsWithPending.length === 0 ? (
+              <p style={{color: 'var(--text-success)'}}>No pending invoices exist!</p>
+            ) : (
+              <form onSubmit={handleGlobalMarkPaid}>
+                <div className="form-group full-width">
+                  <label>Select Tenant</label>
+                  <select 
+                    className="form-control" 
+                    value={selectedTenantId} 
+                    onChange={handleTenantSelect}
+                    required
+                  >
+                    <option value="">-- Choose Tenant --</option>
+                    {tenantsWithPending.map(t => (
+                      <option key={t.tenant.id} value={t.tenant.id}>
+                        {t.tenant.name} ({t.invoices.length} pending)
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {selectedTenantId && (
+                  <div className="form-group full-width">
+                    <label>Select Invoice</label>
+                    <select 
+                      className="form-control" 
+                      value={selectedInvoiceId} 
+                      onChange={(e) => setSelectedInvoiceId(e.target.value)}
+                      required
+                    >
+                      {pendingByTenant[selectedTenantId]?.invoices.map(inv => (
+                        <option key={inv.id} value={inv.id}>
+                          ₹{inv.amountDue.toLocaleString('en-IN')} - Due {new Date(inv.dueDate).toLocaleDateString('en-IN')}
+                        </option>
+                      ))}
+                    </select>
+                    <p style={{fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '0.5rem'}}>
+                      * The oldest pending invoice is selected by default.
+                    </p>
+                  </div>
+                )}
+
+                <div style={{display: 'flex', gap: '1rem', marginTop: '1.5rem'}}>
+                  <button type="submit" className="btn btn-success" style={{flex: 1}} disabled={isSubmitting || !selectedInvoiceId}>
+                    {isSubmitting ? 'Saving...' : 'Mark as Paid'}
+                  </button>
+                  <button type="button" className="btn btn-outline" style={{flex: 1}} onClick={() => setShowCashModal(false)}>
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
       <div className="dashboard-grid">
         <div 
           className="glass-panel stat-card" 
