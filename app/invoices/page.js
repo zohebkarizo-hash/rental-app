@@ -146,6 +146,20 @@ export default function InvoicesPage() {
     }
   }
 
+  const handleDeleteInvoice = async (id) => {
+    if (!confirm('Are you sure you want to completely delete this invoice? This action cannot be undone.')) return;
+    
+    const res = await fetch(`/api/invoices/${id}`, {
+      method: 'DELETE',
+    })
+    
+    if (res.ok) {
+      fetchInvoices()
+    } else {
+      alert('Failed to delete invoice')
+    }
+  }
+
   return (
     <main className="container animate-fade-in">
       <div className="flex-between">
@@ -254,7 +268,14 @@ export default function InvoicesPage() {
                           </button>
                         </>
                       ) : (
-                        <span style={{color: 'var(--text-success)', fontSize: '0.8rem', fontStyle: 'italic', padding: '0.4rem 0'}}>No actions needed</span>
+                        <button 
+                          className="btn btn-danger" 
+                          style={{padding: '0.4rem 0.6rem', fontSize: '0.75rem', fontWeight: 'bold'}}
+                          onClick={() => handleDeleteInvoice(inv.id)}
+                          title="Permanently delete this invoice"
+                        >
+                          Delete Payment
+                        </button>
                       )}
                     </td>
                   </tr>
