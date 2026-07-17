@@ -269,8 +269,8 @@ export default function InvoicesPage() {
                         </>
                       ) : (
                         <button 
-                          className="btn btn-danger" 
-                          style={{padding: '0.4rem 0.6rem', fontSize: '0.75rem', fontWeight: 'bold'}}
+                          className="btn btn-outline" 
+                          style={{padding: '0.4rem 0.6rem', fontSize: '0.75rem', borderColor: 'var(--warning-color)', color: 'var(--warning-color)'}}
                           onClick={() => handleDeleteInvoice(inv.id)}
                           title="Permanently delete this invoice"
                         >
