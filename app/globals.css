@@ -234,7 +234,7 @@ h3 {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #ffffff, #67a685);
+  background: radial-gradient(circle at 30% 30%, #ffffff 0%, var(--text-success) 50%, var(--primary-color) 100%);
   box-shadow: 1px 1px 3px rgba(0,0,0,0.8);
   flex-shrink: 0;
 }
