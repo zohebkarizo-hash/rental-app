@@ -276,6 +276,24 @@ h3 {
   text-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
 }
 
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  padding: 1rem;
+  backdrop-filter: blur(4px);
+}
+.modal-content {
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
 /* Dashboard Grid */
 .dashboard-grid {
   display: grid;
