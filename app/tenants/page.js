@@ -328,8 +328,8 @@ export default function TenantsPage() {
                   {tenants.map(t => (
                     <tr key={t.id}>
                       <td>
-                        <div style={{fontWeight: '600'}}>Unit {t.unitNo || '-'}</div>
-                        <div style={{fontSize: '0.8rem', color: 'var(--text-secondary)'}}>House {t.houseNo || '-'}</div>
+                        <div style={{fontWeight: '600', color: '#ef4444'}}>Unit : {t.unitNo || '-'}</div>
+                        <div style={{fontSize: '0.8rem', color: 'var(--text-secondary)'}}>House : {t.houseNo || '-'}</div>
                       </td>
                       <td>
                         <div>{t.name}</div>

@@ -236,7 +236,10 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
               <tbody>
                 {activeTenants.map(t => (
                   <tr key={t.id}>
-                    <td>Unit {t.unitNo || '-'}, House {t.houseNo || '-'}</td>
+                    <td>
+                      <div style={{fontWeight: '600', color: '#ef4444'}}>Unit : {t.unitNo || '-'}</div>
+                      <div style={{fontSize: '0.8rem', color: 'var(--text-secondary)'}}>House : {t.houseNo || '-'}</div>
+                    </td>
                     <td>{t.name}</td>
                     <td>+{t.phone}</td>
                     <td>₹{t.rentAmount.toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
@@ -269,7 +272,10 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
                 {activeTenants.map(t => (
                   <tr key={t.id}>
                     <td>{t.name}</td>
-                    <td>Unit {t.unitNo || '-'}, House {t.houseNo || '-'}</td>
+                    <td>
+                      <div style={{fontWeight: '600', color: '#ef4444'}}>Unit : {t.unitNo || '-'}</div>
+                      <div style={{fontSize: '0.8rem', color: 'var(--text-secondary)'}}>House : {t.houseNo || '-'}</div>
+                    </td>
                     <td>{new Date(t.createdAt).toLocaleDateString('en-IN')}</td>
                     <td style={{fontWeight: '600'}}>₹{t.deposit.toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
                   </tr>
