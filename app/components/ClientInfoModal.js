@@ -32,7 +32,6 @@ export default function ClientInfoModal({ tenant, onClose }) {
 
           {(tenant.aadharUrl || tenant.passportUrl || tenant.agreementUrl) && (
             <div style={{marginTop: '1.2rem', paddingTop: '1rem', borderTop: '1px dashed rgba(255,255,255,0.1)', display: 'flex', gap: '8px', flexWrap: 'wrap', alignItems: 'center'}}>
-              <span style={{fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.5px', marginRight: '4px'}}>Docs:</span>
               {tenant.aadharUrl && <a href={tenant.aadharUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.6rem', fontSize: '0.75rem', color: 'var(--text-primary)', borderRadius: '20px'}}><span className="bullet-3d"></span> Aadhar</a>}
               {tenant.passportUrl && <a href={tenant.passportUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.6rem', fontSize: '0.75rem', color: 'var(--text-primary)', borderRadius: '20px'}}><span className="bullet-3d"></span> Passport</a>}
               {tenant.agreementUrl && <a href={tenant.agreementUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.6rem', fontSize: '0.75rem', color: 'var(--text-primary)', borderRadius: '20px'}}><span className="bullet-3d"></span> Agreement</a>}
