@@ -24,8 +24,11 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
     window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, '_blank');
   };
 
-  const handleMarkPaid = async (id) => {
-    if (!confirm('Are you sure you want to mark this invoice as Paid in Cash?')) return;
+  const handleMarkPaid = async (id, isVerifying = false) => {
+    const msg = isVerifying 
+      ? 'Are you sure you want to confirm this UPI payment and mark it as officially PAID?' 
+      : 'Are you sure you want to mark this invoice as Paid in Cash?';
+    if (!confirm(msg)) return;
     
     const res = await fetch(`/api/invoices/${id}`, {
       method: 'PATCH',
@@ -174,7 +177,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
                           <button 
                             className="btn btn-success" 
                             style={{padding: '0.3rem 0.6rem', fontSize: '0.75rem', fontWeight: 'bold'}}
-                            onClick={() => handleMarkPaid(inv.id)}
+                            onClick={() => handleMarkPaid(inv.id, true)}
                             title="Confirm payment received"
                           >
                             Confirm
