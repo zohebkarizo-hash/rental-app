@@ -240,11 +240,11 @@ export default function TenantsPage() {
             
             <div className="form-grid" style={{marginTop: '1.5rem'}}>
               <div className="form-group">
-                <label>House No. (e.g. 42)</label>
+                <label>House No.</label>
                 <input type="text" className="form-control" value={formData.houseNo} onChange={e => setFormData({...formData, houseNo: e.target.value})} />
               </div>
               <div className="form-group">
-                <label>Unit No. (e.g. 6)</label>
+                <label>Unit No.</label>
                 <input type="text" className="form-control" value={formData.unitNo} onChange={e => setFormData({...formData, unitNo: e.target.value})} />
               </div>
             </div>
