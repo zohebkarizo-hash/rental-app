@@ -246,6 +246,29 @@ export default function TenantsPage() {
                 </div>
                 <div style={{marginTop: '0.8rem', paddingTop: '0.8rem', borderTop: '1px solid var(--border-color)'}}>
                   <h3 style={{fontSize: '0.9rem', marginBottom: '0.5rem', color: 'var(--primary-color)'}}>Roommate Documents</h3>
+                  
+                  {/* Show existing roommate 1 documents in edit mode */}
+                  {editingId && (
+                    <div style={{display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '0.5rem'}}>
+                      {['roommate1Aadhar', 'roommate1Passport', 'roommate1Photo'].map(type => {
+                        const hasDoc = currentDocs[`${type}Url`];
+                        const isRemoved = removedDocs[type];
+                        const displayType = type.replace('roommate1', '');
+                        if (hasDoc && !isRemoved) {
+                          return (
+                            <span key={type} className="badge" style={{background: 'rgba(0,0,0,0.05)', color: 'var(--text-primary)', display: 'flex', gap: '6px', alignItems: 'center'}}>
+                              {displayType}
+                              <button type="button" onClick={() => setRemovedDocs({...removedDocs, [type]: true})} style={{background: 'transparent', border: 'none', color: '#ef4444', cursor: 'pointer', padding: '0 2px'}}>🗑️</button>
+                            </span>
+                          )
+                        } else if (hasDoc && isRemoved) {
+                          return <span key={type} className="badge" style={{background: 'rgba(239, 68, 68, 0.2)', color: '#ef4444', textDecoration: 'line-through'}}>{displayType} (Will be deleted)</span>
+                        }
+                        return null;
+                      })}
+                    </div>
+                  )}
+                  
                   <div className="form-group" style={{marginBottom: '0.5rem'}}>
                     <div style={{display: 'flex', gap: '0.5rem', flexWrap: 'wrap'}}>
                       <select 
@@ -272,6 +295,20 @@ export default function TenantsPage() {
                       />
                     </div>
                   </div>
+                  
+                  {/* Show attached roommate 1 files */}
+                  <div style={{display: 'flex', gap: '0.5rem', flexWrap: 'wrap'}}>
+                    {['roommate1Aadhar', 'roommate1Passport', 'roommate1Photo'].map(type => {
+                      if (!files[type]) return null;
+                      const displayType = type.replace('roommate1', '');
+                      return (
+                        <span key={type} className="badge badge-paid" style={{display: 'flex', alignItems: 'center', gap: '4px'}}>
+                          {displayType} Attached
+                          <button type="button" onClick={() => setFiles({...files, [type]: null})} style={{background: 'transparent', border: 'none', color: 'white', cursor: 'pointer', padding: '0 2px'}}>✖</button>
+                        </span>
+                      )
+                    })}
+                  </div>
                 </div>
               </div>
             )}
@@ -297,6 +334,29 @@ export default function TenantsPage() {
                 </div>
                 <div style={{marginTop: '0.8rem', paddingTop: '0.8rem', borderTop: '1px solid var(--border-color)'}}>
                   <h3 style={{fontSize: '0.9rem', marginBottom: '0.5rem', color: 'var(--primary-color)'}}>Roommate Documents</h3>
+                  
+                  {/* Show existing roommate 2 documents in edit mode */}
+                  {editingId && (
+                    <div style={{display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '0.5rem'}}>
+                      {['roommate2Aadhar', 'roommate2Passport', 'roommate2Photo'].map(type => {
+                        const hasDoc = currentDocs[`${type}Url`];
+                        const isRemoved = removedDocs[type];
+                        const displayType = type.replace('roommate2', '');
+                        if (hasDoc && !isRemoved) {
+                          return (
+                            <span key={type} className="badge" style={{background: 'rgba(0,0,0,0.05)', color: 'var(--text-primary)', display: 'flex', gap: '6px', alignItems: 'center'}}>
+                              {displayType}
+                              <button type="button" onClick={() => setRemovedDocs({...removedDocs, [type]: true})} style={{background: 'transparent', border: 'none', color: '#ef4444', cursor: 'pointer', padding: '0 2px'}}>🗑️</button>
+                            </span>
+                          )
+                        } else if (hasDoc && isRemoved) {
+                          return <span key={type} className="badge" style={{background: 'rgba(239, 68, 68, 0.2)', color: '#ef4444', textDecoration: 'line-through'}}>{displayType} (Will be deleted)</span>
+                        }
+                        return null;
+                      })}
+                    </div>
+                  )}
+                  
                   <div className="form-group" style={{marginBottom: '0.5rem'}}>
                     <div style={{display: 'flex', gap: '0.5rem', flexWrap: 'wrap'}}>
                       <select 
@@ -322,6 +382,20 @@ export default function TenantsPage() {
                         style={{flex: '2', padding: '0.5rem', minWidth: '200px'}} 
                       />
                     </div>
+                  </div>
+                  
+                  {/* Show attached roommate 2 files */}
+                  <div style={{display: 'flex', gap: '0.5rem', flexWrap: 'wrap'}}>
+                    {['roommate2Aadhar', 'roommate2Passport', 'roommate2Photo'].map(type => {
+                      if (!files[type]) return null;
+                      const displayType = type.replace('roommate2', '');
+                      return (
+                        <span key={type} className="badge badge-paid" style={{display: 'flex', alignItems: 'center', gap: '4px'}}>
+                          {displayType} Attached
+                          <button type="button" onClick={() => setFiles({...files, [type]: null})} style={{background: 'transparent', border: 'none', color: 'white', cursor: 'pointer', padding: '0 2px'}}>✖</button>
+                        </span>
+                      )
+                    })}
                   </div>
                 </div>
               </div>
@@ -366,15 +440,11 @@ export default function TenantsPage() {
               <div style={{marginBottom: '1rem', padding: '0.75rem', background: 'rgba(0,0,0,0.2)', borderRadius: '8px'}}>
                 <label style={{fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '0.5rem', display: 'block'}}>Current Saved Documents:</label>
                 <div style={{display: 'flex', gap: '0.5rem', flexWrap: 'wrap'}}>
-                  {['aadhar', 'passport', 'photo', 'agreement', 'roommate1Aadhar', 'roommate1Passport', 'roommate1Photo', 'roommate2Aadhar', 'roommate2Passport', 'roommate2Photo'].map(type => {
+                  {['aadhar', 'passport', 'photo', 'agreement'].map(type => {
                     const hasDoc = currentDocs[`${type}Url`];
                     const isRemoved = removedDocs[type];
                     
-                    const formatLabel = (t) => {
-                      if (t.startsWith('roommate1')) return `Roommate 1 ${t.replace('roommate1', '')}`;
-                      if (t.startsWith('roommate2')) return `Roommate 2 ${t.replace('roommate2', '')}`;
-                      return t.charAt(0).toUpperCase() + t.slice(1);
-                    }
+                    const formatLabel = (t) => t.charAt(0).toUpperCase() + t.slice(1);
 
                     if (hasDoc && !isRemoved) {
                       return (
@@ -399,7 +469,7 @@ export default function TenantsPage() {
                     }
                     return null;
                   })}
-                  {!Object.values(currentDocs).some(val => val !== null) && (
+                  {!['aadhar', 'passport', 'photo', 'agreement'].some(type => currentDocs[`${type}Url`]) && (
                     <span style={{fontSize: '0.8rem', color: 'var(--text-secondary)'}}>No documents saved currently.</span>
                   )}
                 </div>
@@ -435,13 +505,10 @@ export default function TenantsPage() {
             
             {/* Show attached files */}
             <div style={{display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1.5rem'}}>
-              {Object.entries(files).map(([type, file]) => {
+              {['aadhar', 'passport', 'photo', 'agreement'].map(type => {
+                const file = files[type];
                 if (!file) return null;
-                const formatLabel = (t) => {
-                  if (t.startsWith('roommate1')) return `Roommate 1 ${t.replace('roommate1', '')}`;
-                  if (t.startsWith('roommate2')) return `Roommate 2 ${t.replace('roommate2', '')}`;
-                  return t.charAt(0).toUpperCase() + t.slice(1);
-                }
+                const formatLabel = (t) => t.charAt(0).toUpperCase() + t.slice(1);
                 return (
                   <span key={type} className="badge badge-paid" style={{display: 'flex', alignItems: 'center', gap: '4px'}}>
                     {formatLabel(type)} Attached
