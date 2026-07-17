@@ -358,14 +358,14 @@ export default function TenantsPage() {
                             </button>
                           )}
                           <button 
-                            className="btn btn-warning" 
-                            style={{padding: '0.4rem 0.8rem', fontSize: '0.75rem', width: '100%', textAlign: 'center'}}
+                            className="btn btn-success" 
+                            style={{padding: '0.4rem 0.8rem', fontSize: '0.75rem', width: '100%', textAlign: 'center', whiteSpace: 'nowrap'}}
                             onClick={() => handleEditClick(t)}
                           >
                             Edit
                           </button>
                           <button 
-                            className={`btn ${t.isActive ? 'btn-danger' : 'btn-success'}`} 
+                            className="btn btn-success" 
                             style={{padding: '0.4rem 0.8rem', fontSize: '0.75rem', width: '100%', textAlign: 'center', whiteSpace: 'nowrap'}}
                             onClick={() => handleToggleActive(t.id, t.isActive)}
                           >
