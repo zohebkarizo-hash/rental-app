@@ -230,7 +230,8 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
                   <th>Unit/House</th>
                   <th>Name</th>
                   <th>WhatsApp Phone</th>
-                  <th>Rent Amount</th>
+                  <th>Documents</th>
+                  <th>Deposit</th>
                 </tr>
               </thead>
               <tbody>
@@ -242,10 +243,19 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
                     </td>
                     <td>{t.name}</td>
                     <td>+{t.phone}</td>
-                    <td>₹{t.rentAmount.toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
+                    <td>
+                      <div style={{display: 'flex', flexDirection: 'column', gap: '6px', alignItems: 'flex-start'}}>
+                        {t.aadharUrl && <a href={t.aadharUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.5rem', fontSize: '0.7rem', width: 'fit-content', color: 'var(--text-primary)'}}><span className="bullet-3d"></span> Aadhar</a>}
+                        {t.passportUrl && <a href={t.passportUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.5rem', fontSize: '0.7rem', width: 'fit-content', color: 'var(--text-primary)'}}><span className="bullet-3d"></span> Passport</a>}
+                        {t.photoUrl && <a href={t.photoUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.5rem', fontSize: '0.7rem', width: 'fit-content', color: 'var(--text-primary)'}}><span className="bullet-3d"></span> Photo</a>}
+                        {t.agreementUrl && <a href={t.agreementUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.5rem', fontSize: '0.7rem', width: 'fit-content', color: 'var(--text-primary)'}}><span className="bullet-3d"></span> Agreement</a>}
+                        {!t.aadharUrl && !t.passportUrl && !t.photoUrl && !t.agreementUrl && <span style={{fontSize: '0.75rem', color: 'var(--text-secondary)'}}>None</span>}
+                      </div>
+                    </td>
+                    <td>₹{t.deposit.toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
                   </tr>
                 ))}
-                {activeTenants.length === 0 && <tr><td colSpan="4" style={{textAlign: 'center'}}>No active tenants found.</td></tr>}
+                {activeTenants.length === 0 && <tr><td colSpan="5" style={{textAlign: 'center'}}>No active tenants found.</td></tr>}
               </tbody>
             </table>
           </div>
