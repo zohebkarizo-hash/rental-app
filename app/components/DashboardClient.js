@@ -180,6 +180,9 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
           </div>
         </div>
       )}
+      <div className="flex-between">
+        <h1>Dashboard:</h1>
+      </div> 
       <div className="dashboard-grid">
         <div 
           className="glass-panel stat-card" 
