@@ -194,7 +194,7 @@ export default function TenantsPage() {
             </div>
             
             <div className="form-group">
-              <label>WhatsApp Phone (Digits Only, Prefix 91) <span style={{color: '#ef4444'}}>*</span></label>
+              <label>WhatsApp Phone <span style={{fontSize: '0.75rem', color: 'var(--text-secondary)', fontWeight: '400'}}>(Digits Only, Prefix 91)</span> <span style={{color: '#ef4444'}}>*</span></label>
               <input type="tel" className="form-control" required value={formData.phone} onChange={handlePhoneChange} />
             </div>
 
