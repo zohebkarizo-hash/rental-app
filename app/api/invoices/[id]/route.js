@@ -3,7 +3,8 @@ import { prisma } from '@/lib/prisma'
 
 export async function PATCH(request, { params }) {
   try {
-    const id = parseInt(params.id)
+    const resolvedParams = await params;
+    const id = parseInt(resolvedParams.id);
     const data = await request.json()
     
     if (data.status) {
