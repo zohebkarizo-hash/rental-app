@@ -234,6 +234,10 @@ h3 {
   background: transparent;
   color: var(--warning-color);
 }
+.badge-warning {
+  background: transparent;
+  color: #fbbf24; /* Yellow color for verifying */
+}
 .badge-paid {
   background: transparent;
   color: var(--text-success);
