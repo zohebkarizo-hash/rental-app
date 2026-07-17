@@ -225,9 +225,7 @@ h3 {
 .data-table tr {
   transition: background-color 0.2s ease;
 }
-.data-table tr:hover {
-  background-color: rgba(255, 255, 255, 0.03);
-}
+
 
 .bullet-3d {
   display: inline-block;
