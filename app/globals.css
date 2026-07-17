@@ -323,3 +323,56 @@ h3 {
   td .btn { margin-bottom: 0.5rem; width: 100%; }
   .hide-on-mobile { display: none !important; }
 }
+
+/* Floating Peeking Button */
+@keyframes peekAnimation {
+  0% { transform: translateY(-50%) translateX(6px); }
+  50% { transform: translateY(-50%) translateX(0px); }
+  100% { transform: translateY(-50%) translateX(6px); }
+}
+
+.floating-cash-btn {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  z-index: 900;
+  background: var(--primary-color);
+  color: white;
+  padding: 1rem 0.8rem 1rem 1.2rem;
+  border-radius: 30px 0 0 30px;
+  box-shadow: -4px 0 15px rgba(0,0,0,0.5);
+  cursor: pointer;
+  animation: peekAnimation 2.5s infinite ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: bold;
+  border: 1px solid var(--text-success);
+  border-right: none;
+  transition: all 0.2s ease;
+}
+
+.floating-cash-btn:hover {
+  background: var(--primary-hover);
+  animation: none;
+  transform: translateY(-50%) translateX(0);
+}
+
+.floating-cash-btn-text {
+  white-space: nowrap;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .floating-cash-btn {
+    top: unset;
+    bottom: 80px;
+    height: 48px;
+    padding: 0.6rem 0.6rem 0.6rem 0.8rem;
+    animation: none; /* Disable peeking animation on mobile for stability */
+    transform: none; /* Remove transform so it aligns perfectly without bouncing vertically */
+  }
+  .floating-cash-btn-text {
+    font-size: 0.75rem;
+  }
+}
