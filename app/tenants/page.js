@@ -358,8 +358,8 @@ export default function TenantsPage() {
                             </button>
                           )}
                           <button 
-                            className="btn btn-success" 
-                            style={{padding: '0.4rem 0.8rem', fontSize: '0.75rem', width: '100%', textAlign: 'center', whiteSpace: 'nowrap', color: '#ef4444'}}
+                            className="btn" 
+                            style={{padding: '0.4rem 0.8rem', fontSize: '0.75rem', width: '100%', textAlign: 'center', whiteSpace: 'nowrap', backgroundColor: '#ef4444', color: '#ffffff'}}
                             onClick={() => handleEditClick(t)}
                           >
                             Edit
