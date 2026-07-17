@@ -344,7 +344,8 @@ h3 {
 
 @media (max-width: 768px) {
   .floating-cash-btn {
-    top: 80%; /* Move lower on mobile to avoid covering data */
+    top: auto;
+    bottom: 80px; /* Safe distance from bottom nav bars */
     padding: 0.8rem 0.6rem 0.8rem 1rem;
   }
   .floating-cash-btn-text {
