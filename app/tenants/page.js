@@ -664,7 +664,7 @@ export default function TenantsPage() {
                     houseNumbers.map(house => (
                       <Fragment key={house}>
                         <tr>
-                          <td colSpan="6" style={{backgroundColor: 'rgba(255,255,255,0.03)', fontWeight: 'bold', color: 'var(--primary-color)', padding: '0.8rem 1rem'}}>
+                          <td colSpan="6" style={{backgroundColor: 'rgba(255,255,255,0.03)', fontWeight: 'bold', color: '#ef4444', padding: '0.8rem 1rem'}}>
                             🏡 House {house === 'Unassigned' ? 'Unassigned' : `No: ${house}`}
                           </td>
                         </tr>
