@@ -33,6 +33,15 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
     return a.localeCompare(b);
   });
 
+  // Sort by unit number ascending within each house
+  Object.keys(groupedActiveTenants).forEach(house => {
+    groupedActiveTenants[house].sort((a, b) => {
+      const unitA = parseInt(a.unitNo) || 0;
+      const unitB = parseInt(b.unitNo) || 0;
+      return unitA - unitB;
+    });
+  });
+
   const handleSendStrictReminder = (inv) => {
     let phone = inv.tenant?.phone || '';
     if (!phone) {
@@ -265,7 +274,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
                   activeHouseNumbers.map(house => (
                     <Fragment key={house}>
                       <tr>
-                        <td colSpan="5" style={{backgroundColor: 'rgba(255,255,255,0.03)', fontWeight: 'bold', color: '#ef4444', padding: '0.8rem 1rem'}}>
+                        <td colSpan="5" style={{backgroundColor: 'rgba(255,255,255,0.03)', fontWeight: 'normal', color: '#ef4444', padding: '0.8rem 1rem'}}>
                           🏡 House {house === 'Unassigned' ? 'Unassigned' : `No: ${house}`}
                         </td>
                       </tr>

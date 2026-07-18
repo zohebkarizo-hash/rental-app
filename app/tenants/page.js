@@ -219,6 +219,15 @@ export default function TenantsPage() {
     return a.localeCompare(b);
   });
 
+  // Sort by unit number ascending within each house
+  Object.keys(groupedTenants).forEach(house => {
+    groupedTenants[house].sort((a, b) => {
+      const unitA = parseInt(a.unitNo) || 0;
+      const unitB = parseInt(b.unitNo) || 0;
+      return unitA - unitB;
+    });
+  });
+
   return (
     <main className="container animate-fade-in">
       <div className="flex-between">
@@ -664,7 +673,7 @@ export default function TenantsPage() {
                     houseNumbers.map(house => (
                       <Fragment key={house}>
                         <tr>
-                          <td colSpan="6" style={{backgroundColor: 'rgba(255,255,255,0.03)', fontWeight: 'bold', color: '#ef4444', padding: '0.8rem 1rem'}}>
+                          <td colSpan="6" style={{backgroundColor: 'rgba(255,255,255,0.03)', fontWeight: 'normal', color: '#ef4444', padding: '0.8rem 1rem'}}>
                             🏡 House {house === 'Unassigned' ? 'Unassigned' : `No: ${house}`}
                           </td>
                         </tr>
