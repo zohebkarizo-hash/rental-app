@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Fragment } from 'react'
 import ClientInfoModal from '../components/ClientInfoModal'
 
 export default function TenantsPage() {
@@ -196,6 +196,28 @@ export default function TenantsPage() {
       alert('Failed to generate invoice.')
     }
   }
+
+  // Group and sort tenants for rendering
+  const groupedTenants = {};
+  const houseNumbers = [];
+  
+  tenants.forEach(t => {
+    const house = t.houseNo || 'Unassigned';
+    if (!groupedTenants[house]) {
+      groupedTenants[house] = [];
+      houseNumbers.push(house);
+    }
+    groupedTenants[house].push(t);
+  });
+
+  houseNumbers.sort((a, b) => {
+    if (a === 'Unassigned') return 1;
+    if (b === 'Unassigned') return -1;
+    const numA = parseInt(a);
+    const numB = parseInt(b);
+    if (!isNaN(numA) && !isNaN(numB)) return numA - numB;
+    return a.localeCompare(b);
+  });
 
   return (
     <main className="container animate-fade-in">
@@ -636,63 +658,73 @@ export default function TenantsPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {tenants.map(t => (
-                    <tr key={t.id}>
-                      <td data-label="Unit/House">
-                        <div style={{fontWeight: '600', color: '#ef4444'}}>Unit : {t.unitNo || '-'}</div>
-                        <div style={{fontSize: '0.8rem', color: 'var(--text-secondary)'}}>House : {t.houseNo || '-'}</div>
-                      </td>
-                      <td data-label="Name & Info">
-                        <span 
-                          className="client-name-link"
-                          onClick={() => setSelectedClient(t)}
-                        >
-                          {t.name}
-                        </span>
-                        <div style={{fontSize: '0.8rem', color: 'var(--text-secondary)'}}>+{t.phone}</div>
-                      </td>
-                      <td data-label="Documents">
-                        <div style={{display: 'flex', flexDirection: 'column', gap: '6px', alignItems: 'flex-start'}}>
-                          {t.aadharUrl && <a href={t.aadharUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.5rem', fontSize: '0.7rem', width: '85px', justifyContent: 'flex-start', color: 'var(--text-primary)'}}><span className="bullet-3d"></span> Aadhar</a>}
-                          {t.passportUrl && <a href={t.passportUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.5rem', fontSize: '0.7rem', width: '85px', justifyContent: 'flex-start', color: 'var(--text-primary)'}}><span className="bullet-3d"></span> Passport</a>}
-                          {t.photoUrl && <a href={t.photoUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.5rem', fontSize: '0.7rem', width: '85px', justifyContent: 'flex-start', color: 'var(--text-primary)'}}><span className="bullet-3d"></span> Photo</a>}
-                          {t.agreementUrl && <a href={t.agreementUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.5rem', fontSize: '0.7rem', width: '85px', justifyContent: 'flex-start', color: 'var(--text-primary)'}}><span className="bullet-3d"></span> Agreement</a>}
-                          {!t.aadharUrl && !t.passportUrl && !t.photoUrl && !t.agreementUrl && <span style={{fontSize: '0.75rem', color: 'var(--text-secondary)'}}>None</span>}
-                        </div>
-                      </td>
-                      <td data-label="Deposit">₹{t.deposit.toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
-                      <td data-label="Rent">₹{t.rentAmount.toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
-                      <td data-label="Actions">
-                        <div style={{display: 'flex', flexDirection: 'column', gap: '0.5rem', width: '100%'}}>
-                          {t.isActive && (
-                            <button 
-                              className="btn btn-success" 
-                              style={{padding: '0.4rem 0.8rem', fontSize: '0.75rem', width: '100%', textAlign: 'center'}}
-                              onClick={() => handleGenerateSingle(t.id)}
-                            >
-                              Bill Rent
-                            </button>
-                          )}
-                          <button 
-                            className="btn" 
-                            style={{padding: '0.4rem 0.8rem', fontSize: '0.75rem', width: '100%', textAlign: 'center', whiteSpace: 'nowrap', backgroundColor: '#ef4444', color: '#ffffff'}}
-                            onClick={() => handleEditClick(t)}
-                          >
-                            Edit
-                          </button>
-                          <button 
-                            className="btn btn-success" 
-                            style={{padding: '0.4rem 0.8rem', fontSize: '0.75rem', width: '100%', textAlign: 'center', whiteSpace: 'nowrap'}}
-                            onClick={() => handleToggleActive(t.id, t.isActive)}
-                          >
-                            {t.isActive ? 'Vacate' : 'Restore'}
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                  {tenants.length === 0 && (
+                  {tenants.length === 0 ? (
                     <tr><td colSpan="6" style={{textAlign: 'center', color: 'var(--text-secondary)'}}>No {showActive ? 'active' : 'vacated'} tenants found.</td></tr>
+                  ) : (
+                    houseNumbers.map(house => (
+                      <Fragment key={house}>
+                        <tr>
+                          <td colSpan="6" style={{backgroundColor: 'rgba(255,255,255,0.03)', fontWeight: 'bold', color: 'var(--primary-color)', padding: '0.8rem 1rem'}}>
+                            🏡 House {house === 'Unassigned' ? 'Unassigned' : `No: ${house}`}
+                          </td>
+                        </tr>
+                        {groupedTenants[house].map(t => (
+                          <tr key={t.id}>
+                            <td data-label="Unit/House">
+                              <div style={{fontWeight: '600', color: '#ef4444'}}>Unit : {t.unitNo || '-'}</div>
+                              <div style={{fontSize: '0.8rem', color: 'var(--text-secondary)'}}>House : {t.houseNo || '-'}</div>
+                            </td>
+                            <td data-label="Name & Info">
+                              <span 
+                                className="client-name-link"
+                                onClick={() => setSelectedClient(t)}
+                              >
+                                {t.name}
+                              </span>
+                              <div style={{fontSize: '0.8rem', color: 'var(--text-secondary)'}}>+{t.phone}</div>
+                            </td>
+                            <td data-label="Documents">
+                              <div style={{display: 'flex', flexDirection: 'column', gap: '6px', alignItems: 'flex-start'}}>
+                                {t.aadharUrl && <a href={t.aadharUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.5rem', fontSize: '0.7rem', width: '85px', justifyContent: 'flex-start', color: 'var(--text-primary)'}}><span className="bullet-3d"></span> Aadhar</a>}
+                                {t.passportUrl && <a href={t.passportUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.5rem', fontSize: '0.7rem', width: '85px', justifyContent: 'flex-start', color: 'var(--text-primary)'}}><span className="bullet-3d"></span> Passport</a>}
+                                {t.photoUrl && <a href={t.photoUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.5rem', fontSize: '0.7rem', width: '85px', justifyContent: 'flex-start', color: 'var(--text-primary)'}}><span className="bullet-3d"></span> Photo</a>}
+                                {t.agreementUrl && <a href={t.agreementUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.5rem', fontSize: '0.7rem', width: '85px', justifyContent: 'flex-start', color: 'var(--text-primary)'}}><span className="bullet-3d"></span> Agreement</a>}
+                                {!t.aadharUrl && !t.passportUrl && !t.photoUrl && !t.agreementUrl && <span style={{fontSize: '0.75rem', color: 'var(--text-secondary)'}}>None</span>}
+                              </div>
+                            </td>
+                            <td data-label="Deposit">₹{t.deposit.toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
+                            <td data-label="Rent">₹{t.rentAmount.toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
+                            <td data-label="Actions">
+                              <div style={{display: 'flex', flexDirection: 'column', gap: '0.5rem', width: '100%'}}>
+                                {t.isActive && (
+                                  <button 
+                                    className="btn btn-success" 
+                                    style={{padding: '0.4rem 0.8rem', fontSize: '0.75rem', width: '100%', textAlign: 'center'}}
+                                    onClick={() => handleGenerateSingle(t.id)}
+                                  >
+                                    Bill Rent
+                                  </button>
+                                )}
+                                <button 
+                                  className="btn" 
+                                  style={{padding: '0.4rem 0.8rem', fontSize: '0.75rem', width: '100%', textAlign: 'center', whiteSpace: 'nowrap', backgroundColor: '#ef4444', color: '#ffffff'}}
+                                  onClick={() => handleEditClick(t)}
+                                >
+                                  Edit
+                                </button>
+                                <button 
+                                  className="btn btn-success" 
+                                  style={{padding: '0.4rem 0.8rem', fontSize: '0.75rem', width: '100%', textAlign: 'center', whiteSpace: 'nowrap'}}
+                                  onClick={() => handleToggleActive(t.id, t.isActive)}
+                                >
+                                  {t.isActive ? 'Vacate' : 'Restore'}
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+                      </Fragment>
+                    ))
                   )}
                 </tbody>
               </table>
