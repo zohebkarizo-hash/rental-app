@@ -21,13 +21,19 @@ export default function ClientInfoModal({ tenant, onClose }) {
               <p style={{margin: '0.5rem 0 0 0', fontWeight: '500'}}>+{tenant.phone}</p>
             </div>
             
-            <div style={{width: '64px', height: '64px', borderRadius: '8px', background: 'rgba(255,255,255,0.05)', border: '2px solid var(--primary-color)', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 4px 12px rgba(0,0,0,0.2)'}}>
+            <a 
+              href={tenant.photoUrl || '#'} 
+              target={tenant.photoUrl ? "_blank" : "_self"}
+              rel="noreferrer"
+              className={tenant.photoUrl ? "profile-pic-hover" : ""}
+              style={{textDecoration: 'none', width: '64px', height: '64px', borderRadius: '8px', background: 'rgba(255,255,255,0.05)', border: '2px solid var(--primary-color)', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 4px 12px rgba(0,0,0,0.2)'}}
+            >
               {tenant.photoUrl ? (
                 <img src={tenant.photoUrl} alt={tenant.name} style={{width: '100%', height: '100%', objectFit: 'cover'}} />
               ) : (
                 <span style={{fontSize: '1.5rem', color: 'var(--text-secondary)', fontWeight: 'bold'}}>{tenant.name ? tenant.name.charAt(0).toUpperCase() : '?'}</span>
               )}
-            </div>
+            </a>
           </div>
 
           {(tenant.aadharUrl || tenant.passportUrl || tenant.agreementUrl) && (
@@ -57,13 +63,19 @@ export default function ClientInfoModal({ tenant, onClose }) {
                   )}
                 </div>
                 
-                <div style={{width: '42px', height: '42px', borderRadius: '6px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0}}>
+                <a 
+                  href={tenant.roommate1PhotoUrl || '#'}
+                  target={tenant.roommate1PhotoUrl ? "_blank" : "_self"}
+                  rel="noreferrer"
+                  className={tenant.roommate1PhotoUrl ? "profile-pic-hover" : ""}
+                  style={{textDecoration: 'none', width: '42px', height: '42px', borderRadius: '6px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0}}
+                >
                   {tenant.roommate1PhotoUrl ? (
                     <img src={tenant.roommate1PhotoUrl} alt={tenant.roommate1Name} style={{width: '100%', height: '100%', objectFit: 'cover'}} />
                   ) : (
                     <span style={{fontSize: '1rem', color: 'var(--text-secondary)'}}>{tenant.roommate1Name.charAt(0).toUpperCase()}</span>
                   )}
-                </div>
+                </a>
               </div>
             )}
 
@@ -80,13 +92,19 @@ export default function ClientInfoModal({ tenant, onClose }) {
                   )}
                 </div>
                 
-                <div style={{width: '42px', height: '42px', borderRadius: '6px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0}}>
+                <a 
+                  href={tenant.roommate2PhotoUrl || '#'}
+                  target={tenant.roommate2PhotoUrl ? "_blank" : "_self"}
+                  rel="noreferrer"
+                  className={tenant.roommate2PhotoUrl ? "profile-pic-hover" : ""}
+                  style={{textDecoration: 'none', width: '42px', height: '42px', borderRadius: '6px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0}}
+                >
                   {tenant.roommate2PhotoUrl ? (
                     <img src={tenant.roommate2PhotoUrl} alt={tenant.roommate2Name} style={{width: '100%', height: '100%', objectFit: 'cover'}} />
                   ) : (
                     <span style={{fontSize: '1rem', color: 'var(--text-secondary)'}}>{tenant.roommate2Name.charAt(0).toUpperCase()}</span>
                   )}
-                </div>
+                </a>
               </div>
             )}
           </div>

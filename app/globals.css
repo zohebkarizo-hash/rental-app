@@ -276,6 +276,17 @@ h3 {
   text-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
 }
 
+.profile-pic-hover {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.profile-pic-hover:hover {
+  box-shadow: 0 0 15px var(--text-success) !important;
+  transform: scale(1.1);
+  border-color: var(--text-success) !important;
+  z-index: 10;
+}
+
 .modal-overlay {
   position: fixed;
   top: 0;
