@@ -1,5 +1,5 @@
 "use client"
-import { useState } from 'react'
+import { useState, Fragment } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import ClientInfoModal from './ClientInfoModal'
@@ -10,6 +10,28 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
   const router = useRouter()
 
   const pendingRentTotal = pendingInvoices.reduce((sum, inv) => sum + inv.amountDue, 0)
+
+  // Group active tenants for the dashboard view
+  const groupedActiveTenants = {};
+  const activeHouseNumbers = [];
+  
+  activeTenants.forEach(t => {
+    const house = t.houseNo || 'Unassigned';
+    if (!groupedActiveTenants[house]) {
+      groupedActiveTenants[house] = [];
+      activeHouseNumbers.push(house);
+    }
+    groupedActiveTenants[house].push(t);
+  });
+
+  activeHouseNumbers.sort((a, b) => {
+    if (a === 'Unassigned') return 1;
+    if (b === 'Unassigned') return -1;
+    const numA = parseInt(a);
+    const numB = parseInt(b);
+    if (!isNaN(numA) && !isNaN(numB)) return numA - numB;
+    return a.localeCompare(b);
+  });
 
   const handleSendStrictReminder = (inv) => {
     let phone = inv.tenant?.phone || '';
@@ -237,34 +259,46 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
                 </tr>
               </thead>
               <tbody>
-                {activeTenants.map(t => (
-                  <tr key={t.id}>
-                    <td>
-                      <div style={{fontWeight: '600', color: '#ef4444'}}>Unit : {t.unitNo || '-'}</div>
-                      <div style={{fontSize: '0.8rem', color: 'var(--text-secondary)'}}>House : {t.houseNo || '-'}</div>
-                    </td>
-                    <td>
-                      <span 
-                        className="client-name-link"
-                        onClick={() => setSelectedClient(t)}
-                      >
-                        {t.name}
-                      </span>
-                    </td>
-                    <td>+{t.phone}</td>
-                    <td>
-                      <div style={{display: 'flex', flexDirection: 'column', gap: '6px', alignItems: 'flex-start'}}>
-                        {t.aadharUrl && <a href={t.aadharUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.5rem', fontSize: '0.7rem', width: 'fit-content', color: 'var(--text-primary)'}}><span className="bullet-3d"></span> Aadhar</a>}
-                        {t.passportUrl && <a href={t.passportUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.5rem', fontSize: '0.7rem', width: 'fit-content', color: 'var(--text-primary)'}}><span className="bullet-3d"></span> Passport</a>}
-                        {t.photoUrl && <a href={t.photoUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.5rem', fontSize: '0.7rem', width: 'fit-content', color: 'var(--text-primary)'}}><span className="bullet-3d"></span> Photo</a>}
-                        {t.agreementUrl && <a href={t.agreementUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.5rem', fontSize: '0.7rem', width: 'fit-content', color: 'var(--text-primary)'}}><span className="bullet-3d"></span> Agreement</a>}
-                        {!t.aadharUrl && !t.passportUrl && !t.photoUrl && !t.agreementUrl && <span style={{fontSize: '0.75rem', color: 'var(--text-secondary)'}}>None</span>}
-                      </div>
-                    </td>
-                    <td>₹{t.deposit.toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
-                  </tr>
-                ))}
-                {activeTenants.length === 0 && <tr><td colSpan="5" style={{textAlign: 'center'}}>No active tenants found.</td></tr>}
+                {activeTenants.length === 0 ? (
+                  <tr><td colSpan="5" style={{textAlign: 'center'}}>No active tenants found.</td></tr>
+                ) : (
+                  activeHouseNumbers.map(house => (
+                    <Fragment key={house}>
+                      <tr>
+                        <td colSpan="5" style={{backgroundColor: 'rgba(255,255,255,0.03)', fontWeight: 'bold', color: 'var(--primary-color)', padding: '0.8rem 1rem'}}>
+                          🏡 House {house === 'Unassigned' ? 'Unassigned' : `No: ${house}`}
+                        </td>
+                      </tr>
+                      {groupedActiveTenants[house].map(t => (
+                        <tr key={t.id}>
+                          <td>
+                            <div style={{fontWeight: '600', color: '#ef4444'}}>Unit : {t.unitNo || '-'}</div>
+                            <div style={{fontSize: '0.8rem', color: 'var(--text-secondary)'}}>House : {t.houseNo || '-'}</div>
+                          </td>
+                          <td>
+                            <span 
+                              className="client-name-link"
+                              onClick={() => setSelectedClient(t)}
+                            >
+                              {t.name}
+                            </span>
+                          </td>
+                          <td>+{t.phone}</td>
+                          <td>
+                            <div style={{display: 'flex', flexDirection: 'column', gap: '6px', alignItems: 'flex-start'}}>
+                              {t.aadharUrl && <a href={t.aadharUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.5rem', fontSize: '0.7rem', width: '85px', justifyContent: 'flex-start', color: 'var(--text-primary)'}}><span className="bullet-3d"></span> Aadhar</a>}
+                              {t.passportUrl && <a href={t.passportUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.5rem', fontSize: '0.7rem', width: '85px', justifyContent: 'flex-start', color: 'var(--text-primary)'}}><span className="bullet-3d"></span> Passport</a>}
+                              {t.photoUrl && <a href={t.photoUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.5rem', fontSize: '0.7rem', width: '85px', justifyContent: 'flex-start', color: 'var(--text-primary)'}}><span className="bullet-3d"></span> Photo</a>}
+                              {t.agreementUrl && <a href={t.agreementUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.5rem', fontSize: '0.7rem', width: '85px', justifyContent: 'flex-start', color: 'var(--text-primary)'}}><span className="bullet-3d"></span> Agreement</a>}
+                              {!t.aadharUrl && !t.passportUrl && !t.photoUrl && !t.agreementUrl && <span style={{fontSize: '0.75rem', color: 'var(--text-secondary)'}}>None</span>}
+                            </div>
+                          </td>
+                          <td>₹{t.deposit.toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
+                        </tr>
+                      ))}
+                    </Fragment>
+                  ))
+                )}
               </tbody>
             </table>
           </div>
