@@ -76,10 +76,10 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
     }
   }
 
-  const handleRejectPayment = async (id) => {
+  const handleRejectPayment = async (inv) => {
     if (!confirm('Are you sure you want to reject this payment claim and set it back to Pending?')) return;
     
-    const res = await fetch(`/api/invoices/${id}`, {
+    const res = await fetch(`/api/invoices/${inv.id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ status: 'PENDING' })
@@ -87,6 +87,17 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
     
     if (res.ok) {
       router.refresh();
+      // Trigger WhatsApp notification for rejection
+      let phone = inv.tenant?.phone || '';
+      if (phone) {
+        if (!phone.startsWith('91') && !phone.startsWith('+')) {
+          phone = '91' + phone;
+        }
+        phone = phone.replace('+', '');
+        
+        const text = `Hello ${inv.tenant?.name},\n\nYour recent payment claim for Rs. ${inv.amountDue.toLocaleString('en-IN', {minimumFractionDigits: 2})} has been REJECTED as the funds were not received.\n\nYour invoice is still PENDING. Please complete the payment immediately.\n\nPay here: ${window.location.origin}/pay/${inv.id}`;
+        window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, '_blank');
+      }
     } else {
       alert('Failed to reject payment')
     }
@@ -395,7 +406,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
                           <button 
                             className="btn btn-danger" 
                             style={{padding: '0.3rem 0.6rem', fontSize: '0.75rem', fontWeight: 'bold'}}
-                            onClick={() => handleRejectPayment(inv.id)}
+                            onClick={() => handleRejectPayment(inv)}
                             title="Reject payment claim"
                           >
                             Reject
