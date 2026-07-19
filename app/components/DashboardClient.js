@@ -288,7 +288,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
 
         {/* Deposits Escrow Card */}
         <div 
-          className={`stat-card-app full-width card-deposits ${activeView === 'deposits' ? 'active' : ''}`}
+          className={`stat-card-app card-deposits ${activeView === 'deposits' ? 'active' : ''}`}
           style={{cursor: 'pointer'}}
           onClick={() => setActiveView(activeView === 'deposits' ? null : 'deposits')}
         >
@@ -497,7 +497,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
 
       <div className={` ${activeView ? 'hide-on-mobile' : ''}`} style={{marginBottom: '2rem'}}>
         <h2 style={{margin: '0 0 1.5rem 0'}}>Quick Actions</h2>
-        <div style={{display: 'flex', flexDirection: 'column', gap: '1rem'}}>
+        <div className="quick-actions-grid">
           
           <Link href="/tenants" className="quick-action-card">
             <div className="qa-icon-wrap">
