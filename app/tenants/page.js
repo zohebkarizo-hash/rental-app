@@ -673,8 +673,8 @@ export default function TenantsPage() {
                     houseNumbers.map(house => (
                       <Fragment key={house}>
                         <tr>
-                          <td colSpan="6" style={{backgroundColor: 'rgba(255,255,255,0.03)', fontWeight: 'normal', color: '#ef4444', padding: '0.8rem 1rem'}}>
-                            🏡 House {house === 'Unassigned' ? 'Unassigned' : `No: ${house}`}
+                          <td colSpan="6" style={{backgroundColor: 'transparent', border: 'none', color: 'var(--text-secondary)', padding: '1.5rem 0.5rem 0.2rem 0.5rem', fontWeight: '600', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.1em'}}>
+                            🏡 HOUSE {house === 'Unassigned' ? 'UNASSIGNED' : house}
                           </td>
                         </tr>
                         {groupedTenants[house].map(t => (
@@ -693,11 +693,11 @@ export default function TenantsPage() {
                               <div style={{fontSize: '0.8rem', color: 'var(--text-secondary)'}}>+{t.phone}</div>
                             </td>
                             <td data-label="Documents">
-                              <div style={{display: 'flex', flexDirection: 'column', gap: '6px', alignItems: 'flex-start'}}>
-                                {t.aadharUrl && <a href={t.aadharUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.5rem', fontSize: '0.7rem', width: '85px', justifyContent: 'flex-start', color: 'var(--text-primary)'}}><span className="bullet-3d"></span> Aadhar</a>}
-                                {t.passportUrl && <a href={t.passportUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.5rem', fontSize: '0.7rem', width: '85px', justifyContent: 'flex-start', color: 'var(--text-primary)'}}><span className="bullet-3d"></span> Passport</a>}
-                                {t.photoUrl && <a href={t.photoUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.5rem', fontSize: '0.7rem', width: '85px', justifyContent: 'flex-start', color: 'var(--text-primary)'}}><span className="bullet-3d"></span> Photo</a>}
-                                {t.agreementUrl && <a href={t.agreementUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{padding: '0.2rem 0.5rem', fontSize: '0.7rem', width: '85px', justifyContent: 'flex-start', color: 'var(--text-primary)'}}><span className="bullet-3d"></span> Agreement</a>}
+                              <div style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: '6px', alignItems: 'center'}}>
+                                {t.aadharUrl && <a href={t.aadharUrl} target="_blank" rel="noreferrer" style={{padding: '0.2rem 0.6rem', borderRadius: '12px', fontSize: '0.75rem', background: 'rgba(255,255,255,0.05)', textDecoration: 'none', color: 'var(--text-primary)', border: '1px solid rgba(255,255,255,0.1)'}}>Aadhar</a>}
+                                {t.passportUrl && <a href={t.passportUrl} target="_blank" rel="noreferrer" style={{padding: '0.2rem 0.6rem', borderRadius: '12px', fontSize: '0.75rem', background: 'rgba(255,255,255,0.05)', textDecoration: 'none', color: 'var(--text-primary)', border: '1px solid rgba(255,255,255,0.1)'}}>Passport</a>}
+                                {t.photoUrl && <a href={t.photoUrl} target="_blank" rel="noreferrer" style={{padding: '0.2rem 0.6rem', borderRadius: '12px', fontSize: '0.75rem', background: 'rgba(255,255,255,0.05)', textDecoration: 'none', color: 'var(--text-primary)', border: '1px solid rgba(255,255,255,0.1)'}}>Photo</a>}
+                                {t.agreementUrl && <a href={t.agreementUrl} target="_blank" rel="noreferrer" style={{padding: '0.2rem 0.6rem', borderRadius: '12px', fontSize: '0.75rem', background: 'rgba(255,255,255,0.05)', textDecoration: 'none', color: 'var(--text-primary)', border: '1px solid rgba(255,255,255,0.1)'}}>Agreement</a>}
                                 {!t.aadharUrl && !t.passportUrl && !t.photoUrl && !t.agreementUrl && <span style={{fontSize: '0.75rem', color: 'var(--text-secondary)'}}>None</span>}
                               </div>
                             </td>
