@@ -11,7 +11,8 @@ export default function TenantsPage() {
   // Edit State
   const [editingId, setEditingId] = useState(null)
   const [currentDocs, setCurrentDocs] = useState({ aadharUrl: null, passportUrl: null, photoUrl: null, agreementUrl: null })
-  const [removedDocs, setRemovedDocs] = useState({ aadhar: false, passport: false, photo: false, agreement: false })
+  const [removedDocs, setRemovedDocs] = useState({ aadhar: false, passport: false, photo: false, agreement: false, roommate1Aadhar: false, roommate1Passport: false, roommate1Photo: false, roommate2Aadhar: false, roommate2Passport: false, roommate2Photo: false })
+  const [isFormOpen, setIsFormOpen] = useState(false)
 
   const [files, setFiles] = useState({ aadhar: null, passport: null, photo: null, agreement: null, roommate1Aadhar: null, roommate1Passport: null, roommate1Photo: null, roommate2Aadhar: null, roommate2Passport: null, roommate2Photo: null })
   const [formData, setFormData] = useState({ name: '', phone: '91', houseNo: '', unitNo: '', deposit: '', rentAmount: '', roommate1Name: '', roommate1Phone: '91', roommate2Name: '', roommate2Phone: '91' })
@@ -55,6 +56,7 @@ export default function TenantsPage() {
 
   const handleEditClick = (tenant) => {
     setEditingId(tenant.id)
+    setIsFormOpen(true)
     setFormData({
       name: tenant.name,
       phone: tenant.phone,
@@ -96,6 +98,7 @@ export default function TenantsPage() {
 
   const cancelEdit = () => {
     setEditingId(null)
+    setIsFormOpen(false)
     setFormData({ name: '', phone: '91', houseNo: '', unitNo: '', deposit: '', rentAmount: '', roommate1Name: '', roommate1Phone: '91', roommate2Name: '', roommate2Phone: '91' })
     setRoommateCount(0)
     setFiles({ aadhar: null, passport: null, photo: null, agreement: null, roommate1Aadhar: null, roommate1Passport: null, roommate1Photo: null, roommate2Aadhar: null, roommate2Passport: null, roommate2Photo: null })
@@ -237,10 +240,23 @@ export default function TenantsPage() {
       <div style={{display: 'flex', flexDirection: 'column', gap: '2rem'}}>
         {/* Add/Edit Tenant Form */}
         <div className="glass-panel">
-          <h2 style={{color: editingId ? 'var(--warning-color)' : 'var(--text-primary)', fontSize: '0.9rem', fontWeight: 'bold'}}>
-            {editingId ? 'Edit Tenant Details' : 'Add New Tenant'}
-          </h2>
-          <form onSubmit={handleSubmit}>
+          <div 
+            style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: !editingId ? 'pointer' : 'default'}}
+            onClick={() => !editingId && setIsFormOpen(!isFormOpen)}
+          >
+            <h2 style={{margin: 0, color: editingId ? 'var(--warning-color)' : 'var(--text-primary)', fontSize: '0.9rem', fontWeight: 'bold'}}>
+              {editingId ? 'Edit Tenant Details' : 'Add New Tenant'}
+            </h2>
+            {!editingId && (
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{transform: isFormOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s ease'}}>
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            )}
+          </div>
+          
+          {(isFormOpen || editingId) && (
+            <div style={{marginTop: '1.5rem'}} className="animate-fade-in">
+              <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label>Name <span style={{color: '#ef4444'}}>*</span></label>
               <input type="text" className="form-control" required value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
@@ -637,6 +653,8 @@ export default function TenantsPage() {
               )}
             </div>
           </form>
+          </div>
+          )}
         </div>
 
         {/* Tenants List */}
