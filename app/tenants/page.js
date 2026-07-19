@@ -242,7 +242,7 @@ export default function TenantsPage() {
         <div className="glass-panel" style={{paddingTop: '0'}}>
           <div 
             className="collapsible-header-btn"
-            style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: !editingId ? 'pointer' : 'default', marginTop: '1.5rem'}}
+            style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: !editingId ? 'pointer' : 'default', marginTop: '1rem'}}
             onClick={() => !editingId && setIsFormOpen(!isFormOpen)}
           >
             <h2 style={{margin: 0, color: editingId ? 'var(--warning-color)' : 'var(--text-primary)', fontSize: '1rem', fontWeight: '600'}}>
