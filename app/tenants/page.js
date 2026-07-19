@@ -746,23 +746,23 @@ export default function TenantsPage() {
                               <div style={{display: 'flex', gap: '0.3rem', flexWrap: 'nowrap'}}>
                                 {t.isActive && (
                                   <button 
-                                    className="btn btn-outline" 
-                                    style={{padding: '0.3rem 0.5rem', fontSize: '0.75rem', borderColor: 'var(--text-success)', color: 'var(--text-success)'}}
+                                    className="btn btn-success" 
+                                    style={{padding: '0.3rem 0.5rem', fontSize: '0.75rem', minWidth: '55px', textAlign: 'center'}}
                                     onClick={() => handleGenerateSingle(t.id)}
                                   >
                                     Bill
                                   </button>
                                 )}
                                 <button 
-                                  className="btn btn-outline" 
-                                  style={{padding: '0.3rem 0.5rem', fontSize: '0.75rem', borderColor: 'var(--text-secondary)', color: 'var(--text-secondary)'}}
+                                  className="btn" 
+                                  style={{padding: '0.3rem 0.5rem', fontSize: '0.75rem', minWidth: '55px', textAlign: 'center', backgroundColor: '#ef4444', color: '#ffffff'}}
                                   onClick={() => handleEditClick(t)}
                                 >
                                   Edit
                                 </button>
                                 <button 
-                                  className="btn btn-outline" 
-                                  style={{padding: '0.3rem 0.5rem', fontSize: '0.75rem', borderColor: '#ef4444', color: '#ef4444'}}
+                                  className="btn btn-success" 
+                                  style={{padding: '0.3rem 0.5rem', fontSize: '0.75rem', minWidth: '55px', textAlign: 'center'}}
                                   onClick={() => handleToggleActive(t.id, t.isActive)}
                                 >
                                   {t.isActive ? 'Vacate' : 'Restore'}
