@@ -687,7 +687,7 @@ export default function TenantsPage() {
                         </tr>
                         {groupedTenants[house].map(t => (
                           <tr key={t.id}>
-                            <td data-label="Unit">
+                            <td data-label="Unit" style={{whiteSpace: 'nowrap'}}>
                               <div style={{fontWeight: '450', color: 'var(--text-primary)'}}>Unit {t.unitNo || '-'}</div>
                             </td>
                             <td data-label="Name & Info">
@@ -711,26 +711,26 @@ export default function TenantsPage() {
                             <td data-label="Deposit">₹{t.deposit.toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
                             <td data-label="Rent">₹{t.rentAmount.toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
                             <td data-label="Actions">
-                              <div style={{display: 'flex', gap: '0.4rem', flexWrap: 'wrap'}}>
+                              <div style={{display: 'flex', gap: '0.3rem', flexWrap: 'nowrap'}}>
                                 {t.isActive && (
                                   <button 
-                                    className="btn btn-success" 
-                                    style={{padding: '0.4rem 0.6rem', fontSize: '0.75rem', textAlign: 'center'}}
+                                    className="btn btn-outline" 
+                                    style={{padding: '0.3rem 0.5rem', fontSize: '0.75rem', borderColor: 'var(--text-success)', color: 'var(--text-success)'}}
                                     onClick={() => handleGenerateSingle(t.id)}
                                   >
-                                    Bill Rent
+                                    Bill
                                   </button>
                                 )}
                                 <button 
-                                  className="btn" 
-                                  style={{padding: '0.4rem 0.6rem', fontSize: '0.75rem', textAlign: 'center', whiteSpace: 'nowrap', backgroundColor: '#ef4444', color: '#ffffff'}}
+                                  className="btn btn-outline" 
+                                  style={{padding: '0.3rem 0.5rem', fontSize: '0.75rem', borderColor: 'var(--text-secondary)', color: 'var(--text-secondary)'}}
                                   onClick={() => handleEditClick(t)}
                                 >
                                   Edit
                                 </button>
                                 <button 
-                                  className="btn btn-success" 
-                                  style={{padding: '0.4rem 0.6rem', fontSize: '0.75rem', textAlign: 'center', whiteSpace: 'nowrap'}}
+                                  className="btn btn-outline" 
+                                  style={{padding: '0.3rem 0.5rem', fontSize: '0.75rem', borderColor: '#ef4444', color: '#ef4444'}}
                                   onClick={() => handleToggleActive(t.id, t.isActive)}
                                 >
                                   {t.isActive ? 'Vacate' : 'Restore'}
