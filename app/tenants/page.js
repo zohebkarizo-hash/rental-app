@@ -658,7 +658,7 @@ export default function TenantsPage() {
               <table className="data-table tenants-table">
                 <thead>
                   <tr>
-                    <th>Unit/House</th>
+                    <th>Unit</th>
                     <th>Name & Info</th>
                     <th>Documents</th>
                     <th>Deposit</th>
@@ -673,15 +673,19 @@ export default function TenantsPage() {
                     houseNumbers.map(house => (
                       <Fragment key={house}>
                         <tr>
-                          <td colSpan="6" style={{backgroundColor: 'transparent', border: 'none', color: 'var(--text-secondary)', padding: '1.5rem 0.5rem 0.2rem 0.5rem', fontWeight: '600', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.1em'}}>
-                            🏡 HOUSE {house === 'Unassigned' ? 'UNASSIGNED' : house}
+                          <td colSpan="6" style={{backgroundColor: 'transparent', border: 'none', padding: '2rem 0.5rem 0.5rem 0.5rem'}}>
+                            <div style={{display: 'flex', alignItems: 'center', gap: '1rem'}}>
+                              <div style={{color: 'var(--primary-color)', fontWeight: '600', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.15em', whiteSpace: 'nowrap'}}>
+                                🏡 HOUSE {house === 'Unassigned' ? 'UNASSIGNED' : house}
+                              </div>
+                              <div style={{flex: 1, height: '1px', borderBottom: '1px dashed rgba(255,255,255,0.15)'}}></div>
+                            </div>
                           </td>
                         </tr>
                         {groupedTenants[house].map(t => (
                           <tr key={t.id}>
-                            <td data-label="Unit/House">
-                              <div style={{fontWeight: '600', color: '#ef4444'}}>Unit : {t.unitNo || '-'}</div>
-                              <div style={{fontSize: '0.8rem', color: 'var(--text-secondary)'}}>House : {t.houseNo || '-'}</div>
+                            <td data-label="Unit">
+                              <div style={{fontWeight: '600', color: 'var(--text-primary)'}}>Unit {t.unitNo || '-'}</div>
                             </td>
                             <td data-label="Name & Info">
                               <span 
