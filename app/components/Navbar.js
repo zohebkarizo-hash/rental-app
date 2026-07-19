@@ -25,7 +25,7 @@ export default function Navbar() {
             </svg>
           </div>
           <span style={{color: '#fff', fontSize: '1.4rem', fontWeight: '800'}}>
-            Kiraya<span style={{color: 'var(--primary-color)'}}>PAY</span>
+            <span style={{color: 'var(--warning-color)'}}>Kiraya</span>PAY
           </span>
         </a>
         
