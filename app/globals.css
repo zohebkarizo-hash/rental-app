@@ -637,6 +637,23 @@ h3 {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.stat-card-app:hover {
+  transform: translateY(-5px);
+  background: rgba(30, 41, 59, 0.6);
+}
+.stat-card-app.card-tenants:hover, .stat-card-app.card-tenants.active {
+  border-color: var(--primary-color);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 15px rgba(16, 185, 129, 0.3), inset 0 0 10px rgba(16, 185, 129, 0.1);
+}
+.stat-card-app.card-rent:hover, .stat-card-app.card-rent.active {
+  border-color: var(--warning-color);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 15px rgba(239, 68, 68, 0.3), inset 0 0 10px rgba(239, 68, 68, 0.1);
+}
+.stat-card-app.card-deposits:hover, .stat-card-app.card-deposits.active {
+  border-color: var(--primary-color);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 15px rgba(16, 185, 129, 0.3), inset 0 0 10px rgba(16, 185, 129, 0.1);
 }
 .stat-card-app.full-width {
   grid-column: 1 / -1;

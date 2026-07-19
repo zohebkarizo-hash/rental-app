@@ -232,8 +232,8 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
       <div className="dashboard-grid-app">
         {/* Tenants Card */}
         <div 
-          className="stat-card-app" 
-          style={{cursor: 'pointer', border: activeView === 'tenants' ? '1px solid var(--primary-color)' : ''}}
+          className={`stat-card-app card-tenants ${activeView === 'tenants' ? 'active' : ''}`}
+          style={{cursor: 'pointer'}}
           onClick={() => setActiveView(activeView === 'tenants' ? null : 'tenants')}
         >
           <svg className="watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -258,9 +258,9 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
         
         {/* Due Rent Card */}
         <div 
-          className="stat-card-app"
+          className={`stat-card-app card-rent ${activeView === 'pending' ? 'active' : ''}`}
           onClick={() => setActiveView(activeView === 'pending' ? null : 'pending')}
-          style={{cursor: 'pointer', border: activeView === 'pending' ? '1px solid var(--warning-color)' : ''}}
+          style={{cursor: 'pointer'}}
         >
           <svg className="watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
@@ -288,8 +288,8 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
 
         {/* Deposits Escrow Card */}
         <div 
-          className="stat-card-app full-width"
-          style={{cursor: 'pointer', border: activeView === 'deposits' ? '1px solid var(--primary-color)' : ''}}
+          className={`stat-card-app full-width card-deposits ${activeView === 'deposits' ? 'active' : ''}`}
+          style={{cursor: 'pointer'}}
           onClick={() => setActiveView(activeView === 'deposits' ? null : 'deposits')}
         >
           <svg className="watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
