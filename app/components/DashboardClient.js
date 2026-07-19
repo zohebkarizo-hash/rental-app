@@ -224,38 +224,99 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
           </div>
         </div>
       )}
-      <div className="flex-between">
-        <h1 style={{margin: 0}}>Dashboard:</h1>
-        <button className="btn btn-success hide-on-mobile" style={{padding: '0.4rem 0.8rem', fontSize: '0.85rem'}} onClick={() => setShowCashModal(true)}>💰 Cash Entry</button>
+      <div style={{marginBottom: '2rem'}}>
+        <h1 style={{margin: '0 0 0.2rem 0'}}>Overview</h1>
+        <p style={{color: 'var(--text-secondary)', margin: 0}}>Your properties at a glance.</p>
       </div>
 
-      <div className="dashboard-grid">
+      <div className="dashboard-grid-app">
+        {/* Tenants Card */}
         <div 
-          className="glass-panel stat-card" 
-          style={{cursor: 'pointer', border: activeView === 'tenants' ? '2px solid var(--text-success)' : ''}}
+          className="stat-card-app" 
+          style={{cursor: 'pointer', border: activeView === 'tenants' ? '1px solid var(--primary-color)' : ''}}
           onClick={() => setActiveView(activeView === 'tenants' ? null : 'tenants')}
         >
-          <div className="stat-label">Active Tenants <span style={{opacity: 0.5}}>&rarr;</span></div>
-          <div className="stat-value">{activeTenants.length}</div>
+          <svg className="watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+          <div>
+            <div className="top-row">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary-color)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+              <span className="stat-label">TENANTS</span>
+            </div>
+            <div className="stat-value">{activeTenants.length}</div>
+            <div className="stat-subtext" style={{color: 'var(--primary-color)'}}>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{display: 'inline', marginRight: '4px'}}><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+              Active
+            </div>
+          </div>
         </div>
         
+        {/* Due Rent Card */}
         <div 
-          className="glass-panel stat-card"
-          style={{cursor: 'pointer', border: activeView === 'deposits' ? '2px solid var(--text-success)' : ''}}
+          className="stat-card-app"
+          onClick={() => setActiveView(activeView === 'pending' ? null : 'pending')}
+          style={{cursor: 'pointer', border: activeView === 'pending' ? '1px solid var(--warning-color)' : ''}}
+        >
+          <svg className="watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+          <div>
+            <div className="top-row">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--warning-color)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+              <span className="stat-label">DUE RENT</span>
+            </div>
+            <div className="stat-value" style={{color: 'var(--warning-text)'}}>
+              ₹{(pendingRentTotal / 1000).toFixed(1)}K
+            </div>
+            <div className="stat-subtext" style={{color: 'var(--warning-color)'}}>
+              {pendingInvoices.length} invoices
+            </div>
+          </div>
+        </div>
+
+        {/* Deposits Escrow Card */}
+        <div 
+          className="stat-card-app full-width"
+          style={{cursor: 'pointer', border: activeView === 'deposits' ? '1px solid var(--primary-color)' : ''}}
           onClick={() => setActiveView(activeView === 'deposits' ? null : 'deposits')}
         >
-          <div className="stat-label">Total Deposits <span style={{opacity: 0.5}}>&rarr;</span></div>
-          <div className="stat-value">₹{totalDeposit.toLocaleString('en-IN', {minimumFractionDigits: 2})}</div>
-        </div>
-        
-        <div 
-          className="glass-panel stat-card"
-          onClick={() => setActiveView(activeView === 'pending' ? null : 'pending')}
-          style={{cursor: 'pointer', border: activeView === 'pending' ? '1px solid var(--primary-color)' : '1px solid var(--border-color)'}}
-        >
-          <div className="stat-label">PENDING RENT <span style={{opacity: 0.5}}>→</span></div>
-          <div className="stat-value" style={{color: 'var(--warning-color)'}}>
-            ₹{pendingRentTotal.toLocaleString('en-IN', {minimumFractionDigits: 2})}
+          <svg className="watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="12" y1="1" x2="12" y2="23"></line>
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+          </svg>
+          <div>
+            <div className="top-row">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary-color)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="12" y1="1" x2="12" y2="23"></line>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+              <span className="stat-label">DEPOSITS ESCROW</span>
+            </div>
+            <div className="stat-value">
+              ₹{(totalDeposit / 1000).toFixed(0)}K
+            </div>
+            <div className="stat-subtext" style={{color: 'var(--text-secondary)'}}>
+              Safely held
+            </div>
           </div>
         </div>
       </div>
@@ -440,20 +501,67 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
         </div>
       )}
 
-      <div className={`glass-panel ${activeView ? 'hide-on-mobile' : ''}`}>
-        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem'}}>
-          <h2 style={{margin: 0}}>Quick Actions</h2>
-          <button className="btn btn-success hide-on-desktop" style={{padding: '0.4rem 0.8rem', fontSize: '0.85rem'}} onClick={() => setShowCashModal(true)}>💰 Cash Entry</button>
-        </div>
-        <p style={{color: 'var(--text-secondary)', marginBottom: '1.5rem'}}>Manage your properties and generate rent invoices automatically.</p>
-        <div style={{display: 'flex', gap: '1rem'}}>
-          <Link href="/tenants" className="btn">
-            Manage Tenants
+      <div className={` ${activeView ? 'hide-on-mobile' : ''}`} style={{marginBottom: '2rem'}}>
+        <h2 style={{margin: '0 0 1.5rem 0'}}>Quick Actions</h2>
+        <div style={{display: 'flex', flexDirection: 'column', gap: '1rem'}}>
+          
+          <Link href="/tenants" className="quick-action-card">
+            <div className="qa-icon-wrap">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary-color)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </div>
+            <div>
+              <div className="qa-title">Manage Tenants</div>
+              <div className="qa-subtext">Add tenants & view KYC.</div>
+            </div>
           </Link>
-          <Link href="/invoices" className="btn">
-            Generate Invoices
+          
+          <Link href="/invoices" className="quick-action-card">
+            <div className="qa-icon-wrap">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary-color)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+            </div>
+            <div>
+              <div className="qa-title">Send Invoices</div>
+              <div className="qa-subtext">Manual WhatsApp links.</div>
+            </div>
           </Link>
+          
         </div>
+      </div>
+      
+      {/* Floating Cash Entry Button */}
+      <div 
+        onClick={() => setShowCashModal(true)}
+        style={{
+          position: 'fixed',
+          bottom: '90px', // Above bottom nav
+          right: '20px',
+          width: '64px',
+          height: '64px',
+          borderRadius: '50%',
+          backgroundColor: 'var(--primary-color)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          boxShadow: '0 10px 25px rgba(16, 185, 129, 0.4)',
+          cursor: 'pointer',
+          zIndex: 900
+        }}
+      >
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
       </div>
       <ClientInfoModal tenant={selectedClient} onClose={() => setSelectedClient(null)} />
     </>
