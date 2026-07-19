@@ -685,7 +685,7 @@ export default function TenantsPage() {
                         {groupedTenants[house].map(t => (
                           <tr key={t.id}>
                             <td data-label="Unit">
-                              <div style={{fontWeight: '600', color: 'var(--text-primary)'}}>Unit {t.unitNo || '-'}</div>
+                              <div style={{fontWeight: '450', color: 'var(--text-primary)'}}>Unit {t.unitNo || '-'}</div>
                             </td>
                             <td data-label="Name & Info">
                               <span 
@@ -698,10 +698,10 @@ export default function TenantsPage() {
                             </td>
                             <td data-label="Documents">
                               <div style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: '6px', alignItems: 'center'}}>
-                                {t.aadharUrl && <a href={t.aadharUrl} target="_blank" rel="noreferrer" style={{padding: '0.2rem 0.6rem', borderRadius: '12px', fontSize: '0.75rem', background: 'rgba(255,255,255,0.05)', textDecoration: 'none', color: 'var(--text-primary)', border: '1px solid rgba(255,255,255,0.1)'}}>Aadhar</a>}
-                                {t.passportUrl && <a href={t.passportUrl} target="_blank" rel="noreferrer" style={{padding: '0.2rem 0.6rem', borderRadius: '12px', fontSize: '0.75rem', background: 'rgba(255,255,255,0.05)', textDecoration: 'none', color: 'var(--text-primary)', border: '1px solid rgba(255,255,255,0.1)'}}>Passport</a>}
-                                {t.photoUrl && <a href={t.photoUrl} target="_blank" rel="noreferrer" style={{padding: '0.2rem 0.6rem', borderRadius: '12px', fontSize: '0.75rem', background: 'rgba(255,255,255,0.05)', textDecoration: 'none', color: 'var(--text-primary)', border: '1px solid rgba(255,255,255,0.1)'}}>Photo</a>}
-                                {t.agreementUrl && <a href={t.agreementUrl} target="_blank" rel="noreferrer" style={{padding: '0.2rem 0.6rem', borderRadius: '12px', fontSize: '0.75rem', background: 'rgba(255,255,255,0.05)', textDecoration: 'none', color: 'var(--text-primary)', border: '1px solid rgba(255,255,255,0.1)'}}>Agreement</a>}
+                                {t.aadharUrl && <a href={t.aadharUrl} target="_blank" rel="noreferrer" className="doc-badge">Aadhar</a>}
+                                {t.passportUrl && <a href={t.passportUrl} target="_blank" rel="noreferrer" className="doc-badge">Passport</a>}
+                                {t.photoUrl && <a href={t.photoUrl} target="_blank" rel="noreferrer" className="doc-badge">Photo</a>}
+                                {t.agreementUrl && <a href={t.agreementUrl} target="_blank" rel="noreferrer" className="doc-badge">Agreement</a>}
                                 {!t.aadharUrl && !t.passportUrl && !t.photoUrl && !t.agreementUrl && <span style={{fontSize: '0.75rem', color: 'var(--text-secondary)'}}>None</span>}
                               </div>
                             </td>
