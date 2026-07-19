@@ -643,11 +643,11 @@ h3 {
 }
 .stat-card-app .watermark {
   position: absolute;
-  right: -10px;
-  bottom: -10px;
-  opacity: 0.05;
-  width: 100px;
-  height: 100px;
+  right: -5px;
+  bottom: -5px;
+  opacity: 0.02;
+  width: 60px;
+  height: 60px;
   pointer-events: none;
 }
 .stat-card-app .top-row {
