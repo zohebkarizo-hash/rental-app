@@ -711,11 +711,11 @@ export default function TenantsPage() {
                             <td data-label="Deposit">₹{t.deposit.toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
                             <td data-label="Rent">₹{t.rentAmount.toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
                             <td data-label="Actions">
-                              <div style={{display: 'flex', flexDirection: 'column', gap: '0.5rem', width: '100%'}}>
+                              <div style={{display: 'flex', gap: '0.4rem', flexWrap: 'wrap'}}>
                                 {t.isActive && (
                                   <button 
                                     className="btn btn-success" 
-                                    style={{padding: '0.4rem 0.8rem', fontSize: '0.75rem', width: '100%', textAlign: 'center'}}
+                                    style={{padding: '0.4rem 0.6rem', fontSize: '0.75rem', textAlign: 'center'}}
                                     onClick={() => handleGenerateSingle(t.id)}
                                   >
                                     Bill Rent
@@ -723,14 +723,14 @@ export default function TenantsPage() {
                                 )}
                                 <button 
                                   className="btn" 
-                                  style={{padding: '0.4rem 0.8rem', fontSize: '0.75rem', width: '100%', textAlign: 'center', whiteSpace: 'nowrap', backgroundColor: '#ef4444', color: '#ffffff'}}
+                                  style={{padding: '0.4rem 0.6rem', fontSize: '0.75rem', textAlign: 'center', whiteSpace: 'nowrap', backgroundColor: '#ef4444', color: '#ffffff'}}
                                   onClick={() => handleEditClick(t)}
                                 >
                                   Edit
                                 </button>
                                 <button 
                                   className="btn btn-success" 
-                                  style={{padding: '0.4rem 0.8rem', fontSize: '0.75rem', width: '100%', textAlign: 'center', whiteSpace: 'nowrap'}}
+                                  style={{padding: '0.4rem 0.6rem', fontSize: '0.75rem', textAlign: 'center', whiteSpace: 'nowrap'}}
                                   onClick={() => handleToggleActive(t.id, t.isActive)}
                                 >
                                   {t.isActive ? 'Vacate' : 'Restore'}
