@@ -250,7 +250,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
                 <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
                 <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
               </svg>
-              <span className="stat-label">TENANTS</span>
+              <span className="stat-label">ACTIVE TENANTS</span>
             </div>
             <div className="stat-value">{activeTenants.length}</div>
           </div>
@@ -293,16 +293,20 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
           onClick={() => setActiveView(activeView === 'deposits' ? null : 'deposits')}
         >
           <svg className="watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="12" y1="1" x2="12" y2="23"></line>
-            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            <path d="M6 3h12" />
+            <path d="M6 8h12" />
+            <path d="M6 13h8.5a4.5 4.5 0 0 0 0-9" />
+            <path d="M10 13l5 8" />
           </svg>
           <div>
             <div className="top-row">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary-color)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="12" y1="1" x2="12" y2="23"></line>
-                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                <path d="M6 3h12" />
+                <path d="M6 8h12" />
+                <path d="M6 13h8.5a4.5 4.5 0 0 0 0-9" />
+                <path d="M10 13l5 8" />
               </svg>
-              <span className="stat-label">DEPOSITS ESCROW</span>
+              <span className="stat-label">DEPOSITS / SECURITY</span>
             </div>
             <div className="stat-value">
               ₹{(totalDeposit / 1000).toFixed(0)}K
