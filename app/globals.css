@@ -281,6 +281,33 @@ h3 {
   color: rgba(255,255,255,0.3);
 }
 
+/* Sleek File Input */
+input[type="file"].form-control {
+  padding: 0.35rem 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+input[type="file"]::file-selector-button {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 0.4rem 0.8rem;
+  margin-right: 1rem;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 500;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+input[type="file"]::file-selector-button:hover {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: var(--primary-color);
+  color: var(--text-success);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+}
+
 /* Sleek Tables */
 .data-table {
   width: 100%;
