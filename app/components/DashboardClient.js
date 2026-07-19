@@ -253,10 +253,6 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
               <span className="stat-label">TENANTS</span>
             </div>
             <div className="stat-value">{activeTenants.length}</div>
-            <div className="stat-subtext" style={{color: 'var(--primary-color)'}}>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{display: 'inline', marginRight: '4px'}}><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
-              Active
-            </div>
           </div>
         </div>
         
@@ -287,9 +283,6 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
             <div className="stat-value" style={{color: 'var(--warning-text)'}}>
               ₹{(pendingRentTotal / 1000).toFixed(1)}K
             </div>
-            <div className="stat-subtext" style={{color: 'var(--warning-color)'}}>
-              {pendingInvoices.length} invoices
-            </div>
           </div>
         </div>
 
@@ -313,9 +306,6 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
             </div>
             <div className="stat-value">
               ₹{(totalDeposit / 1000).toFixed(0)}K
-            </div>
-            <div className="stat-subtext" style={{color: 'var(--text-secondary)'}}>
-              Safely held
             </div>
           </div>
         </div>
