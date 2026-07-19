@@ -340,7 +340,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
                   activeHouseNumbers.map(house => (
                     <Fragment key={house}>
                       <tr>
-                        <td colSpan="5" style={{backgroundColor: 'transparent', border: 'none', padding: '2rem 0.5rem 0.5rem 0.5rem'}}>
+                        <td colSpan="5" style={{backgroundColor: 'transparent', border: 'none', padding: '1rem 0.5rem 0.25rem 0.5rem'}}>
                           <div style={{display: 'flex', alignItems: 'center', gap: '1rem'}}>
                             <div style={{color: 'var(--primary-color)', fontWeight: '600', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.15em', whiteSpace: 'nowrap'}}>
                               🏡 HOUSE {house === 'Unassigned' ? 'UNASSIGNED' : house}

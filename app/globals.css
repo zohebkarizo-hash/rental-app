@@ -312,12 +312,12 @@ input[type="file"]::file-selector-button:hover {
 .data-table {
   width: 100%;
   border-collapse: separate;
-  border-spacing: 0 0.5rem;
-  margin-top: 1rem;
+  border-spacing: 0 0.25rem;
+  margin-top: 0.5rem;
   font-size: 0.95rem;
 }
 .data-table th, .data-table td {
-  padding: 1.2rem 1rem;
+  padding: 0.8rem 0.5rem;
   text-align: left;
 }
 .data-table td {
