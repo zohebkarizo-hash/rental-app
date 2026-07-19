@@ -239,18 +239,32 @@ export default function TenantsPage() {
 
       <div style={{display: 'flex', flexDirection: 'column', gap: '2rem'}}>
         {/* Add/Edit Tenant Form */}
-        <div className="glass-panel">
+        <div className="glass-panel" style={{paddingTop: '0'}}>
           <div 
-            style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: !editingId ? 'pointer' : 'default'}}
+            className="collapsible-header-btn"
+            style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: !editingId ? 'pointer' : 'default', marginTop: '1.5rem'}}
             onClick={() => !editingId && setIsFormOpen(!isFormOpen)}
           >
-            <h2 style={{margin: 0, color: editingId ? 'var(--warning-color)' : 'var(--text-primary)', fontSize: '0.9rem', fontWeight: 'bold'}}>
-              {editingId ? 'Edit Tenant Details' : 'Add New Tenant'}
+            <h2 style={{margin: 0, color: editingId ? 'var(--warning-color)' : 'var(--text-primary)', fontSize: '1rem', fontWeight: '600'}}>
+              {editingId ? 'Edit Tenant Details' : (
+                <span style={{display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
+                  <span style={{fontSize: '1.2rem'}}>✨</span> Add New Tenant
+                </span>
+              )}
             </h2>
             {!editingId && (
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{transform: isFormOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s ease'}}>
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
+              <div style={{
+                background: 'rgba(255,255,255,0.1)', 
+                borderRadius: '50%', 
+                width: '32px', height: '32px', 
+                display: 'flex', justifyContent: 'center', alignItems: 'center',
+                transform: isFormOpen ? 'rotate(180deg)' : 'rotate(0deg)', 
+                transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)'
+              }}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
             )}
           </div>
           
