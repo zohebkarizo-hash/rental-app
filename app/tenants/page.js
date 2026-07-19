@@ -301,10 +301,10 @@ export default function TenantsPage() {
                   )}
                   
                   <div className="form-group" style={{marginBottom: '0.5rem'}}>
-                    <div style={{display: 'flex', gap: '0.5rem', flexWrap: 'wrap'}}>
+                    <div style={{display: 'flex', gap: '0.5rem', flexWrap: 'nowrap'}}>
                       <select 
                         className="form-control" 
-                        style={{flex: '1', minWidth: '120px'}}
+                        style={{flex: '1', minWidth: '0'}}
                         onChange={(e) => {
                           const input = document.getElementById('r1-unified-file-upload');
                           input.setAttribute('data-doctype', e.target.value);
@@ -316,7 +316,7 @@ export default function TenantsPage() {
                         <option value="roommate1Passport">Passport</option>
                         <option value="roommate1Photo">Photo</option>
                       </select>
-                      <div style={{flex: '2', minWidth: '200px', display: 'flex', gap: '0.3rem'}}>
+                      <div style={{flex: '2', display: 'flex', gap: '0.3rem', minWidth: '0'}}>
                         <input 
                           type="file" 
                           id="r1-unified-file-upload"
@@ -415,10 +415,10 @@ export default function TenantsPage() {
                   )}
                   
                   <div className="form-group" style={{marginBottom: '0.5rem'}}>
-                    <div style={{display: 'flex', gap: '0.5rem', flexWrap: 'wrap'}}>
+                    <div style={{display: 'flex', gap: '0.5rem', flexWrap: 'nowrap'}}>
                       <select 
                         className="form-control" 
-                        style={{flex: '1', minWidth: '120px'}}
+                        style={{flex: '1', minWidth: '0'}}
                         onChange={(e) => {
                           const input = document.getElementById('r2-unified-file-upload');
                           input.setAttribute('data-doctype', e.target.value);
@@ -430,7 +430,7 @@ export default function TenantsPage() {
                         <option value="roommate2Passport">Passport</option>
                         <option value="roommate2Photo">Photo</option>
                       </select>
-                      <div style={{flex: '2', minWidth: '200px', display: 'flex', gap: '0.3rem'}}>
+                      <div style={{flex: '2', display: 'flex', gap: '0.3rem', minWidth: '0'}}>
                         <input 
                           type="file" 
                           id="r2-unified-file-upload"
@@ -557,10 +557,10 @@ export default function TenantsPage() {
               </div>
             )}
             <div className="form-group" style={{marginBottom: '0.5rem'}}>
-              <div style={{display: 'flex', gap: '0.5rem', flexWrap: 'wrap'}}>
+              <div style={{display: 'flex', gap: '0.5rem', flexWrap: 'nowrap'}}>
                 <select 
                   className="form-control" 
-                  style={{flex: '1', minWidth: '120px'}}
+                  style={{flex: '1', minWidth: '0'}}
                   onChange={(e) => {
                     const input = document.getElementById('unified-file-upload');
                     input.setAttribute('data-doctype', e.target.value);
@@ -573,7 +573,7 @@ export default function TenantsPage() {
                   <option value="photo">Tenant Photo</option>
                   <option value="agreement">Rental Agreement</option>
                 </select>
-                <div style={{flex: '2', minWidth: '200px', display: 'flex', gap: '0.3rem'}}>
+                <div style={{flex: '2', display: 'flex', gap: '0.3rem', minWidth: '0'}}>
                   <input 
                     type="file" 
                     id="unified-file-upload"
