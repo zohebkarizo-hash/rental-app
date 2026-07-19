@@ -234,7 +234,7 @@ export default function TenantsPage() {
         <h1>Tenants Management</h1>
       </div>
 
-      <div className="dashboard-grid" style={{gridTemplateColumns: '1fr 2fr'}}>
+      <div style={{display: 'flex', flexDirection: 'column', gap: '2rem'}}>
         {/* Add/Edit Tenant Form */}
         <div className="glass-panel">
           <h2 style={{color: editingId ? 'var(--warning-color)' : 'var(--text-primary)', fontSize: '0.9rem', fontWeight: 'bold'}}>
