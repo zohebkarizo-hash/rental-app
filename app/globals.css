@@ -709,7 +709,7 @@ h3 {
 }
 .stat-card-app .stat-value {
   font-size: 2.2rem;
-  font-weight: 700;
+  font-weight: 500;
   color: #fff;
   z-index: 1;
 }
