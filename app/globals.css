@@ -456,7 +456,7 @@ h3 {
 
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
-  .container { padding: 1.5rem 1rem; }
+  .container { padding: 1.5rem 1rem 0 1rem; }
   .navbar { flex-direction: column; padding: 1.5rem; gap: 1.5rem; }
   .nav-links { gap: 1.5rem; font-size: 1rem; flex-wrap: wrap; justify-content: center; width: 100%; margin: 0; }
   .flex-between { flex-direction: column; align-items: flex-start; gap: 1rem; margin-bottom: 1.5rem; }
@@ -465,7 +465,7 @@ h3 {
   .dashboard-grid { 
     grid-template-columns: 1fr !important; 
     gap: 1.25rem; 
-    margin-bottom: 2rem; 
+    margin-bottom: 1rem; 
   }
   
   .glass-panel { padding: 1.5rem; border-radius: 16px; }
@@ -738,10 +738,17 @@ h3 {
   color: var(--text-secondary);
   font-size: 0.85rem;
 }
+.quick-actions-section {
+  margin-bottom: 2rem;
+}
 
 @media (max-width: 768px) {
   .dashboard-grid-app {
     grid-template-columns: 1fr;
+    margin-bottom: 1.25rem;
+  }
+  .quick-actions-section {
+    margin-bottom: 0;
   }
   .quick-actions-grid {
     grid-template-columns: 1fr;

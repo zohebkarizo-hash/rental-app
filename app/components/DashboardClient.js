@@ -495,7 +495,7 @@ export default function DashboardClient({ activeTenants, pendingInvoices, totalD
         </div>
       )}
 
-      <div className={` ${activeView ? 'hide-on-mobile' : ''}`} style={{marginBottom: '2rem'}}>
+      <div className={`quick-actions-section ${activeView ? 'hide-on-mobile' : ''}`}>
         <h2 style={{margin: '0 0 1.5rem 0'}}>Quick Actions</h2>
         <div className="quick-actions-grid">
           
